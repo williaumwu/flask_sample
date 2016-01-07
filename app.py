@@ -1,5 +1,3 @@
-# app.py
-
 from flask import Flask
 from flask import request, render_template
 from flask.ext.sqlalchemy import SQLAlchemy

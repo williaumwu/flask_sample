@@ -1,5 +1,3 @@
-# models.py
-
 import datetime
 from app import db
 
