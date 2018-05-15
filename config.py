@@ -3,8 +3,8 @@
 import os
 
 class BaseConfig(object):
-    SECRET_KEY = os.environ['SECRET_KEY']
-    DEBUG = os.environ['DEBUG']
+    SECRET_KEY = os.environ.get('SECRET_KEY',"ERUIECKDRCBDKWAV")
+    DEBUG = os.environ.get('DEBUG',True)
     DB_NAME = os.environ['MYSQL_DB_NAME']
     DB_USER = os.environ['MYSQL_DB_USER']
     DB_PASS = os.environ['MYSQL_DB_PASSWORD']
