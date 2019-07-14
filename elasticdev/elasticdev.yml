@@ -1,5 +1,5 @@
 global_arguments:
-   aws_default_region: us-east-1
+   aws_default_region: ap-southeast-1
    docker_repo: flask_sample
 infrastructure:
    ecr_repo:
