@@ -9,7 +9,6 @@ infrastructure:
    dockerhost:
        stack_name: elasticdev:::ec2_docker_host
        arguments:
-          hostname: docker_flask_sample
           size: t2.micro
           disksize: 25
        stack_vars:
