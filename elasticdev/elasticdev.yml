@@ -22,7 +22,6 @@ build:
            - infrastructure::ecr_repo
        stack_name: elasticdev:::ec2_ci
        arguments:
-           docker_host: docker_flask_sample
            repo_url: https://github.com/williaumwu/flask_sample
            repo_branch: master
            triggered_branches:
