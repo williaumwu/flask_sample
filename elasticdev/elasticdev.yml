@@ -24,6 +24,8 @@ build:
        arguments:
            repo_url: https://github.com/williaumwu/flask_sample
            repo_branch: master
+           dockerfile: Dockerfile
+           dockerfile_test: Dockerfile_test
            triggered_branches:
              - master
 destroy:
