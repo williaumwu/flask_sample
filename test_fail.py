@@ -8,5 +8,6 @@ def func(x):
 
 def test_answer():
     assert func(5) == 5
+    #assert func(4) == 5
 
 test_answer()
