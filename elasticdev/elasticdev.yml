@@ -1,8 +1,8 @@
 global_arguments:
    aws_default_region: us-east-1
 infrastructure:
-   ecr_repo:
-       stack_name: elasticdev:::simple_vpc
+   vpc:
+       stack_name: elasticdev:::aws_simple_vpc
        arguments:
           vpc_name: test_vpc
 destroy:
