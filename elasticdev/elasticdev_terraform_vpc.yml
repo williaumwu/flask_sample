@@ -1,0 +1,11 @@
+global_arguments:
+   aws_default_region: us-west-1
+infrastructure:
+   vpc:
+       stack_name: elasticdev:::aws_simple_vpc
+       arguments:
+          vpc_name: test_vpc
+destroy:
+   stack_name: elasticdev:::ed_core::callback_delete
+   arguments:
+       pre_delete_resources: True
