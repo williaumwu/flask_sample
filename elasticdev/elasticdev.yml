@@ -1,33 +1,59 @@
 global_arguments:
-   aws_default_region: us-west-1
+   aws_default_region: us-east-1
    docker_repo: flask_sample
 infrastructure:
    ecr_repo:
        stack_name: elasticdev:::ecr_repo
        arguments:
           name: flask_sample
+       credentials:
+           - reference: aws_2
+             orchestration: true
+   ssh_upload:
+       stack_name: elasticdev:::ec2_ssh_upload
+       arguments:
+          name: flask_sample_key
+       credentials:
+           - reference: aws_2
+             orchestration: true
    dockerhost:
        stack_name: elasticdev:::ec2_docker_host
+       dependencies: 
+           - infrastructure::ssh_upload
+           - infrastructure::ecr_repo
        arguments:
-          hostname: docker_flask_sample
           size: t2.micro
           disksize: 25
+          keyname: flask_sample_key
        stack_vars:
            - name: elasticdev:::ubuntu::ec2_ubuntu
              arguments:
                   ip_key: public_ip
+       credentials:
+           - reference: aws_2
+             orchestration: true
 build:
    ci_example:
+       create_webhook: true
        dependencies: 
            - infrastructure::dockerhost
            - infrastructure::ecr_repo
        stack_name: elasticdev:::ec2_ci
        arguments:
-           docker_host: docker_flask_sample
            repo_url: https://github.com/williaumwu/flask_sample
-           repo_branch: master
+           repo_branch: ci
+           dockerfile: Dockerfile
+           dockerfile_test: Dockerfile_test
            triggered_branches:
-             - master
+             - ci
+       credentials:
+           - reference: aws_2
+             orchestration: true
+           - reference: docker
+             delegation: true
+       inputvars:
+           - reference: docker_build
+             delegation: true
 destroy:
    stack_name: elasticdev:::ed_core::callback_delete
    arguments:

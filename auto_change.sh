@@ -4,4 +4,5 @@ cd templates
 cp -rp .index.html index.html
 sed -i -- 's|'__search_and_replace_here'|'${NEWSTRING}'|g' index.html
 cd -
+git add .
 git commit -a -m "testing change new string $NEWSTRING"; git push
