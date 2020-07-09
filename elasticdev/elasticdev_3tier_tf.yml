@@ -1,0 +1,12 @@
+global_arguments:
+   aws_default_region: us-west-1
+infrastructure:
+   vpc:
+       stack_name: elasticdev:::aws_vpc_3tier_tf
+       arguments:
+          vpc_name: vpc_3tier
+          availability_zones: ["us-west-1b", "us-west-1a"]
+destroy:
+   stack_name: elasticdev:::ed_core::callback_delete
+   arguments:
+       pre_delete_resources: True
