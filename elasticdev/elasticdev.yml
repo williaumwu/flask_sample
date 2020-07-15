@@ -38,7 +38,7 @@ build:
        dependencies: 
            - infrastructure::dockerhost
            - infrastructure::ecr_repo
-       stack_name: elasticdev:::ec2_ci
+       stack_name: elasticdev:::ec2_ci_fastest
        arguments:
            repo_url: https://github.com/williaumwu/flask_sample
            repo_branch: ci
