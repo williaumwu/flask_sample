@@ -6,6 +6,6 @@ infrastructure:
     arguments:
       vpc_name: project1
       gcloud_project: project1-282607
-      credential_group: williaumwu:::gcloud_creds::project1
+      credential_group: williaumwu:::gcloud-creds::project1
 destroy:
    stack_name: elasticdev:::ed_core::callback_delete
