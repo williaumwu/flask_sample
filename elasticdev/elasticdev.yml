@@ -1,7 +1,7 @@
 global_arguments:
    aws_default_region: us-west-1
 infrastructure:
-   vpc:
+   eks:
        stack_name: elasticdev:::eks_cluster_tf
        arguments:
           vpc_name: eks_2
