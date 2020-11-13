@@ -2,12 +2,13 @@ global_arguments:
    aws_default_region: us-west-1
 infrastructure:
    vpc:
-       stack_name: elasticdev:::eks_vpc_tf
+       stack_name: elasticdev:::eks_cluster_tf
        arguments:
           vpc_name: eks_2
           eks_cluster: eks-2-dev
-          availability_zones: us-west-1a,us-west-1c
-          subnet_base: 10.14
+          eks_min_capacity: 1
+          eks_max_capacity: 1
+          eks_desired_capacity: 1
        credentials:
            - reference: aws_2
              orchestration: true
