@@ -13,6 +13,8 @@ infrastructure:
              orchestration: true
    eks:
        stack_name: elasticdev:::eks_cluster_tf
+       dependencies: 
+           - infrastructure::vpc
        arguments:
           eks_min_capacity: 1
           eks_max_capacity: 1
