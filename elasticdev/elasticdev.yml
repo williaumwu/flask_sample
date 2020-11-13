@@ -2,7 +2,7 @@ global_arguments:
    aws_default_region: us-west-2
 infrastructure:
    vpc:
-       stack_name: elasticdev:::aws_simple_vpc
+       stack_name: elasticdev:::aws_vpc_3tier
        arguments:
           vpc_name: simple_vpc
           use_docker: True
