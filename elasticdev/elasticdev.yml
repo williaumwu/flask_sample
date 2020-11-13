@@ -5,7 +5,7 @@ infrastructure:
        stack_name: elasticdev:::eks_cluster_tf
        arguments:
           vpc_name: eks_2
-          eks_cluster: eks-2-dev
+          eks_cluster: eks-2-dev2
           eks_min_capacity: 1
           eks_max_capacity: 1
           eks_desired_capacity: 1
