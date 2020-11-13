@@ -1,14 +1,11 @@
 global_arguments:
-   aws_default_region: us-west-1
+   aws_default_region: us-west-2
 infrastructure:
-   eks:
-       stack_name: elasticdev:::eks_cluster_tf
+   vpc:
+       stack_name: elasticdev:::aws_simple_vpc
        arguments:
-          vpc_name: eks_2
-          eks_cluster: eks-2-prod
-          eks_min_capacity: 1
-          eks_max_capacity: 1
-          eks_desired_capacity: 1
-       credentials:
-           - reference: aws_2
-             orchestration: true
+          vpc_name: simple_vpc
+          use_docker: True
+          availability_zones: ["us-west-2b", "us-west-1a"]
+destroy:
+   stack_name: elasticdev:::ed_core::callback_delete
