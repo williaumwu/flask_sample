@@ -1,24 +1,23 @@
 global_arguments:
-   aws_default_region: us-west-1
-   vpc_name: eks_2
-   eks_cluster: eks-2-dev
+   aws_default_region: us-east-2
 infrastructure:
    vpc:
-       stack_name: elasticdev:::eks_vpc_tf
+       stack_name: elasticdev:::aws_vpc_3tier
        arguments:
-          availability_zones: us-west-1a,us-west-1c
-          subnet_base: 10.14
+          vpc_name: eks_vpc
+          main_network_block: 10.7.0.0/16
+          vpc_tags: '{"kubernetes.io/cluster/eks_vpc":"shared"}'
+          nat_gw_tags: '{"Name":"eks_vpc-nat-eip"}'
+          public_subnet_tags: '{"kubernetes.io/role/elb":"1"}'
+          private_subnet_tags: '{"kubernetes.io/role/internal_elb":"1"}'
+          enable_nat_gateway: true
+          single_nat_gateway: true
+          enable_dns_hostnames: true
+          reuse_nat_ips: true
+          one_nat_gateway_per_az: false
+          use_docker: True
        credentials:
            - reference: aws_2
              orchestration: true
-   eks:
-       stack_name: elasticdev:::eks_cluster_tf
-       dependencies: 
-           - infrastructure::vpc
-       arguments:
-          eks_min_capacity: 1
-          eks_max_capacity: 1
-          eks_desired_capacity: 1
-       credentials:
-           - reference: aws_2
-             orchestration: true
+destroy:
+   stack_name: elasticdev:::ed_core::callback_delete
