@@ -2,7 +2,7 @@ global_arguments:
    aws_default_region: us-west-2
 infrastructure:
    vpc:
-       stack_name: elasticdev:::aws_vpc_3tier
+       stack_name: elasticdev:::aws_vpc
        arguments:
           vpc_name: eks_vpc
           main_network_block: 10.7.0.0/16
