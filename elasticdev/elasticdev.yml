@@ -4,7 +4,7 @@ infrastructure:
    vpc:
        stack_name: elasticdev:::aws_vpc_3tier
        arguments:
-          vpc_name: simple_vpc
+          vpc_name: vpc_3tier
           use_docker: True
           availability_zones: ["us-west-2c", "us-west-2a"]
        credentials:
