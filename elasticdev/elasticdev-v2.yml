@@ -6,7 +6,10 @@ infrastructure:
        arguments:
           vpc_name: eks_vpc
           main_network_block: 10.7.0.0/16
-          tier_level: "2"
+          vpc_tags: '{"kubernetes.io/cluster/eks_vpc":"shared"}'
+          nat_gw_tags: '{"Name":"eks_vpc-nat-eip"}'
+          public_subnet_tags: '{"kubernetes.io/role/elb":"1"}'
+          private_subnet_tags: '{"kubernetes.io/role/internal_elb":"1"}'
           enable_nat_gateway: true
           single_nat_gateway: true
           enable_dns_hostnames: true
