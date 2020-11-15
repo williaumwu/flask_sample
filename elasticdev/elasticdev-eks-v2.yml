@@ -7,6 +7,10 @@ infrastructure:
        stack_name: elasticdev:::aws_vpc
        arguments:
           main_network_block: 10.7.0.0/16
+          vpc_tags: {"kubernetes.io/cluster/eks_dev":"shared"}
+          nat_gw_tags: {"Name":"eks_vpc-nat-eip"}
+          public_subnet_tags: {"kubernetes.io/role/elb":"1"}
+          private_subnet_tags: {"kubernetes.io/role/internal_elb":"1"}
           enable_nat_gateway: true
           single_nat_gateway: true
           enable_dns_hostnames: true
