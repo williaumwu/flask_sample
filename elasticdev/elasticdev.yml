@@ -6,7 +6,7 @@ infrastructure:
    vpc:
        stack_name: elasticdev:::aws_vpc
        arguments:
-          main_network_block: 10.7.0.0/16
+          main_network_block: 10.8.0.0/16
           enable_nat_gateway: true
           single_nat_gateway: true
           enable_dns_hostnames: true
@@ -20,7 +20,6 @@ infrastructure:
        dependencies: 
            - infrastructure::vpc
        arguments:
-          eks_cluster: eks-2-dev
           eks_min_capacity: 1
           eks_max_capacity: 1
           eks_desired_capacity: 1
