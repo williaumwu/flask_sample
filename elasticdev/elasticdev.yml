@@ -5,8 +5,8 @@ infrastructure:
        stack_name: elasticdev:::aws_rds
        arguments:
           vpc_name: tier_vpc
-          rds_name: rds-test-mysql
-          db_subnet_name: rds-test-mysql
+          rds_name: rds-test-mysql-2
+          db_subnet_name: rds-test-mysql-2
           security_group_names: database
           allocated_storage: 14
           db_name: app
