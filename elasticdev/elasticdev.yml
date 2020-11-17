@@ -1,28 +1,15 @@
 global_arguments:
-   aws_default_region: us-west-1
-   vpc_name: eks_vpc
-   eks_cluster: eks-dev
+   aws_default_region: us-east-2
 infrastructure:
-   vpc:
-       stack_name: elasticdev:::aws_vpc
+   rds:
+       stack_name: elasticdev:::aws_rds
        arguments:
-          main_network_block: 10.8.0.0/16
-          enable_nat_gateway: true
-          single_nat_gateway: true
-          enable_dns_hostnames: true
-          reuse_nat_ips: true
-          one_nat_gateway_per_az: false
-       credentials:
-           - reference: aws_2
-             orchestration: true
-   eks:
-       stack_name: elasticdev:::eks_cluster_tf
-       dependencies: 
-           - infrastructure::vpc
-       arguments:
-          eks_min_capacity: 1
-          eks_max_capacity: 1
-          eks_desired_capacity: 1
+          vpc_name: tier_vpc
+          rds_name: rds_test
+          db_subnet_name: rds_test
+          security_group_names: database
+          allocated_storage: 14
+          db_name: app
        credentials:
            - reference: aws_2
              orchestration: true
