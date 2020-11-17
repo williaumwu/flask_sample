@@ -2,10 +2,10 @@ global_arguments:
    aws_default_region: us-east-2
 infrastructure:
    vpc:
-       stack_name: elasticdev:::aws_vpc_3tier
+       stack_name: elasticdev:::aws_vpc_and_security_group
        arguments:
-          vpc_name: eks_vpc
-          main_network_block: 10.7.0.0/16
+          vpc_name: tier_vpc
+          main_network_block: 10.18.0.0/16
           tier_level: "2"
           enable_nat_gateway: true
           single_nat_gateway: true
