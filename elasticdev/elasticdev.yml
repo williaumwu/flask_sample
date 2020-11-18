@@ -1,31 +1,14 @@
 global_arguments:
    aws_default_region: us-east-2
-   vpc_name: rds-vpc
+   vpc_name: tier_vpc
 infrastructure:
-   vpc:
-       stack_name: elasticdev:::aws_vpc
+   parse-terraform:
+       stack_name: elasticdev:::parse_terraform
        arguments:
-          main_network_block: 10.25.0.0/16
-          enable_nat_gateway: true
-          single_nat_gateway: true
-          enable_dns_hostnames: true
-          reuse_nat_ips: true
-          one_nat_gateway_per_az: false
-       credentials:
-           - reference: aws_2
-             orchestration: true
-   rds:
-       stack_name: elasticdev:::aws_rds
-       dependencies: 
-           - infrastructure::vpc
-       arguments:
-          rds_name: rds-test-mysql-7
-          db_subnet_name: rds-test-mysql-7
-          security_group_names: database
-          allocated_storage: 14
-          db_name: app
-       credentials:
-           - reference: aws_2
-             orchestration: true
-destroy:
-   stack_name: elasticdev:::ed_core::callback_delete
+          src_resource_type: vpc
+          resource_type: subnet
+          mode: managed
+          resource_name: tier_vpc
+          vpc: tier_vpc
+          must_exists: true
+          provider: aws
