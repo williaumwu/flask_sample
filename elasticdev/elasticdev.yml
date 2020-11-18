@@ -6,9 +6,9 @@ infrastructure:
        stack_name: elasticdev:::parse_terraform
        arguments:
           src_resource_type: vpc
-          resource_type: subnet
-          mode: managed
-          resource_name: tier_vpc
-          vpc: tier_vpc
+          src_resource_name: tier_vpc
           must_exists: true
           provider: aws
+          vpc: tier_vpc
+          resource_type: subnet
+          mode: managed
