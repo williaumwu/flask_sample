@@ -10,5 +10,6 @@ infrastructure:
           must_exists: true
           provider: aws
           vpc: tier_vpc
+          resource_type: subnet
           terraform_type: aws_subnet
           terraform_mode: managed
