@@ -1,17 +1,19 @@
 global_arguments:
-   aws_default_region: us-west-1
+   aws_default_region: us-east-2
    vpc_name: eks_vpc
    eks_cluster: eks-dev
 infrastructure:
    vpc:
-       stack_name: elasticdev:::aws_vpc
+       stack_name: elasticdev:::aws_vpc_and_security_group
        arguments:
-          main_network_block: 10.8.0.0/16
+          main_network_block: 10.13.0.0/16
+          tier_level: "2"
           enable_nat_gateway: true
           single_nat_gateway: true
           enable_dns_hostnames: true
           reuse_nat_ips: true
           one_nat_gateway_per_az: false
+          use_docker: True
        credentials:
            - reference: aws_2
              orchestration: true
