@@ -21,8 +21,8 @@ infrastructure:
        dependencies: 
            - infrastructure::vpc
        arguments:
-          rds_name: rds-test-mysql-7
-          db_subnet_name: rds-test-mysql-7
+          rds_name: rds-test-mysql-9
+          db_subnet_name: rds-test-mysql-9
           security_group_names: database
           allocated_storage: 14
           db_name: app
