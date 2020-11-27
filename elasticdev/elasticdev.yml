@@ -1,5 +1,6 @@
 global_arguments:
-   aws_default_region: us-east-2
+   aws_default_region: ap-southeast-1
+   vpc_name: sample
 infrastructure:
    ssh_upload:
        stack_name: elasticdev:::ec2_ssh_upload
@@ -9,13 +10,15 @@ infrastructure:
            - reference: aws_2
              orchestration: true
    mongodb_hosts:
-       stack_name: elasticdev:::ec2_ubuntu
+       stack_name: elasticdev:::mongodb_replica_on_ec2
        dependencies: 
            - infrastructure::ssh_upload
        arguments:
-          size: t2.micro
+          size: t3.micro
+          ssh_keyname: mongodb_ssh
+          security_groups: web
+          subnet: private
           disksize: 25
-          keyname: mongodb_ssh
           ip_key: public_ip
        credentials:
            - reference: aws_2
