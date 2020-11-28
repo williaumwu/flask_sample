@@ -9,7 +9,7 @@ infrastructure:
           size: t3.micro
           ssh_keyname: mongodb_ssh
           security_groups: web,bastion
-          subnet: private
+          subnet: public
           disksize: 25
           ip_key: public_ip
        credentials:
