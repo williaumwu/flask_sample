@@ -8,7 +8,7 @@ infrastructure:
        arguments:
           size: t3.micro
           ssh_keyname: mongodb_ssh
-          num_of_replicas: 3
+          num_of_replicas: 1
           security_groups: web,bastion
           subnet: public
           disksize: 25
