@@ -6,6 +6,8 @@ infrastructure:
    mongodb_hosts:
        stack_name: elasticdev:::mongodb_replica_on_ec2
        arguments:
+          mongodb_username: admin123
+          mongodb_password: admin123
           size: t3.micro
           ssh_keyname: mongodb_ssh
           num_of_replicas: 1
