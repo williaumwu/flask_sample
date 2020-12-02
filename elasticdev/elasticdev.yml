@@ -10,7 +10,7 @@ infrastructure:
           mongodb_password: admin123
           size: t3.micro
           ssh_keyname: mongodb_ssh
-          num_of_replicas: 1
+          num_of_replicas: 3
           security_groups: web,bastion
           subnet: public
           disksize: 25
