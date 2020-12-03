@@ -1,31 +1,21 @@
-global_arguments:
-   aws_default_region: us-east-2
-   vpc_name: rds-vpc
 infrastructure:
-   vpc:
-       stack_name: elasticdev:::aws_vpc_and_security_group
+   ec2_volume:
+       stack_name: elasticdev:::ec2_ubuntu
        arguments:
-          main_network_block: 10.13.0.0/16
-          tier_level: "2"
-          enable_nat_gateway: true
-          single_nat_gateway: true
-          enable_dns_hostnames: true
-          reuse_nat_ips: true
-          one_nat_gateway_per_az: false
-          use_docker: True
-       credentials:
-           - reference: aws_2
-             orchestration: true
-   rds:
-       stack_name: elasticdev:::aws_rds
-       dependencies: 
-           - infrastructure::vpc
-       arguments:
-          rds_name: rds-test-mysql-9
-          db_subnet_name: rds-test-mysql-9
-          security_group_names: database
-          allocated_storage: 14
-          db_name: app
+          aws_default_region: ap-southeast-1
+          vpc_name: sample
+          hostname: ec2-test-volume
+          keyname: mongodb_ssh
+          image: ami-06fb5332e8e3e577a
+          security_groups: web,bastion
+          subnet: public
+          size: t3.micro
+          ip_key: public_ip
+          register_to_ed: null
+          disksize: 25
+          extra_disk: 25
+          extra_disk_mntpt: /var/lib/mongodb
+          extra_disk_fstype: xfs
        credentials:
            - reference: aws_2
              orchestration: true
