@@ -13,7 +13,7 @@ infrastructure:
           ip_key: public_ip
           register_to_ed: null
           disksize: 25
-          volume_size: 25
+          volume_size: 100
           volume_mntpt: /var/lib/mongodb
           volume_fstype: xfs
        credentials:
