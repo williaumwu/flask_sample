@@ -13,9 +13,9 @@ infrastructure:
           ip_key: public_ip
           register_to_ed: null
           disksize: 25
-          extra_disk: 25
-          extra_disk_mntpt: /var/lib/mongodb
-          extra_disk_fstype: xfs
+          volume_size: 25
+          volume_mntpt: /var/lib/mongodb
+          volume_fstype: xfs
        credentials:
            - reference: aws_2
              orchestration: true
