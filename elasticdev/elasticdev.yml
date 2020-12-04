@@ -16,6 +16,9 @@ infrastructure:
           subnet: public
           disksize: 25
           ip_key: public_ip
+          volume_size: 100
+          volume_mntpt: /var/lib/mongodb
+          volume_fstype: xfs
        credentials:
            - reference: aws_2
              orchestration: true
