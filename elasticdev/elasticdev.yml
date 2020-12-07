@@ -1,5 +1,5 @@
 global_arguments:
-   aws_default_region: ap-southeast-1
+   aws_default_region: ap-east-1
 infrastructure:
    vpc:
        stack_name: elasticdev:::aws_vpc_and_security_group
