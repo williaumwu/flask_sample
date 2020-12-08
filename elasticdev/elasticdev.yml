@@ -1,7 +1,7 @@
 global_arguments:
    aws_default_region: ap-southeast-1
-   vpc_name: sample
-   mongodb_cluster: sample
+   vpc_name: mongodb-test
+   mongodb_cluster: mongodb-test
 infrastructure:
    mongodb_hosts:
        stack_name: elasticdev:::mongodb_replica_on_ec2
