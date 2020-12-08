@@ -18,5 +18,12 @@ infrastructure:
        credentials:
            - reference: aws_2
              orchestration: true
+   ssh_upload:
+       stack_name: elasticdev:::ec2_ssh_upload
+       arguments:
+          name: mongodb
+       credentials:
+           - reference: aws_2
+             orchestration: true
 destroy:
    stack_name: elasticdev:::ed_core::callback_delete
