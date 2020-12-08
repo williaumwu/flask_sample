@@ -21,7 +21,7 @@ infrastructure:
    ssh_upload:
        stack_name: elasticdev:::ec2_ssh_upload
        arguments:
-          name: mongodb
+          name: mongodb_ssh
        credentials:
            - reference: aws_2
              orchestration: true
