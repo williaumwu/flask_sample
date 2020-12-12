@@ -4,7 +4,7 @@ infrastructure:
    vpc:
        stack_name: elasticdev:::aws_vpc_and_security_group
        arguments:
-          vpc_name: test-vpc
+          vpc_name: test-vpc_v2
           main_network_block: 10.37.0.0/16
           tier_level: "2"
           enable_nat_gateway: true
