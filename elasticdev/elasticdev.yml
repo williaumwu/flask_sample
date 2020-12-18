@@ -1,5 +1,5 @@
 global_arguments:
-   aws_default_region: ap-east-1
+   aws_default_region: ap-southeast-1
    vpc_name: mongodb-test
    mongodb_cluster: mongodb-test
 infrastructure:
