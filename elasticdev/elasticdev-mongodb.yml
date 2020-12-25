@@ -1,18 +1,24 @@
 global_arguments:
    aws_default_region: ap-southeast-1
-   vpc_name: sample
-   mongodb_cluster: sample
+   vpc_name: mongodb-test
+   mongodb_cluster: mongodb-test
 infrastructure:
    mongodb_hosts:
        stack_name: elasticdev:::mongodb_replica_on_ec2
        arguments:
+          hostname_random: true
           size: t3.micro
           ssh_keyname: mongodb_ssh
-          num_of_replicas: 1
+          num_of_replicas: 5
           security_groups: web,bastion
           subnet: public
           disksize: 25
           ip_key: public_ip
+          volume_size: 100
+          volume_mount: /var/lib/mongodb
+          volume_fstype: xfs
+          mongodb_username: admin123
+          mongodb_password: admin123
        credentials:
            - reference: aws_2
              orchestration: true
