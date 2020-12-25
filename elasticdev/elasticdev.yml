@@ -1,28 +1,22 @@
 global_arguments:
    aws_default_region: ap-southeast-1
-   vpc_name: vpc-test
-   mongodb_cluster: mongodb-test
+   vpc_name: mongodb-test
 infrastructure:
-   mongodb_hosts:
-       stack_name: elasticdev:::mongodb_replica_on_ec2
+   vpc:
+       stack_name: elasticdev:::aws_vpc_and_security_group
        arguments:
-          hostname_random: true
-          size: t3.micro
-          ssh_keyname: mongodb_ssh
-          num_of_replicas: 5
-          security_groups: web,bastion
-          subnet: public
-          disksize: 25
-          ip_key: public_ip
-          volume_size: 100
-          volume_mount: /var/lib/mongodb
-          volume_fstype: xfs
-          mongodb_username: admin123
-          mongodb_password: admin123
+          main_network_block: 10.40.0.0/16
+          tier_level: "2"
+          enable_nat_gateway: true
+          single_nat_gateway: true
+          enable_dns_hostnames: true
+          reuse_nat_ips: true
+          one_nat_gateway_per_az: false
+          use_docker: True
+          labels: "app:mongo,tier:database"
+          tags: "mongo,database,stateful"
        credentials:
            - reference: aws_2
              orchestration: true
 destroy:
    stack_name: elasticdev:::ed_core::callback_delete
-   arguments:
-       pre_delete_resources: True
