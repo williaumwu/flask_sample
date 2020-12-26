@@ -6,12 +6,15 @@ infrastructure:
    mongodb_hosts:
        stack_name: elasticdev:::mongodb_replica_on_ec2
        arguments:
+          bastion_config: true
+          bastion_security_groups: bastion
+          bastion_subnet: public
           hostname_random: true
           size: t3.micro
           ssh_keyname: mongodb_ssh
-          num_of_replicas: 3
-          security_groups: web,bastion
-          subnet: public
+          num_of_replicas: 1
+          security_groups: database
+          subnet: private
           disksize: 25
           ip_key: public_ip
           volume_size: 100
