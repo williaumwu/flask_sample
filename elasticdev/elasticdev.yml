@@ -1,6 +1,6 @@
 global_arguments:
    aws_default_region: us-east-2
-   vpc_name: rds-vpc-dev
+   vpc_name: rds-dev-vpc
 infrastructure:
    vpc:
        stack_name: elasticdev:::aws_vpc_and_security_group
@@ -21,8 +21,8 @@ infrastructure:
        dependencies: 
            - infrastructure::vpc
        arguments:
-          rds_name: rds-mysql-dev
-          db_subnet_name: rds-mysql-dev
+          rds_name: rds-dev-mysql
+          db_subnet_name: rds-dev-mysql
           security_group_names: database
           allocated_storage: 14
           db_name: app
