@@ -1,11 +1,11 @@
 global_arguments:
    aws_default_region: us-east-2
-   vpc_name: rds-vpc
+   vpc_name: rds-vpc-dev
 infrastructure:
    vpc:
        stack_name: elasticdev:::aws_vpc_and_security_group
        arguments:
-          main_network_block: 10.13.0.0/16
+          main_network_block: 10.20.0.0/16
           tier_level: "2"
           enable_nat_gateway: true
           single_nat_gateway: true
@@ -21,8 +21,8 @@ infrastructure:
        dependencies: 
            - infrastructure::vpc
        arguments:
-          rds_name: rds-test-mysql-9
-          db_subnet_name: rds-test-mysql-9
+          rds_name: rds-mysql-dev
+          db_subnet_name: rds-mysql-dev
           security_group_names: database
           allocated_storage: 14
           db_name: app
