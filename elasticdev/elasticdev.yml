@@ -30,5 +30,3 @@ build:
              - master
 destroy:
    stack_name: elasticdev:::ed_core::callback_delete
-   arguments:
-       pre_delete_resources: True
