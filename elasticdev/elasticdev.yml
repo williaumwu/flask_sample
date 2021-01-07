@@ -33,7 +33,6 @@ infrastructure:
           - infrastructure::vpc
           - infrastructure::ssh_upload
        arguments:
-          bastion_config: true
           bastion_config_destroy: true
           bastion_security_groups: bastion
           bastion_subnet: public
