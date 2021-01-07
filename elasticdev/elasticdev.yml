@@ -1,6 +1,6 @@
 global_arguments:
    aws_default_region: ap-southeast-1
-   vpc_name: mongodb-cluster-vpc
+   vpc_name: mongodb-cluster-dev-vpc
    mongodb_cluster: mongodb-cluster-dev
 infrastructure:
    ssh_upload:
