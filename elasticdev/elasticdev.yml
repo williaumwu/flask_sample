@@ -1,5 +1,5 @@
 global_arguments:
-   aws_default_region: us-east-2
+   aws_default_region: ap-southeast-1
    vpc_name: kafka-cluster-dev-vpc
    kafka_cluster: kafka-cluster-dev
 infrastructure:
@@ -33,8 +33,8 @@ infrastructure:
           - infrastructure::vpc
           - infrastructure::ssh_upload
        arguments:
-          image: ami-0a0ad6b70e61be944
-          bastion_image: ami-0a0ad6b70e61be944
+          image: ami-03aad423811bbee56
+          bastion_image: ami-03aad423811bbee56
           bastion_config_destroy: true
           bastion_security_groups: bastion
           bastion_subnet: public
