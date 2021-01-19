@@ -39,7 +39,7 @@ infrastructure:
           hostname_random: true
           size: t3.micro
           ssh_keyname: mongodb-cluster-ssh-dev
-          num_of_replicas: 5
+          num_of_replicas: 3
           security_groups: database
           subnet: private
           disksize: 25
