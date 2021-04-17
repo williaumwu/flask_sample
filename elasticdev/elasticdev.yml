@@ -1,5 +1,5 @@
 global_arguments:
-   aws_default_region: us-east-2
+   aws_default_region: eu-west-1
    vpc_name: eks-dev-vpc
    eks_cluster: eks-dev
 infrastructure:
