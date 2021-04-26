@@ -22,7 +22,7 @@ infrastructure:
            - infrastructure::ssh_upload
            - infrastructure::ecr_repo
        arguments:
-          size: t2.micro
+          instance_type: t2.micro
           disksize: 25
           keyname: flask_sample_key
        stack_vars:
