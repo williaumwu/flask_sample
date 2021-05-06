@@ -39,5 +39,8 @@ infrastructure:
        credentials:
          - reference: aws_2
            orchestration: true
+       inputargs:
+         - reference: docker_build
+           delegation: true
 destroy:
    stack_name: elasticdev:::ed_core::callback_delete
