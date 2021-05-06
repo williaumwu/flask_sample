@@ -1,13 +1,5 @@
 global_arguments:
    aws_default_region: eu-west-2
-labels:
-   - name: dev-label-1
-     environment: dev
-     purpose: test
-   - name: dev-label-2
-     car: bmw
-     model: 320i
-infrastructure:
 infrastructure:
    vpc:
        stack_name: elasticdev:::aws_vpc_and_security_group
@@ -22,9 +14,6 @@ infrastructure:
           one_nat_gateway_per_az: false
           labels: "app:mongo,tier:database"
           tags: "mongo,database,stateful"
-       labels:
-           - dev-label-1
-           - dev-label-2
        credentials:
            - reference: aws_2
              orchestration: true
