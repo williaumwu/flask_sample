@@ -1,22 +1,22 @@
 global_arguments:
    aws_default_region: eu-west-2
 labels:
-   - dev-label-1: 
-       environment: dev
-       purpose: test
-   - dev-label-2:
-       car: bmw
-       model: 320i
-   - app_details:
+   dev-label-1: 
+     environment: dev
+     purpose: test
+   dev-label-2:
+     car: bmw
+     model: 320i
+   app_details:
+     app: mongo
+     tier: database
+selectors:
+   app_details:
+     match_labels:
        app: mongo
        tier: database
-selectors:
-   - app_details:
-       match_labels:
-         app: mongo
-         tier: database
-       match_params:
-         must_be_one: True
+     match_params:
+       must_be_one: True
 infrastructure:
    vpc:
        stack_name: elasticdev:::aws_vpc_and_security_group
