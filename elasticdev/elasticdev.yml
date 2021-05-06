@@ -7,6 +7,9 @@ labels:
    - name: dev-label-2
      car: bmw
      model: 320i
+   - name: app_details
+     app: mongo
+     tier: database
 infrastructure:
    vpc:
        stack_name: elasticdev:::aws_vpc_and_security_group
@@ -19,7 +22,6 @@ infrastructure:
           enable_dns_hostnames: true
           reuse_nat_ips: true
           one_nat_gateway_per_az: false
-          labels: "app:mongo,tier:database"
           tags: "mongo,database,stateful"
        labels:
            - dev-label-1
