@@ -8,7 +8,6 @@ labels:
      car: bmw
      model: 320i
 infrastructure:
-infrastructure:
    vpc:
        stack_name: elasticdev:::aws_vpc_and_security_group
        arguments:
