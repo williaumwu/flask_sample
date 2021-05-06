@@ -1,33 +1,43 @@
 global_arguments:
    aws_default_region: eu-west-2
 labels:
-   - name: dev-label-1
-     environment: dev
-     purpose: test
-   - name: dev-label-2
-     car: bmw
-     model: 320i
-   - name: app_details
-     app: mongo
-     tier: database
+   - dev-label-1: 
+       environment: dev
+       purpose: test
+   - dev-label-2:
+       car: bmw
+       model: 320i
+   - app_details:
+       app: mongo
+       tier: database
+selectors:
+   - app_details:
+       match_labels:
+         app: mongo
+         tier: database
+       match_params:
+         must_be_one: True
 infrastructure:
    vpc:
        stack_name: elasticdev:::aws_vpc_and_security_group
        arguments:
-          vpc_name: dev-vpc-eu-west-test
-          main_network_block: 10.30.0.0/16
-          tier_level: "2"
-          enable_nat_gateway: true
-          single_nat_gateway: true
-          enable_dns_hostnames: true
-          reuse_nat_ips: true
-          one_nat_gateway_per_az: false
-          tags: "mongo,database,stateful"
+         vpc_id: _selector:::app_details::vpc_id
+         vpc_name: dev-vpc-eu-west-test
+         main_network_block: 10.30.0.0/16
+         tier_level: "2"
+         enable_nat_gateway: true
+         single_nat_gateway: true
+         enable_dns_hostnames: true
+         reuse_nat_ips: true
+         one_nat_gateway_per_az: false
+         tags: "mongo,database,stateful"
+       selectors:
+         - app_details
        labels:
-           - dev-label-1
-           - dev-label-2
+         - dev-label-1
+         - dev-label-2
        credentials:
-           - reference: aws_2
-             orchestration: true
+         - reference: aws_2
+           orchestration: true
 destroy:
    stack_name: elasticdev:::ed_core::callback_delete
