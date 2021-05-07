@@ -46,6 +46,10 @@ infrastructure:
           rds_name: rds-dev-mysql
           allocated_storage: 14
           db_name: app
+       selectors:
+         - vpc_info
+         - sg_info
+         - subnet_info
        credentials:
            - reference: aws_2
              orchestration: true
