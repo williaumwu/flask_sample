@@ -1,14 +1,14 @@
 global_arguments:
    aws_default_region: eu-west-2
 labels:
-   dev-label-1: 
+   general: 
      environment: dev
      purpose: test
-   dev-label-2:
+   vehicle:
      car: bmw
      model: 320i
-   app_details:
-     app: mongo
+   details:
+     app: mysql
      tier: database
 infrastructure:
    vpc:
@@ -25,8 +25,9 @@ infrastructure:
          one_nat_gateway_per_az: false
          tags: "mongo,database,stateful"
        labels:
-         - dev-label-1
-         - dev-label-2
+         - general
+         - vehicle
+         - details
        credentials:
          - reference: aws_2
            orchestration: true
