@@ -1,15 +1,20 @@
 global_arguments:
    aws_default_region: eu-west-2
 labels:
-   rds:
-     aws_product: rds
+   general: 
      environment: dev
+     purpose: test
+   infrastructure:
+     cloud: aws
+     product: rds
      app_tier: database
 selectors:
    vpc_info:
      match_labels:
        car: bmw
+       model: 320i
        environment: dev
+       app_tier: networking
      match_keys:
        provider: aws
        region: eu-west-2
@@ -19,7 +24,9 @@ selectors:
    sg_info:
      match_labels:
        car: bmw
+       model: 320i
        environment: dev
+       app_tier: networking
      match_keys:
        provider: aws
        region: eu-west-2
@@ -30,7 +37,9 @@ selectors:
    subnet_info:
      match_labels:
        car: bmw
+       model: 320i
        environment: dev
+       app_tier: networking
      match_keys:
        provider: aws
        region: eu-west-2
@@ -44,7 +53,7 @@ infrastructure:
           vpc_name: selector:::vpc_info::name
           sg_id: selector:::sg_info::sg_id
           subnet_ids: selector:::subnet_info::subnet_id:csv
-          rds_name: rds-dev-mysql
+          rds_name: eval-ed-rds
           allocated_storage: 14
           db_name: app
        labels:
