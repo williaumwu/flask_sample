@@ -10,13 +10,6 @@ labels:
    app_details:
      app: mongo
      tier: database
-selectors:
-   app_details:
-     match_labels:
-       app: mongo
-       tier: database
-     match_params:
-       must_be_one: True
 infrastructure:
    vpc:
        stack_name: elasticdev:::aws_vpc_and_security_group
@@ -31,8 +24,6 @@ infrastructure:
          reuse_nat_ips: true
          one_nat_gateway_per_az: false
          tags: "mongo,database,stateful"
-       selectors:
-         - app_details
        labels:
          - dev-label-1
          - dev-label-2
