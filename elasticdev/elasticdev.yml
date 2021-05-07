@@ -2,9 +2,9 @@ global_arguments:
    aws_default_region: eu-west-2
 labels:
    rds:
-     app: rds
-     tier: database
+     aws_product: rds
      environment: dev
+     app_tier: database
 selectors:
    vpc_info:
      match_labels:
