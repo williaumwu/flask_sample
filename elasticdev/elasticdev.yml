@@ -4,18 +4,18 @@ labels:
    general: 
      environment: dev
      purpose: test
+   infrastructure:
+     cloud: aws
+     product: vpc
+     app_tier: networking
    vehicle:
      car: bmw
      model: 320i
-   details:
-     app: mysql
-     tier: database
 infrastructure:
    vpc:
        stack_name: elasticdev:::aws_vpc_and_security_group
        arguments:
-         vpc_id: _selector:::app_details::vpc_id
-         vpc_name: dev-vpc-eu-west-test
+         vpc_name: eval-ed-vpc
          main_network_block: 10.30.0.0/16
          tier_level: "2"
          enable_nat_gateway: true
@@ -26,8 +26,8 @@ infrastructure:
          tags: "mongo,database,stateful"
        labels:
          - general
+         - infrastructure
          - vehicle
-         - details
        credentials:
          - reference: aws_2
            orchestration: true
