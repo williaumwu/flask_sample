@@ -40,8 +40,8 @@ infrastructure:
    rds:
        stack_name: elasticdev:::aws_rds_dev
        arguments:
-          vpc_name: selector:::vpc_info::name:str
-          sg_id: selector:::sg_info::sg_id:str
+          vpc_name: selector:::vpc_info::name
+          sg_id: selector:::sg_info::sg_id
           subnet_ids: selector:::subnet_info::subnet_id:csv
           rds_name: rds-dev-mysql
           allocated_storage: 14
