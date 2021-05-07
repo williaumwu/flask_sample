@@ -1,29 +1,49 @@
 global_arguments:
-   aws_default_region: us-east-2
-   vpc_name: rds-dev-vpc
-infrastructure:
-   vpc:
-       stack_name: elasticdev:::aws_vpc_and_security_group
-       arguments:
-          main_network_block: 10.20.0.0/16
-          tier_level: "2"
-          enable_nat_gateway: true
-          single_nat_gateway: true
-          enable_dns_hostnames: true
-          reuse_nat_ips: true
-          one_nat_gateway_per_az: false
-          use_docker: True
-       credentials:
-           - reference: aws_2
-             orchestration: true
+   aws_default_region: eu-west-2
+labels:
    rds:
-       stack_name: elasticdev:::aws_rds
-       dependencies: 
-           - infrastructure::vpc
+     app: rds
+     tier: database
+selectors:
+   vpc_info:
+     match_labels:
+       car: bmw
+       tier: database
+     match_keys:
+       provider: aws
+       region: eu-west-2
+     match_params:
+       must_exists: True
+       resource_type: vpc
+   sg_info:
+     match_labels:
+       car: bmw
+       tier: database
+     match_keys:
+       provider: aws
+       region: eu-west-2
+       name: database
+     match_params:
+       must_be_one: True
+       resource_type: security_group
+   subnet_info:
+     match_labels:
+       car: bmw
+       tier: database
+     match_keys:
+       provider: aws
+       region: eu-west-2
+       name: private
+     match_params:
+       resource_type: subnet
+infrastructure:
+   rds:
+       stack_name: elasticdev:::aws_rds_dev
        arguments:
+          vpc_name: selector:::vpc_info::name:str
+          sg_id: selector:::sg_info::sg_id:str
+          subnet_ids: selector:::subnet_info::subnet_id:csv
           rds_name: rds-dev-mysql
-          db_subnet_name: rds-dev-mysql
-          security_group_names: database
           allocated_storage: 14
           db_name: app
        credentials:
