@@ -4,11 +4,12 @@ labels:
    rds:
      app: rds
      tier: database
+     environment: dev
 selectors:
    vpc_info:
      match_labels:
        car: bmw
-       tier: database
+       environment: dev
      match_keys:
        provider: aws
        region: eu-west-2
@@ -18,7 +19,7 @@ selectors:
    sg_info:
      match_labels:
        car: bmw
-       tier: database
+       environment: dev
      match_keys:
        provider: aws
        region: eu-west-2
@@ -29,7 +30,7 @@ selectors:
    subnet_info:
      match_labels:
        car: bmw
-       tier: database
+       environment: dev
      match_keys:
        provider: aws
        region: eu-west-2
@@ -46,6 +47,8 @@ infrastructure:
           rds_name: rds-dev-mysql
           allocated_storage: 14
           db_name: app
+       labels:
+         - rds
        selectors:
          - vpc_info
          - sg_info
