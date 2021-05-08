@@ -15,6 +15,7 @@ infrastructure:
    vpc:
        stack_name: elasticdev:::aws_vpc_and_security_group
        arguments:
+         eks_cluster: eval-ed-eks
          vpc_name: eval-ed-vpc
          main_network_block: 10.30.0.0/16
          tier_level: "2"
