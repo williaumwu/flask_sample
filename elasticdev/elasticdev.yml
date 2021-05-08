@@ -43,6 +43,9 @@ infrastructure:
           eks_min_capacity: 1
           eks_max_capacity: 1
           eks_desired_capacity: 1
+       labels:
+          - general
+          - infrastructure
        credentials:
            - reference: aws_2
              orchestration: true
