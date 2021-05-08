@@ -35,11 +35,11 @@ selectors:
 infrastructure:
    eks:
        stack_name: elasticdev:::aws_eks_dev
-       vpc_name: selector:::vpc_info::name
-       vpc_id: selector:::vpc_info::vpc_id
-       eks_cluster: eval-ed-eks
-       subnet_ids: selector:::subnet_info::subnet_id:csv
        arguments:
+          vpc_name: selector:::vpc_info::name
+          vpc_id: selector:::vpc_info::vpc_id
+          eks_cluster: eval-ed-eks
+          subnet_ids: selector:::subnet_info::subnet_id:csv
           eks_min_capacity: 1
           eks_max_capacity: 1
           eks_desired_capacity: 1
