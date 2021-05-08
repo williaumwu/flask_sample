@@ -57,7 +57,8 @@ infrastructure:
           allocated_storage: 14
           db_name: app
        labels:
-         - rds
+         - general
+         - infrastructure
        selectors:
          - vpc_info
          - sg_info
