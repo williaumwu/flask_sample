@@ -46,6 +46,9 @@ infrastructure:
        labels:
           - general
           - infrastructure
+       selectors:
+         - vpc_info
+         - subnet_info
        credentials:
            - reference: aws_2
              orchestration: true
