@@ -6,7 +6,8 @@ labels:
      purpose: test
    infrastructure:
      cloud: aws
-     product: k8
+     product: rds
+     app_tier: database
 selectors:
    vpc_info:
      match_labels:
@@ -20,6 +21,19 @@ selectors:
      match_params:
        must_exists: True
        resource_type: vpc
+   sg_info:
+     match_labels:
+       car: bmw
+       model: 320i
+       environment: dev
+       app_tier: networking
+     match_keys:
+       provider: aws
+       region: eu-west-2
+       name: database
+     match_params:
+       must_be_one: True
+       resource_type: security_group
    subnet_info:
      match_labels:
        car: bmw
@@ -33,16 +47,22 @@ selectors:
      match_params:
        resource_type: subnet
 infrastructure:
-   eks:
-       stack_name: elasticdev:::aws_eks_dev
-       vpc_name: selector:::vpc_info::name
-       vpc_id: selector:::vpc_info::vpc_id
-       eks_cluster: eval-ed-eks
-       subnet_ids: selector:::subnet_info::subnet_id:csv
+   rds:
+       stack_name: elasticdev:::aws_rds_dev
        arguments:
-          eks_min_capacity: 1
-          eks_max_capacity: 1
-          eks_desired_capacity: 1
+          vpc_name: selector:::vpc_info::name
+          sg_id: selector:::sg_info::sg_id
+          subnet_ids: selector:::subnet_info::subnet_id:csv
+          rds_name: eval-ed-rds
+          allocated_storage: 14
+          db_name: app
+       labels:
+         - general
+         - infrastructure
+       selectors:
+         - vpc_info
+         - sg_info
+         - subnet_info
        credentials:
            - reference: aws_2
              orchestration: true
