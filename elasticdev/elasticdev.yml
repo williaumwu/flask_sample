@@ -17,7 +17,7 @@ infrastructure:
            - reference: aws_2
              orchestration: true
    rds:
-       stack_name: elasticdev:::aws_rds
+       stack_name: elasticdev:::aws_rds_non-selector
        dependencies: 
            - infrastructure::vpc
        arguments:
