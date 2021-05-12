@@ -18,7 +18,7 @@ infrastructure:
            - reference: aws_2
              orchestration: true
    eks:
-       stack_name: elasticdev:::aws_eks
+       stack_name: elasticdev:::aws_eks_non-selector
        dependencies: 
            - infrastructure::vpc
        arguments:
