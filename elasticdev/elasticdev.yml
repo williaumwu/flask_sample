@@ -1,5 +1,5 @@
 global_arguments:
-   aws_default_region: eu-west-2
+   aws_default_region: us-west-1
 labels:
    general: 
      environment: dev
@@ -16,7 +16,7 @@ selectors:
        app_tier: networking
      match_keys:
        provider: aws
-       region: eu-west-2
+       region: us-west-1
      match_params:
        must_exists: True
        resource_type: vpc
@@ -28,7 +28,7 @@ selectors:
        app_tier: networking
      match_keys:
        provider: aws
-       region: eu-west-2
+       region: us-west-1
        name: private
      match_params:
        resource_type: subnet
@@ -40,7 +40,7 @@ selectors:
        app_tier: networking
      match_keys:
        provider: aws
-       region: eu-west-2
+       region: us-west-1
        name: public
      match_params:
        resource_type: subnet
@@ -52,7 +52,7 @@ selectors:
        app_tier: networking
      match_keys:
        provider: aws
-       region: eu-west-2
+       region: us-west-1
        name: database
      match_params:
        must_be_one: True
@@ -65,7 +65,7 @@ selectors:
        app_tier: networking
      match_keys:
        provider: aws
-       region: eu-west-2
+       region: us-west-1
        name: bastion
      match_params:
        must_be_one: True
