@@ -1,5 +1,5 @@
 global_arguments:
-   aws_default_region: eu-west-2
+   aws_default_region: us-west-1
 labels:
    general: 
      environment: dev
