@@ -1,0 +1,112 @@
+global_arguments:
+   aws_default_region: us-west-1
+labels:
+   general: 
+     environment: dev
+     purpose: test
+   infrastructure:
+     cloud: aws
+     product: kafka
+selectors:
+   vpc_info:
+     match_labels:
+       car: bmw
+       model: 320i
+       environment: dev
+       app_tier: networking
+     match_keys:
+       provider: aws
+       region: us-west-1
+     match_params:
+       must_exists: True
+       resource_type: vpc
+   private_subnet_info:
+     match_labels:
+       car: bmw
+       model: 320i
+       environment: dev
+       app_tier: networking
+     match_keys:
+       provider: aws
+       region: us-west-1
+       name: private
+     match_params:
+       resource_type: subnet
+   public_subnet_info:
+     match_labels:
+       car: bmw
+       model: 320i
+       environment: dev
+       app_tier: networking
+     match_keys:
+       provider: aws
+       region: us-west-1
+       name: public
+     match_params:
+       resource_type: subnet
+   sg_database_info:
+     match_labels:
+       car: bmw
+       model: 320i
+       environment: dev
+       app_tier: networking
+     match_keys:
+       provider: aws
+       region: us-west-1
+       name: database
+     match_params:
+       must_be_one: True
+       resource_type: security_group
+   sg_bastion_info:
+     match_labels:
+       car: bmw
+       model: 320i
+       environment: dev
+       app_tier: networking
+     match_keys:
+       provider: aws
+       region: us-west-1
+       name: bastion
+     match_params:
+       must_be_one: True
+       resource_type: security_group
+infrastructure:
+   ssh_upload:
+       stack_name: elasticdev:::ec2_ssh_upload
+       arguments:
+          name: kafka-cluster-ssh-dev
+          clobber: True
+       credentials:
+           - reference: aws_2
+             orchestration: true
+   kafka:
+       stack_name: elasticdev:::kafka_on_ec2
+       dependencies:
+          - infrastructure::ssh_upload
+       arguments:
+          kafka_cluster: kafka-cluster-dev
+          vpc_name: selector:::vpc_info::name
+          vpc_id: selector:::vpc_info::vpc_id
+          subnet_ids: selector:::private_subnet_info::subnet_id:csv
+          sg_id: selector:::sg_database_info::sg_id
+          bastion_sg_id: selector:::sg_bastion_info::sg_id
+          bastion_subnet_ids: selector:::public_subnet_info::subnet_id:csv
+          bastion_config_destroy: true
+          image: ami-03aad423811bbee56
+          bastion_image: ami-03aad423811bbee56
+          bastion_config_destroy: true
+          size: t3.micro
+          ssh_keyname: kafka-cluster-ssh-dev
+          num_of_replicas: 5
+          disksize: 25
+       selectors:
+         - vpc_info
+         - public_subnet_info
+         - private_subnet_info
+         - sg_bastion_info
+         - sg_database_info
+       credentials:
+           - reference: aws_2
+             orchestration: true
+destroy:
+   stack_name: elasticdev:::ed_core::callback_delete
