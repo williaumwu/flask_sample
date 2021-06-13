@@ -34,7 +34,7 @@ selectors:
        resource_type: subnet
 infrastructure:
    eks:
-       stack_name: elasticdev:::aws_eks_dev
+       stack_name: elasticdev:::aws_eks
        arguments:
           vpc_name: selector:::vpc_info::name
           vpc_id: selector:::vpc_info::vpc_id
