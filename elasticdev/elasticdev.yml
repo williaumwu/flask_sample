@@ -48,7 +48,7 @@ selectors:
        resource_type: subnet
 infrastructure:
    rds:
-       stack_name: elasticdev:::aws_rds_dev
+       stack_name: elasticdev:::aws_rds
        arguments:
           vpc_name: selector:::vpc_info::name
           sg_id: selector:::sg_info::sg_id
