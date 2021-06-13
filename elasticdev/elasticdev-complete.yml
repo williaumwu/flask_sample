@@ -1,6 +1,6 @@
 global_arguments:
-   aws_default_region: ap-southeast-1
-   vpc_name: mongodb-cluster-vpc
+   aws_default_region: ap-northeast-1
+   vpc_name: mongodb-cluster-dev-vpc
    mongodb_cluster: mongodb-cluster-dev
 infrastructure:
    ssh_upload:
@@ -33,13 +33,13 @@ infrastructure:
           - infrastructure::vpc
           - infrastructure::ssh_upload
        arguments:
-          bastion_config: true
+          bastion_config_destroy: true
           bastion_security_groups: bastion
           bastion_subnet: public
           hostname_random: true
           size: t3.micro
           ssh_keyname: mongodb-cluster-ssh-dev
-          num_of_replicas: 1
+          num_of_replicas: 3
           security_groups: database
           subnet: private
           disksize: 25
@@ -54,5 +54,3 @@ infrastructure:
              orchestration: true
 destroy:
    stack_name: elasticdev:::ed_core::callback_delete
-   arguments:
-       pre_delete_resources: True
