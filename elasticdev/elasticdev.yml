@@ -50,7 +50,7 @@ infrastructure:
          - vpc_info
          - subnet_info
        credentials:
-           - reference: aws_2
+           - reference: aws
              orchestration: true
 destroy:
    stack_name: elasticdev:::ed_core::callback_delete
