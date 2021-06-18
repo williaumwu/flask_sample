@@ -1,21 +1,39 @@
 global_arguments:
-   aws_default_region: eu-west-2
+   aws_default_region: us-west-1
+labels:
+   general: 
+     environment: dev
+     purpose: test
+   infrastructure:
+     cloud: aws
+     product: vpc
+     app_tier: networking
+   vehicle:
+     car: bmw
+     model: 320i
 infrastructure:
    vpc:
        stack_name: elasticdev:::aws_vpc_and_security_group
        arguments:
-          vpc_name: dev-vpc-eu-west-test
-          main_network_block: 10.30.0.0/16
-          tier_level: "2"
-          enable_nat_gateway: true
-          single_nat_gateway: true
-          enable_dns_hostnames: true
-          reuse_nat_ips: true
-          one_nat_gateway_per_az: false
-          labels: "app:mongo,tier:database"
-          tags: "mongo,database,stateful"
+         eks_cluster: eval-ed-eks
+         vpc_name: eval-ed-vpc
+         main_network_block: 10.30.0.0/16
+         tier_level: "2"
+         enable_nat_gateway: true
+         single_nat_gateway: true
+         enable_dns_hostnames: true
+         reuse_nat_ips: true
+         one_nat_gateway_per_az: false
+         tags: "mongo,database,stateful"
+       labels:
+         - general
+         - infrastructure
+         - vehicle
        credentials:
-           - reference: aws_2
-             orchestration: true
+         - reference: aws_2
+           orchestration: true
+       inputvars:
+         - reference: docker_build
+           delegation: true
 destroy:
    stack_name: elasticdev:::ed_core::callback_delete
