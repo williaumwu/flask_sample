@@ -42,7 +42,7 @@ selectors:
      match_params:
        must_be_one: True
        resource_type: security_group
-build:
+test:
    ci_example:
        stack_name: williaumwu:::hello_world_stack
        arguments:
