@@ -47,4 +47,3 @@ test:
        stack_name: williaumwu:::hello_world_stack
        arguments:
           show_version: 101
-          hostname: demo-host-101
