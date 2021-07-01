@@ -51,6 +51,8 @@ infrastructure:
            - reference: aws_2
              orchestration: true
    demo_host:
+       dependencies: 
+           - infrastructure::ssh_upload
        stack_name: elasticdev:::ec2_ubuntu
        arguments:
           hostname: demo-host-101
