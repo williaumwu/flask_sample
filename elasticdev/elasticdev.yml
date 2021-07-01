@@ -1,6 +1,5 @@
 global_arguments:
    aws_default_region: us-west-1
-   docker_repo: flask_sample
 labels:
    ci: 
      environment: dev
@@ -44,29 +43,20 @@ selectors:
        must_be_one: True
        resource_type: security_group
 infrastructure:
-   ecr_repo:
-       stack_name: elasticdev:::ecr_repo
-       arguments:
-          name: flask_sample
-       credentials:
-           - reference: aws_2
-             orchestration: true
    ssh_upload:
        stack_name: elasticdev:::ec2_ssh_upload
        arguments:
-          name: flask_sample_key
+          name: demo_key
        credentials:
            - reference: aws_2
              orchestration: true
-   dockerhost:
-       stack_name: elasticdev:::ec2_docker_host
-       dependencies: 
-           - infrastructure::ssh_upload
-           - infrastructure::ecr_repo
+   demo_host:
+       stack_name: elasticdev:::ec2_ubuntu
        arguments:
+          hostname: demo-host-101
           instance_type: t2.micro
-          disksize: 25
-          keyname: flask_sample_key
+          disksize: 10
+          keyname: demo_key
        stack_vars:
            - name: elasticdev:::ubuntu::ec2_ubuntu
              arguments:
@@ -84,25 +74,8 @@ infrastructure:
          - sg_bastion_info
 build:
    ci_example:
-       create_webhook: true
        dependencies: 
            - infrastructure::dockerhost
-           - infrastructure::ecr_repo
-       stack_name: elasticdev:::ec2_ci
+       stack_name: williaumwu:::hello_world_stack
        arguments:
-           repo_url: https://github.com/williaumwu/flask_sample
-           repo_branch: ci
-           dockerfile: Dockerfile
-           dockerfile_test: Dockerfile_test
-           triggered_branches:
-             - ci
-       credentials:
-           - reference: aws_2
-             orchestration: true
-           - reference: docker
-             delegation: true
-       inputvars:
-           - reference: docker_build
-             delegation: true
-destroy:
-   stack_name: elasticdev:::ed_core::callback_delete
+           show_version: 101
