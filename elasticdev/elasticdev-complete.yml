@@ -42,6 +42,38 @@ selectors:
      match_params:
        must_be_one: True
        resource_type: security_group
+infrastructure:
+   ssh_upload:
+       stack_name: elasticdev:::ec2_ssh_upload
+       arguments:
+          name: demo_key
+       credentials:
+           - reference: aws_2
+             orchestration: true
+   demo_host:
+       dependencies: 
+           - infrastructure::ssh_upload
+       stack_name: elasticdev:::ec2_ubuntu
+       arguments:
+          hostname: demo-host-101
+          instance_type: t2.micro
+          disksize: 10
+          keyname: demo_key
+       stack_vars:
+           - name: elasticdev:::ubuntu::ec2_ubuntu
+             arguments:
+                  ip_key: public_ip
+                  vpc_name: selector:::vpc_info::name
+                  vpc_id: selector:::vpc_info::vpc_id
+                  sg_id: selector:::sg_bastion_info::sg_id
+                  subnet_ids: selector:::public_subnet_info::subnet_id:csv
+       credentials:
+           - reference: aws_2
+             orchestration: true
+       selectors:
+         - vpc_info
+         - public_subnet_info
+         - sg_bastion_info
 build:
    ci_example:
        dependencies: 
