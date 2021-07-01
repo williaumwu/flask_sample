@@ -44,8 +44,6 @@ selectors:
        resource_type: security_group
 build:
    ci_example:
-       dependencies: 
-           - infrastructure::dockerhost
        stack_name: williaumwu:::hello_world_stack
        arguments:
            show_version: 101
