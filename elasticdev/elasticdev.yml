@@ -1,50 +1,5 @@
-global_arguments:
-   aws_default_region: us-west-1
-labels:
-   ci: 
-     environment: dev
-     purpose: test
-selectors:
-   vpc_info:
-     match_labels:
-       car: bmw
-       model: 320i
-       environment: dev
-       app_tier: networking
-     match_keys:
-       provider: aws
-       region: us-west-1
-     match_params:
-       must_exists: True
-       resource_type: vpc
-   public_subnet_info:
-     match_labels:
-       car: bmw
-       model: 320i
-       environment: dev
-       app_tier: networking
-     match_keys:
-       provider: aws
-       region: us-west-1
-       name: public
-     match_params:
-       resource_type: subnet
-   sg_bastion_info:
-     match_labels:
-       car: bmw
-       model: 320i
-       environment: dev
-       app_tier: networking
-     match_keys:
-       provider: aws
-       region: us-west-1
-       name: bastion
-     match_params:
-       must_be_one: True
-       resource_type: security_group
-test:
-   hello_world_demo:
-       stack_name: williaumwu:::hello_world_stack
+vehicle:
+   ferrari:
+       stack_name: williaumwu:::ferrari_platform
        arguments:
-          show_version: 101
-          hostname: demo-host-101
+          build_dir: ferrari
