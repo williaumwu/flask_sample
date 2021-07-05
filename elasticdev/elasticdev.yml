@@ -1,4 +1,4 @@
-vehicle:
+custom:
    ferrari:
        stack_name: williaumwu:::ferrari_platform
        arguments:
