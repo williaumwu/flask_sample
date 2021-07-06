@@ -3,3 +3,4 @@ custom:
        stack_name: williaumwu:::ferrari_platform
        arguments:
           build_dir: ferrari
+          entry_point: True
