@@ -1,6 +1,11 @@
 custom:
    ferrari:
-       stack_name: williaumwu:::ferrari_platform
+       stack_name: williaumwu:::ferrari_contructor
        arguments:
           build_dir: ferrari
+          entry_point: True
+   mercedes:
+       stack_name: williaumwu:::mercedes_platform
+       arguments:
+          build_dir: mercedes
           entry_point: True
