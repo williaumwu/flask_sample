@@ -9,3 +9,8 @@ custom:
        arguments:
           build_dir: mercedes
           entry_point: True
+   williams:
+       stack_name: williaumwu:::mercedes_constructor
+       arguments:
+          build_dir: williams
+          entry_point: True
