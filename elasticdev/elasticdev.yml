@@ -10,12 +10,12 @@ labels:
      app_tier: database
 selectors:
    vpc_info:
-     labels:
+     match_labels:
        car: bmw
        model: 320i
        environment: dev
        app_tier: networking
-     keys:
+     match_yoyo_keys:
        provider: aws
        region: us-west-1
      params:
