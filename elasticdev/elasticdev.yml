@@ -9,3 +9,13 @@ custom:
        arguments:
           build_dir: mercedes
           entry_point: True
+   bmw:
+       stack_name: williaumwu:::mercedes_platform
+       arguments:
+          build_dir: bmw
+          entry_point: True
+   audi:
+       stack_name: williaumwu:::mercedes_platform
+       arguments:
+          build_dir: audi
+          entry_point: True
