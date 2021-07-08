@@ -10,41 +10,41 @@ labels:
      app_tier: database
 selectors:
    vpc_info:
-     match_labels:
+     labels:
        car: bmw
        model: 320i
        environment: dev
        app_tier: networking
-     match_keys:
+     keys:
        provider: aws
        region: us-west-1
-     match_params:
+     params:
        must_exists: True
        resource_type: vpc
    sg_info:
-     match_labels:
+     labels:
        car: bmw
        model: 320i
        environment: dev
        app_tier: networking
-     match_keys:
+     keys:
        provider: aws
        region: us-west-1
        name: database
-     match_params:
+     params:
        must_be_one: True
        resource_type: security_group
    subnet_info:
-     match_labels:
+     labels:
        car: bmw
        model: 320i
        environment: dev
        app_tier: networking
-     match_keys:
+     keys:
        provider: aws
        region: us-west-1
        name: private
-     match_params:
+     params:
        resource_type: subnet
 infrastructure:
    rds:
