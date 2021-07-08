@@ -1,4 +1,9 @@
 custom:
+   maserati:
+       stack_name: williaumwu:::ferrari_constructor:1
+       arguments:
+          build_dir: maserati
+          entry_point: True
    ferrari:
        stack_name: williaumwu:::ferrari_constructor:1
        arguments:
