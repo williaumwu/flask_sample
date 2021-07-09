@@ -1,16 +1,12 @@
 custom:
-   ferrari:
-       stack_name: williaumwu:::ferrari_constructor:12
+   ferrari-hard-tires:
+       stack_name: williaumwu:::ferrari_constructor:3
        arguments:
           build_dir: ferrari
           entry_point: True
-   mercedes:
-       stack_name: williaumwu:::mercedes_contructor
-       arguments:
-          build_dir: mercedes
-          entry_point: True
-   redbull:
-       stack_name: williaumwu:::redbull_constructor
+   ferrari-soft-tires:
+       stack_name: williaumwu:::ferrari_constructor:4
        arguments:
           build_dir: ferrari
           entry_point: True
+
