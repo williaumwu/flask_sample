@@ -1,6 +1,6 @@
 custom:
    ferrari:
-       stack_name: williaumwu:::ferrari_constructor
+       stack_name: williaumwu:::ferrari_constructor:12
        arguments:
           build_dir: ferrari
           entry_point: True
@@ -13,49 +13,4 @@ custom:
        stack_name: williaumwu:::redbull_constructor
        arguments:
           build_dir: ferrari
-          entry_point: True
-   maserati:
-       stack_name: williaumwu:::ferrari_platform
-       arguments:
-          build_dir: maserati
-          entry_point: True
-   volkwagen:
-       stack_name: williaumwu:::mercedes_platform
-       arguments:
-          build_dir: volkwagen
-          entry_point: True
-   pocarti:
-       stack_name: williaumwu:::redbull_platform
-       arguments:
-          build_dir: pocarti
-          entry_point: True
-   ferrari2:
-       stack_name: williaumwu:::ferrari_constructor
-       arguments:
-          build_dir: ferrari
-          entry_point: True
-   mercedes2:
-       stack_name: williaumwu:::mercedes_contructor
-       arguments:
-          build_dir: mercedes
-          entry_point: True
-   redbull2:
-       stack_name: williaumwu:::redbull_constructor
-       arguments:
-          build_dir: ferrari
-          entry_point: True
-   maserati2:
-       stack_name: williaumwu:::ferrari_platform
-       arguments:
-          build_dir: maserati
-          entry_point: True
-   volkwagen2:
-       stack_name: williaumwu:::mercedes_platform
-       arguments:
-          build_dir: volkwagen
-          entry_point: True
-   pocarti2:
-       stack_name: williaumwu:::redbull_platform
-       arguments:
-          build_dir: pocarti
           entry_point: True
