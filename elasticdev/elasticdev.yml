@@ -4,3 +4,4 @@ custom:
        arguments:
           build_dir: ferrari
           entry_point: True
+          enforce_locks: True
