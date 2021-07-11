@@ -1,6 +1,6 @@
 custom:
    ferrari-hard-tires:
-       stack_name: williaumwu:::ferrari_constructor:5
+       stack_name: williaumwu:::ferrari_constructor:3
        arguments:
           build_dir: ferrari
           entry_point: True
