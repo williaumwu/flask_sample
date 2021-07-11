@@ -4,3 +4,8 @@ custom:
        arguments:
           build_dir: ferrari
           entry_point: True
+   ferrari-soft-tires:
+       stack_name: williaumwu:::ferrari_constructor:5
+       arguments:
+          build_dir: ferrari
+          entry_point: True
