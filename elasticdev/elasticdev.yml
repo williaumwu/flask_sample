@@ -10,7 +10,7 @@ custom:
           build_dir: ferrari
           entry_point: True
    ferrari-soft-tires-ashton-martin:
-       stack_name: williaumwu:::ferrari_constructor:7
+       stack_name: williaumwu:::ferrari_constructor:8
        arguments:
           build_dir: ferrari
           entry_point: True
