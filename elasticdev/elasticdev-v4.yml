@@ -1,0 +1,16 @@
+custom:
+   ferrari-hard-tires:
+       stack_name: williaumwu:::ferrari_constructor:3
+       arguments:
+          build_dir: ferrari
+          entry_point: True
+   ferrari-soft-tires-ferrari:
+       stack_name: williaumwu:::ferrari_constructor:6
+       arguments:
+          build_dir: ferrari
+          entry_point: True
+   ferrari-soft-tires-ashton-martin:
+       stack_name: williaumwu:::ferrari_constructor:8
+       arguments:
+          build_dir: ferrari
+          entry_point: True
