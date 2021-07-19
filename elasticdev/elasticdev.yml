@@ -2,10 +2,10 @@ custom:
    ferrari-hard-tires:
        stack_name: williaumwu:::ferrari_constructor:3
        arguments:
-          build_dir: ferrari
+          build_dir: ferrari3
           entry_point: True
    ferrari-soft-tires:
        stack_name: williaumwu:::ferrari_constructor:6
        arguments:
-          build_dir: ferrari
+          build_dir: ferrari6
           entry_point: True
