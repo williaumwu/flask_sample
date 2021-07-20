@@ -9,8 +9,3 @@ custom:
        arguments:
           build_dir: ferrari
           entry_point: True
-   hass-racing-car:
-       stack_name: suekong1984:::haas_constructor
-       arguments:
-          build_dir: hass
-          entry_point: True
