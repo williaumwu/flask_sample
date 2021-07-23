@@ -97,7 +97,12 @@ infrastructure:
           bastion_config_destroy: true
           size: t3.micro
           ssh_keyname: kafka-cluster-ssh-dev
-          num_of_replicas: 5
+          num_of_zookeeper: 1
+          num_of_broker: 1
+          num_of_schema_registry: 1
+          num_of_broker: 1
+          num_of_rest: 1
+          num_of_ksql: 1
           disksize: 25
        selectors:
          - vpc_info
