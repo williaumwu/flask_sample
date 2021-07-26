@@ -31,11 +31,9 @@ infrastructure:
          - vehicle
        credentials:
          - reference: aws_2
-           copy: true
            orchestration: true
        inputvars:
          - reference: docker_build
-           copy: true
            delegation: true
 destroy:
    stack_name: elasticdev:::ed_core::callback_delete
