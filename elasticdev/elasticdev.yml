@@ -88,6 +88,10 @@ infrastructure:
           subnet_ids: selector:::private_subnet_info::subnet_id:csv
           sg_id: selector:::sg_database_info::sg_id
           vpc_id: selector:::vpc_info::vpc_id
+          ami_filter: Name=name,Values=ubuntu/images/hvm-ssd/ubuntu-bionic-18.04-amd64-server-*
+          ami_owner: 099720109477 
+          bastion_ami_filter: Name=name,Values=ubuntu/images/hvm-ssd/ubuntu-bionic-18.04-amd64-server-*
+          bastion_ami_owner: 099720109477 
           bastion_sg_id: selector:::sg_bastion_info::sg_id
           bastion_subnet_ids: selector:::public_subnet_info::subnet_id:csv
           bastion_config_destroy: true
