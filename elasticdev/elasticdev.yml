@@ -94,7 +94,7 @@ infrastructure:
           mongodb_cluster: mongodb-cluster-dev
           hostname_random: true
           size: t3.micro
-          ssh_keyname: mongodb-cluster-ssh-dev
+          ssh_key_name: mongodb-cluster-ssh-dev
           num_of_replicas: 3
           disksize: 25
           ip_key: public_ip
