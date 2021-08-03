@@ -1,5 +1,5 @@
 global_arguments:
-   aws_default_region: us-west-1
+   aws_default_region: eu-west-1
    docker_repo: flask_sample
 labels:
    ci: 
@@ -14,7 +14,7 @@ selectors:
        app_tier: networking
      match_keys:
        provider: aws
-       region: us-west-1
+       region: eu-west-1
      match_params:
        must_exists: True
        resource_type: vpc
@@ -26,7 +26,7 @@ selectors:
        app_tier: networking
      match_keys:
        provider: aws
-       region: us-west-1
+       region: eu-west-1
        name: public
      match_params:
        resource_type: subnet
@@ -38,7 +38,7 @@ selectors:
        app_tier: networking
      match_keys:
        provider: aws
-       region: us-west-1
+       region: eu-west-1
        name: bastion
      match_params:
        must_be_one: True
