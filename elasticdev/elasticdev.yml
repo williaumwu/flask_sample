@@ -37,3 +37,5 @@ infrastructure:
            delegation: true
 destroy:
    stack_name: elasticdev:::ed_core::callback_delete
+       arguments:
+         parallel: null
