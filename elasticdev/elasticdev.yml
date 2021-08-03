@@ -92,8 +92,10 @@ infrastructure:
           bastion_sg_id: selector:::sg_bastion_info::sg_id
           bastion_subnet_ids: selector:::public_subnet_info::subnet_id:csv
           bastion_config_destroy: true
-          image: ami-03aad423811bbee56
-          bastion_image: ami-03aad423811bbee56
+          ami_filter: Name=name,Values=ubuntu/images/hvm-ssd/ubuntu-bionic-18.04-amd64-server-*
+          ami_owner: 099720109477 
+          bastion_ami_filter: Name=name,Values=ubuntu/images/hvm-ssd/ubuntu-bionic-18.04-amd64-server-*
+          bastion_ami_owner: 099720109477 
           bastion_config_destroy: true
           instance_type: t3.micro
           ssh_key_name: kafka-cluster-ssh-dev
