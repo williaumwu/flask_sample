@@ -85,7 +85,6 @@ infrastructure:
           - infrastructure::ssh_upload
        arguments:
           kafka_cluster: kafka-cluster-dev
-          spot: None
           vpc_name: selector:::vpc_info::name
           vpc_id: selector:::vpc_info::vpc_id
           subnet_ids: selector:::private_subnet_info::subnet_id:csv
