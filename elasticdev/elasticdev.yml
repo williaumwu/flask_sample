@@ -84,6 +84,7 @@ infrastructure:
        dependencies:
           - infrastructure::ssh_upload
        arguments:
+          spot: true
           vpc_name: selector:::vpc_info::name
           subnet_ids: selector:::private_subnet_info::subnet_id:csv
           sg_id: selector:::sg_database_info::sg_id
