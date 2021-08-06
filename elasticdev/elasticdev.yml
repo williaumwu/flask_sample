@@ -84,6 +84,7 @@ infrastructure:
        dependencies:
           - infrastructure::ssh_upload
        arguments:
+          spot: True
           kafka_cluster: kafka-cluster-dev
           vpc_name: selector:::vpc_info::name
           vpc_id: selector:::vpc_info::vpc_id
