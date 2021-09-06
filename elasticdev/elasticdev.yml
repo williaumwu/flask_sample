@@ -1,6 +1,6 @@
 custom:
-   hass-racing-car:
-       stack_name: suekong1984:::haas_constructor
+   almond-croissant:
+       stack_name: williaumwu:::third_wave_croissant
        arguments:
-          build_dir: hass
+          build_dir: third_wave_croissant
           entry_point: True
