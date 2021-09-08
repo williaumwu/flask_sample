@@ -4,3 +4,8 @@ custom:
        arguments:
           build_dir: third_wave_croissant
           entry_point: True
+   new-age-muffin:
+       stack_name: bill12252016:::new_age_muffin
+       arguments:
+          build_dir: new_age_muffin
+          entry_point: True
