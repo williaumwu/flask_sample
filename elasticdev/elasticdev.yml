@@ -8,6 +8,7 @@ custom:
        stack_name: williaumwu:::third_wave_croissant:6
        arguments:
           build_dir: third_wave_croissant_2
+          entry_point: True
    new-age-muffin:
        stack_name: bill12252016:::new_age_muffin
        arguments:
