@@ -1,9 +1,13 @@
 custom:
    almond-croissant:
-       stack_name: williaumwu:::third_wave_croissant
+       stack_name: williaumwu:::third_wave_croissant:5
        arguments:
           build_dir: third_wave_croissant
           entry_point: True
+   almond-croissant_2:
+       stack_name: williaumwu:::third_wave_croissant:6
+       arguments:
+          build_dir: third_wave_croissant_2
    new-age-muffin:
        stack_name: bill12252016:::new_age_muffin
        arguments:
