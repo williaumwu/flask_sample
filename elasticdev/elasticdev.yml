@@ -15,7 +15,7 @@ custom:
           build_dir: third_wave_croissant_2
           entry_point: True
    croffin:
-       stack_name: suekong1984:::croffin:6
+       stack_name: suekong1984:::croffin
        arguments:
           build_dir: croffin
           entry_point: True
