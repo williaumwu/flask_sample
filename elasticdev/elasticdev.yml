@@ -10,7 +10,7 @@ custom:
           build_dir: third_wave_croissant
           entry_point: True
    almond-croissant_2:
-       stack_name: williaumwu:::third_wave_croissant:6
+       stack_name: williaumwu:::third_wave_croissant:7
        arguments:
           build_dir: third_wave_croissant_2
           entry_point: True
