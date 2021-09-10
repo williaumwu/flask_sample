@@ -1,4 +1,9 @@
 custom:
+   new-age-muffin:
+       stack_name: bill12252016:::new_age_muffin
+       arguments:
+          build_dir: new_age_muffin
+          entry_point: True
    almond-croissant:
        stack_name: williaumwu:::third_wave_croissant:5
        arguments:
@@ -9,8 +14,8 @@ custom:
        arguments:
           build_dir: third_wave_croissant_2
           entry_point: True
-   new-age-muffin:
-       stack_name: bill12252016:::new_age_muffin
+   croffin:
+       stack_name: suekong1984:::croffin:6
        arguments:
-          build_dir: new_age_muffin
+          build_dir: croffin
           entry_point: True
