@@ -6,7 +6,7 @@ labels:
      cloud: do
 infrastructure:
    ssh_upload:
-       stack_name: elasticdev:::do_ssh_upload
+       stack_name: elasticdev:::new_do_ssh_key
        arguments:
           name: ed-test-do-key
        labels:
