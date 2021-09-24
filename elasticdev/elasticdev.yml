@@ -29,6 +29,9 @@ infrastructure:
        stack_name: elasticdev:::droplet
        dependencies:
           - infrastructure::ssh_upload
+       labels:
+         - general
+         - infrastructure
        selectors:
          - ssh_key_info
        arguments:
