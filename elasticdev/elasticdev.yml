@@ -15,6 +15,7 @@ selectors:
        must_exists: True
        resource_type: ssh_key
 infrastructure:
+   jenkins_ans:
        stack_name: elasticdev:::jenkins_on_docker
        arguments:
           ssh_key_name: ed-test-do-key
