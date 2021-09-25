@@ -18,7 +18,7 @@ infrastructure:
    ssh_upload:
        stack_name: elasticdev:::new_do_ssh_key
        arguments:
-          name: ed-test-do-key
+          name: ed-jenkins-example
        labels:
          - general
          - infrastructure
@@ -36,9 +36,9 @@ infrastructure:
          - ssh_key_info
        arguments:
           ssh_key_id: selector:::ssh_key_info::id
-          hostname: example-droplet
+          hostname: ed-jenkins-example
           region: NYC1
-          size: s-1vcpu-1gb
+          size: s-1vcpu-2gb
           with_monitoring: True
           with_backups: false
           with_ipv6: false
@@ -47,5 +47,13 @@ infrastructure:
        credentials:
            - reference: do
              orchestration: true
+   jenkins_ans:
+       stack_name: elasticdev:::jenkins_on_docker
+       arguments:
+          ssh_key_name: ed-jenkins-example
+          hostname: ed-jenkins-example
+       labels:
+         - general
+         - infrastructure
 destroy:
    stack_name: elasticdev:::ed_core::callback_delete
