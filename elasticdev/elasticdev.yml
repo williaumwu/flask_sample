@@ -49,6 +49,9 @@ infrastructure:
              orchestration: true
    jenkins_ans:
        stack_name: elasticdev:::jenkins_on_docker
+       dependencies:
+          - infrastructure::ssh_upload
+          - infrastructure::droplet
        arguments:
           ssh_key_name: ed-jenkins-example
           hostname: ed-jenkins-example
