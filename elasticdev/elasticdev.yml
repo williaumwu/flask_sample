@@ -13,18 +13,9 @@ labels:
      model: 320i
 infrastructure:
    vpc:
-       stack_name: elasticdev:::aws_vpc_and_security_group
+       stack_name: elasticdev:::aws_vpc-simple
        arguments:
-         eks_cluster: eval-ed-eks
-         vpc_name: eval-ed-vpc
-         main_network_block: 10.30.0.0/16
-         tier_level: "2"
-         enable_nat_gateway: true
-         single_nat_gateway: true
-         enable_dns_hostnames: true
-         reuse_nat_ips: true
-         one_nat_gateway_per_az: false
-         tags: "mongo,database,stateful"
+         vpc_name: eval-ed-vpc-simple
        labels:
          - general
          - infrastructure
@@ -32,9 +23,6 @@ infrastructure:
        credentials:
          - reference: aws_2
            orchestration: true
-       inputvars:
-         - reference: docker_build
-           delegation: true
 destroy:
    stack_name: elasticdev:::ed_core::callback_delete
    arguments:
