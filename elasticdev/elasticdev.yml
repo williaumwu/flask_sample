@@ -16,6 +16,7 @@ infrastructure:
        stack_name: elasticdev:::aws_vpc-simple
        arguments:
          vpc_name: eval-ed-vpc-simple
+         eks_cluster: eval-ed-eks
        labels:
          - general
          - infrastructure
