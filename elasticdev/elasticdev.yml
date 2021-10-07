@@ -29,7 +29,7 @@ selectors:
      match_keys:
        provider: aws
        region: eu-west-1
-       name: private
+       name: public
      match_params:
        resource_type: subnet
 infrastructure:
