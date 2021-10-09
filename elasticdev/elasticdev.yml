@@ -11,8 +11,8 @@ infrastructure:
    iam:
        stack_name: elasticdev:::aws_iam
        arguments:
-          iam_name: test-iam
-          policy_name: test-iam
+          iam_name: eval-ed-iam
+          policy_name: eval-ed-iam
        labels:
           - general
           - infrastructure
