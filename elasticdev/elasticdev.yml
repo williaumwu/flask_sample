@@ -30,7 +30,7 @@ infrastructure:
          - infrastructure
          - vehicle
        credentials:
-         - reference: aws_2
+         - reference: eval-ed-iam
            orchestration: true
        inputvars:
          - reference: docker_build
