@@ -49,14 +49,14 @@ infrastructure:
        arguments:
           name: flask_sample
        credentials:
-           - reference: aws_2
+           - reference: eval-ed-iam
              orchestration: true
    ssh_upload:
        stack_name: elasticdev:::ec2_ssh_upload
        arguments:
           name: flask_sample_key
        credentials:
-           - reference: aws_2
+           - reference: eval-ed-iam
              orchestration: true
    dockerhost:
        stack_name: elasticdev:::ec2_docker_host
@@ -76,7 +76,7 @@ infrastructure:
                   sg_id: selector:::sg_bastion_info::sg_id
                   subnet_ids: selector:::public_subnet_info::subnet_id:csv
        credentials:
-           - reference: aws_2
+           - reference: eval-ed-iam
              orchestration: true
        selectors:
          - vpc_info
@@ -97,7 +97,7 @@ build:
            triggered_branches:
              - ci
        credentials:
-           - reference: aws_2
+           - reference: eval-ed-iam
              orchestration: true
            - reference: docker
              delegation: true
