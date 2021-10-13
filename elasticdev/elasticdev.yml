@@ -77,7 +77,7 @@ infrastructure:
           name: mongodb-cluster-ssh-dev
           clobber: True
        credentials:
-           - reference: aws_2
+           - reference: eval-ed-iam
              orchestration: true
    replica:
        stack_name: elasticdev:::mongodb_replica_on_ec2
@@ -115,7 +115,7 @@ infrastructure:
          - sg_bastion_info
          - sg_database_info
        credentials:
-           - reference: aws_2
+           - reference: eval-ed-iam
              orchestration: true
 destroy:
    stack_name: elasticdev:::ed_core::callback_delete
