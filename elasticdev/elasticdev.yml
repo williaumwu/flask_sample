@@ -2,8 +2,8 @@ global_arguments:
    aws_default_region: eu-west-1
 labels:
    general: 
-     environment: dev-2
-     purpose: test-2
+     environment: dev2
+     purpose: test2
    infrastructure:
      cloud: aws
      product: iam
