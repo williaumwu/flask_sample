@@ -1,4 +1,4 @@
 FROM python:2.7-onbuild
 
-ADD test.py /opt
+ADD testing/test.py /opt
 RUN /opt/test.py
