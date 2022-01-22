@@ -11,7 +11,7 @@ infrastructure:
    iam-role:
        stack_name: elasticdev:::aws_iam_role
        arguments:
-          role_namerole_name: eval-ed-role
+          role_name: eval-ed-role
           instance_profile_name: eval-ed-role
           iam_role_policy_name: eval-ed-role
        labels:
