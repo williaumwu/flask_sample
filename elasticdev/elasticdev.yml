@@ -56,6 +56,7 @@ infrastructure:
           rds_name: eval-ed-rds
           allocated_storage: 14
           db_name: app
+          publish_creds: true
        labels:
          - general
          - infrastructure
@@ -65,6 +66,8 @@ infrastructure:
          - subnet_info
        credentials:
            - reference: eval-ed-iam
+             orchestration: true
+           - reference: rds
              orchestration: true
 destroy:
    stack_name: elasticdev:::ed_core::callback_delete
