@@ -67,6 +67,7 @@ infrastructure:
        credentials:
            - reference: eval-ed-iam
              orchestration: true
+       inputvars:
            - reference: rds
              orchestration: true
 destroy:
