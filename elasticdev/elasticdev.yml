@@ -25,7 +25,7 @@ infrastructure:
        stack_name: elasticdev:::aws_cloud9
        arguments:
           subnet_ids: selector:::subnet_info::subnet_id:csv
-          automatic_stop_time_minutes: 20
+          automatic_stop_time_minutes: 10
           cloud9_name: eval-ed-cloud9-admin
        labels:
           - general
