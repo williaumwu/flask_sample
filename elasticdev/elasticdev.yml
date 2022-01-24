@@ -6,34 +6,18 @@ labels:
      purpose: test
    infrastructure:
      cloud: aws
-     product: cloud9
-selectors:
-   subnet_info:
-     match_labels:
-       car: bmw
-       model: 320i
-       environment: dev
-       app_tier: networking
-     match_keys:
-       provider: aws
-       region: eu-west-1
-       name: public
-     match_params:
-       resource_type: subnet
+     product: ssh_public_key
 infrastructure:
-   cloud9:
-       stack_name: elasticdev:::aws_cloud9
+   ssh_public_key:
+       stack_name: elasticdev:::aws_ssh_public_key
        arguments:
-          subnet_ids: selector:::subnet_info::subnet_id:csv
-          automatic_stop_time_minutes: 10
-          cloud9_name: eval-ed-admin
+          key_name: eval-ed-admin-ssh-key
        labels:
           - general
           - infrastructure
-       selectors:
-         - subnet_info
        credentials:
            - reference: eval-ed-iam
              orchestration: true
-destroy:
-   stack_name: elasticdev:::ed_core::callback_delete
+       inputvars:
+           - reference: test_public_ssh_key
+             orchestration: true
