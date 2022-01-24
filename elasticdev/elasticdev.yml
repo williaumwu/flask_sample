@@ -26,6 +26,7 @@ infrastructure:
        arguments:
           subnet_ids: selector:::subnet_info::subnet_id:csv
           automatic_stop_time_minutes: 20
+          cloud9_name: eval-ed-cloud9
        labels:
           - general
           - infrastructure
