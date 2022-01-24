@@ -9,7 +9,7 @@ labels:
      product: ssh_public_key
 infrastructure:
    ssh_public_key:
-       stack_name: elasticdev:::aws_ssh_public_key
+       stack_name: elasticdev:::ec2_ssh_upload_public
        arguments:
           key_name: eval-ed-admin-ssh-key
        labels:
