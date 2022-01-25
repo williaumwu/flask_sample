@@ -73,7 +73,7 @@ infrastructure:
           subnet_ids: selector:::public_subnet_info::subnet_id:csv
           sg_id: selector:::sg_bastion_info::sg_id
           vpc_id: selector:::vpc_info::vpc_id
-          instance_profile_name: selector:::instance_profile_info::name
+          iam_instance_profile: selector:::instance_profile_info::name
           ip_key: public_ip
           size: t3.micro
           disksize: 25
