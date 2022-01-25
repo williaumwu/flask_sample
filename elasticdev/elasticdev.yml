@@ -42,7 +42,6 @@ selectors:
    instance_profile_info:
      match_labels:
        environment: dev
-       app_tier: networking
      match_keys:
        provider: aws
      match_params:
