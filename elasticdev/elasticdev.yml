@@ -57,29 +57,23 @@ selectors:
        must_be_one: True
        resource_type: iam_instance_profile
 infrastructure:
-
-
-
-
-   ssh_upload_public:
+   ssh_public_key:
        stack_name: elasticdev:::ec2_ssh_upload_public
        arguments:
-          name: mongodb-cluster-ssh-dev
-          clobber: True
+          key_name: eval-ed-admin-ssh-key
+       labels:
+          - general
+          - infrastructure
        credentials:
-           - reference: eval-ed-iam
-             orchestration: true
-
-
-
-
-
-
-
+          - reference: eval-ed-iam
+            orchestration: true
+       inputvars:
+          - reference: test_public_ssh_key
+            orchestration: true
    ec2_admin:
        stack_name: elasticdev:::ec2_ubuntu_admin
        dependencies:
-          - infrastructure::ssh_upload_public
+          - infrastructure::ssh_public_key
        arguments:
           hostname: eval-ec2-admin
           spot: true
@@ -91,15 +85,12 @@ infrastructure:
           ip_key: public_ip
           size: t3.micro
           disksize: 25
-
-          ssh_key_name: mongodb-cluster-ssh-dev
-
+          ssh_key_name: eval-ed-admin-ssh-key
        selectors:
          - vpc_info
          - public_subnet_info
          - sg_bastion_info
          - instance_profile_info
        credentials:
-           - reference: eval-ed-iam
-             orchestration: true
-
+         - reference: eval-ed-iam
+           orchestration: true
