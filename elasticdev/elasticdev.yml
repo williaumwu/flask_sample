@@ -10,8 +10,6 @@ labels:
 selectors:
    vpc_info:
      match_labels:
-       car: bmw
-       model: 320i
        environment: dev
        app_tier: networking
      match_keys:
@@ -22,8 +20,6 @@ selectors:
        resource_type: vpc
    public_subnet_info:
      match_labels:
-       car: bmw
-       model: 320i
        environment: dev
        app_tier: networking
      match_keys:
@@ -34,8 +30,6 @@ selectors:
        resource_type: subnet
    sg_bastion_info:
      match_labels:
-       car: bmw
-       model: 320i
        environment: dev
        app_tier: networking
      match_keys:
@@ -47,8 +41,6 @@ selectors:
        resource_type: security_group
    instance_profile_info:
      match_labels:
-       car: bmw
-       model: 320i
        environment: dev
        app_tier: networking
      match_keys:
