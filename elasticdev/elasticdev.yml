@@ -6,7 +6,7 @@ labels:
      purpose: test
    infrastructure:
      cloud: aws
-     product: iam
+     product: iam-instance-profile
 infrastructure:
    iam-role:
        stack_name: elasticdev:::aws_iam_role
@@ -20,5 +20,3 @@ infrastructure:
        credentials:
            - reference: aws
              orchestration: true
-destroy:
-   stack_name: elasticdev:::ed_core::callback_delete
