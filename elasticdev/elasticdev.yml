@@ -6,7 +6,10 @@ labels:
      purpose: test
    infrastructure:
      cloud: aws
+   ec2:
      product: ec2
+   ssh:
+     product: ssh_public_key
 selectors:
    vpc_info:
      match_labels:
@@ -49,8 +52,28 @@ selectors:
        must_be_one: True
        resource_type: iam_instance_profile
 infrastructure:
+   ssh_public_key:
+       stack_name: elasticdev:::ec2_ssh_upload_public
+       arguments:
+          key_name: eval-ed-admin-ssh-key
+       labels:
+          - general
+          - infrastructure
+          - ssh
+       credentials:
+          - reference: eval-ed-iam
+            orchestration: true
+       inputvars:
+          - reference: test_public_ssh_key
+            orchestration: true
    ec2_admin:
        stack_name: elasticdev:::ec2_ubuntu_admin
+       dependencies:
+          - infrastructure::ssh_public_key
+       labels:
+          - general
+          - infrastructure
+          - ec2
        arguments:
           hostname: eval-ec2-admin
           spot: true
