@@ -60,6 +60,7 @@ infrastructure:
           - ec2
        arguments:
           hostname: eval-ec2-admin
+          install_kubectl: true
           spot: true
           vpc_name: selector:::vpc_info::name
           subnet_ids: selector:::public_subnet_info::subnet_id:csv
