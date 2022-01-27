@@ -6,6 +6,10 @@ labels:
      purpose: test
    infrastructure:
      cloud: aws
+   ec2:
+     product: ec2
+   ssh:
+     product: ssh_public_key
 selectors:
    vpc_info:
      match_labels:
@@ -53,6 +57,7 @@ infrastructure:
        labels:
           - general
           - infrastructure
+          - ec2
        arguments:
           hostname: eval-ec2-admin
           spot: true
