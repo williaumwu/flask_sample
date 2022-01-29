@@ -52,20 +52,6 @@ selectors:
        must_be_one: True
        resource_type: iam_instance_profile
 infrastructure:
-   ssh_public_key:
-       stack_name: elasticdev:::ec2_ssh_upload_public
-       arguments:
-          key_name: eval-ed-admin-ssh-key
-       labels:
-          - general
-          - infrastructure
-          - ssh
-       credentials:
-          - reference: eval-ed-iam
-            orchestration: true
-       inputvars:
-          - reference: test_public_ssh_key
-            orchestration: true
    ec2_admin:
        stack_name: elasticdev:::ec2_ubuntu_admin
        labels:
@@ -75,6 +61,7 @@ infrastructure:
        arguments:
           hostname: eval-ec2-admin
           install_kubectl: true
+          eks_workshop: true
           spot: true
           vpc_name: selector:::vpc_info::name
           subnet_ids: selector:::public_subnet_info::subnet_id:csv
