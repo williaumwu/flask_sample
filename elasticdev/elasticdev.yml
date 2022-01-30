@@ -20,6 +20,17 @@ selectors:
      match_params:
        must_exists: True
        resource_type: vpc
+   sg_bastion_info:
+     match_labels:
+       environment: dev
+       app_tier: networking
+     match_keys:
+       provider: aws
+       region: eu-west-1
+       name: bastion
+     match_params:
+       must_be_one: True
+       resource_type: security_group
    subnet_info:
      match_labels:
        car: bmw
@@ -41,6 +52,7 @@ infrastructure:
           eks_cluster: eval-ed-eks
           eks_cluster_version: 1.19
           subnet_ids: selector:::subnet_info::subnet_id:csv
+          sg_id: selector:::sg_bastion_info::sg_id
           eks_min_capacity: 1
           eks_max_capacity: 1
           eks_desired_capacity: 1
@@ -50,6 +62,7 @@ infrastructure:
        selectors:
          - vpc_info
          - subnet_info
+         - sg_bastion_info
        credentials:
            - reference: eval-ed-iam
              orchestration: true
