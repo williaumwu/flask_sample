@@ -2,8 +2,8 @@ global_arguments:
    aws_default_region: eu-west-1
 labels:
    general: 
-     environment: dev-2
-     purpose: test-2
+     environment: dev
+     purpose: test
    infrastructure:
      cloud: aws
      product: iam
@@ -11,8 +11,8 @@ infrastructure:
    iam:
        stack_name: elasticdev:::aws_iam
        arguments:
-          iam_name: eval-ed-iam-2
-          policy_name: eval-ed-iam-2
+          iam_name: eval-ed-iam
+          policy_name: eval-ed-iam
        labels:
           - general
           - infrastructure
