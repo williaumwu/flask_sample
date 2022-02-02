@@ -47,6 +47,7 @@ infrastructure:
    eks:
        stack_name: elasticdev:::aws_eks
        arguments:
+          role_name: eval-ed-role
           vpc_name: selector:::vpc_info::name
           vpc_id: selector:::vpc_info::vpc_id
           eks_cluster: eval-ed-eks
