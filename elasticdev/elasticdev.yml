@@ -60,6 +60,7 @@ infrastructure:
           - ec2
        arguments:
           hostname: eval-ec2-admin
+          eks_cluster: eval-ed-eks
           install_kubectl: true
           eks_workshop: true
           spot: true
