@@ -61,8 +61,8 @@ infrastructure:
        arguments:
           hostname: eval-ec2-admin
           eks_cluster: eval-ed-eks
-          install_kubectl: true
           eks_workshop: true
+          install_kubectl: true
           spot: true
           vpc_name: selector:::vpc_info::name
           subnet_ids: selector:::public_subnet_info::subnet_id:csv
