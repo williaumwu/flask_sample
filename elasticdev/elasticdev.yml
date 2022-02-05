@@ -4,6 +4,7 @@ labels:
    general: 
      environment: dev
      purpose: test
+     eks_cluster: eks-workshop
    infrastructure:
      cloud: aws
    ec2:
@@ -66,6 +67,8 @@ infrastructure:
            - reference: eks-workshop-public-key
              orchestration: true
    ec2_admin:
+       dependencies: 
+           - infrastructure::ssh_public_key
        stack_name: elasticdev:::ec2_ubuntu_admin
        labels:
           - general
