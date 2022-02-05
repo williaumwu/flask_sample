@@ -4,12 +4,17 @@ labels:
    general: 
      environment: dev
      purpose: test
+     eks_cluster: eks-workshop
    infrastructure:
      cloud: aws
    iam-instance-profile:
      product: iam-instance-profile
    eks:
      product: eks
+   ec2:
+     product: ec2
+   ssh:
+     product: ssh_public_key
 selectors:
    vpc_info:
      match_labels:
@@ -47,6 +52,19 @@ selectors:
      match_params:
        resource_type: subnet
 infrastructure:
+   ssh_public_key:
+       stack_name: elasticdev:::ec2_ssh_upload_public
+       arguments:
+          key_name: eks-workshop-public-key
+       labels:
+          - general
+          - infrastructure
+       credentials:
+           - reference: eval-ed-iam
+             orchestration: true
+       inputvars:
+           - reference: eks-workshop-public-key
+             orchestration: true
    iam-role:
        stack_name: elasticdev:::aws_iam_role
        arguments:
@@ -86,5 +104,36 @@ infrastructure:
        credentials:
            - reference: eval-ed-iam
              orchestration: true
+   ec2_admin:
+       dependencies: 
+           - infrastructure::ssh_public_key
+           - infrastructure::eks
+       stack_name: elasticdev:::ec2_ubuntu_admin
+       labels:
+          - general
+          - infrastructure
+          - ec2
+       arguments:
+          hostname: eks-ec2-admin-workshop
+          eks_cluster: eks-workshop
+          eks_workshop: true
+          install_kubectl: true
+          spot: true
+          vpc_name: selector:::vpc_info::name
+          subnet_ids: selector:::public_subnet_info::subnet_id:csv
+          sg_id: selector:::sg_bastion_info::sg_id
+          vpc_id: selector:::vpc_info::vpc_id
+          iam_instance_profile: eks-workshop-role
+          ip_key: public_ip
+          size: t3.micro
+          disksize: 25
+          ssh_key_name: eks-workshop-public-key
+       selectors:
+         - vpc_info
+         - public_subnet_info
+         - sg_bastion_info
+       credentials:
+         - reference: eval-ed-iam
+           orchestration: true
 destroy:
    stack_name: elasticdev:::ed_core::callback_delete
