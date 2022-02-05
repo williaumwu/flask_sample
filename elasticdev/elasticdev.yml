@@ -4,16 +4,17 @@ labels:
    general: 
      environment: dev
      purpose: test
-     eks_cluster: eks-workshop
    infrastructure:
      cloud: aws
-   ec2:
-     product: ec2
-   ssh:
-     product: ssh_public_key
+   iam-instance-profile:
+     product: iam-instance-profile
+   eks:
+     product: eks
 selectors:
    vpc_info:
      match_labels:
+       car: bmw
+       model: 320i
        environment: dev
        app_tier: networking
      match_keys:
@@ -22,16 +23,6 @@ selectors:
      match_params:
        must_exists: True
        resource_type: vpc
-   public_subnet_info:
-     match_labels:
-       environment: dev
-       app_tier: networking
-     match_keys:
-       provider: aws
-       region: eu-west-1
-       name: public
-     match_params:
-       resource_type: subnet
    sg_bastion_info:
      match_labels:
        environment: dev
@@ -43,57 +34,57 @@ selectors:
      match_params:
        must_be_one: True
        resource_type: security_group
-   instance_profile_info:
+   subnet_info:
      match_labels:
+       car: bmw
+       model: 320i
        environment: dev
-       purpose: test
+       app_tier: networking
      match_keys:
        provider: aws
+       region: eu-west-1
+       name: public
      match_params:
-       must_be_one: True
-       resource_type: iam_instance_profile
+       resource_type: subnet
 infrastructure:
-   ssh_public_key:
-       stack_name: elasticdev:::ec2_ssh_upload_public
+   iam-role:
+       stack_name: elasticdev:::aws_iam_role
        arguments:
-          key_name: eks-workshop-public-key
+          role_name: eks-workshop-role
+          iam_instance_profile: eks-workshop-role
+          iam_role_policy_name: eks-workshop-role
        labels:
           - general
           - infrastructure
+          - iam-instance-profile
+       credentials:
+           - reference: aws
+             orchestration: true
+   eks:
+       dependencies: 
+           - infrastructure::iam-role
+       stack_name: elasticdev:::aws_eks
+       arguments:
+          role_name: eks-workshop-role
+          vpc_name: selector:::vpc_info::name
+          vpc_id: selector:::vpc_info::vpc_id
+          eks_cluster: eks-workshop
+          eks_cluster_version: 1.19
+          subnet_ids: selector:::subnet_info::subnet_id:csv
+          sg_id: selector:::sg_bastion_info::sg_id
+          eks_min_capacity: 1
+          eks_max_capacity: 1
+          eks_desired_capacity: 1
+       labels:
+          - general
+          - infrastructure
+          - eks
+       selectors:
+         - vpc_info
+         - subnet_info
+         - sg_bastion_info
        credentials:
            - reference: eval-ed-iam
              orchestration: true
-       inputvars:
-           - reference: eks-workshop-public-key
-             orchestration: true
-   ec2_admin:
-       dependencies: 
-           - infrastructure::ssh_public_key
-       stack_name: elasticdev:::ec2_ubuntu_admin
-       labels:
-          - general
-          - infrastructure
-          - ec2
-       arguments:
-          hostname: eks-ec2-admin-workshop
-          eks_cluster: eks-workshop
-          eks_workshop: true
-          install_kubectl: true
-          spot: true
-          vpc_name: selector:::vpc_info::name
-          subnet_ids: selector:::public_subnet_info::subnet_id:csv
-          sg_id: selector:::sg_bastion_info::sg_id
-          vpc_id: selector:::vpc_info::vpc_id
-          iam_instance_profile: selector:::instance_profile_info::name
-          ip_key: public_ip
-          size: t3.micro
-          disksize: 25
-          ssh_key_name: eks-workshop-public-key
-       selectors:
-         - vpc_info
-         - public_subnet_info
-         - sg_bastion_info
-         - instance_profile_info
-       credentials:
-         - reference: eval-ed-iam
-           orchestration: true
+destroy:
+   stack_name: elasticdev:::ed_core::callback_delete
