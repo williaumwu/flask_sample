@@ -52,6 +52,19 @@ selectors:
        must_be_one: True
        resource_type: iam_instance_profile
 infrastructure:
+   ssh_public_key:
+       stack_name: elasticdev:::ec2_ssh_upload_public
+       arguments:
+          key_name: eks-workshop-public-key
+       labels:
+          - general
+          - infrastructure
+       credentials:
+           - reference: eval-ed-iam
+             orchestration: true
+       inputvars:
+           - reference: eks-workshop-public-key
+             orchestration: true
    ec2_admin:
        stack_name: elasticdev:::ec2_ubuntu_admin
        labels:
@@ -59,8 +72,8 @@ infrastructure:
           - infrastructure
           - ec2
        arguments:
-          hostname: eval-ec2-admin
-          eks_cluster: eval-ed-eks
+          hostname: eks-ec2-admin-workshop
+          eks_cluster: eks-workshop
           eks_workshop: true
           install_kubectl: true
           spot: true
@@ -72,7 +85,7 @@ infrastructure:
           ip_key: public_ip
           size: t3.micro
           disksize: 25
-          ssh_key_name: eval-ed-admin-ssh-key
+          ssh_key_name: eks-workshop-public-key
        selectors:
          - vpc_info
          - public_subnet_info
