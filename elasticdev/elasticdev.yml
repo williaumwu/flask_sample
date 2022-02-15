@@ -13,7 +13,7 @@ selectors:
        provider: do
      match_params:
        must_exists: True
-       resource_type: ssh_key
+       resource_type: ssh_public_key
 infrastructure:
    ssh_upload:
        stack_name: elasticdev:::do_ssh_upload_public
