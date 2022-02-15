@@ -16,14 +16,17 @@ selectors:
        resource_type: ssh_key
 infrastructure:
    ssh_upload:
-       stack_name: elasticdev:::new_do_ssh_key
+       stack_name: elasticdev:::do_ssh_upload_public
        arguments:
-          name: ed-jenkins-example
+          key_name: jenkins-master-ssh-key
        labels:
-         - general
-         - infrastructure
+          - general
+          - infrastructure
        credentials:
            - reference: do
+             orchestration: true
+       inputvars:
+           - reference: jenkins-master-ssh-key
              orchestration: true
    droplet:
        stack_name: elasticdev:::droplet
