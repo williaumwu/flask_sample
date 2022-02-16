@@ -23,7 +23,7 @@ infrastructure:
           - general
           - infrastructure
        credentials:
-           - reference: do
+           - reference: do-token
              orchestration: true
        inputvars:
            - reference: jenkins-ssh-key
@@ -48,7 +48,7 @@ infrastructure:
           with_private_networking: false
           with_resize_disk: false
        credentials:
-           - reference: do
+           - reference: do-token
              orchestration: true
    jenkins_ans:
        stack_name: elasticdev:::jenkins_on_docker
