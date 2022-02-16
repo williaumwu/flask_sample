@@ -18,7 +18,7 @@ infrastructure:
    ssh_upload:
        stack_name: elasticdev:::do_ssh_upload_public
        arguments:
-          key_name: jenkins-master-ssh-key
+          key_name: jenkins-ssh-key
        labels:
           - general
           - infrastructure
@@ -26,7 +26,7 @@ infrastructure:
            - reference: do
              orchestration: true
        inputvars:
-           - reference: jenkins-master-ssh-key
+           - reference: jenkins-ssh-key
              orchestration: true
    droplet:
        stack_name: elasticdev:::droplet
