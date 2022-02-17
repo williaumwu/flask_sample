@@ -58,5 +58,3 @@ infrastructure:
        labels:
          - general
          - infrastructure
-destroy:
-   stack_name: elasticdev:::ed_core::callback_delete
