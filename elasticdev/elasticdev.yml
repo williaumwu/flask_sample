@@ -71,20 +71,10 @@ selectors:
        must_be_one: True
        resource_type: security_group
 infrastructure:
-   ssh_upload:
-       stack_name: elasticdev:::ec2_ssh_upload
-       arguments:
-          name: mongodb-cluster-ssh-dev
-          clobber: True
-       credentials:
-           - reference: eval-ed-iam
-             orchestration: true
    replica:
        stack_name: elasticdev:::mongodb_replica_on_ec2
-       dependencies:
-          - infrastructure::ssh_upload
        arguments:
-          spot: true
+          mongodb_cluster: mongodb-cluster-dev
           vpc_name: selector:::vpc_info::name
           subnet_ids: selector:::public_subnet_info::subnet_id:csv
           sg_id: selector:::sg_database_info::sg_id
@@ -96,10 +86,8 @@ infrastructure:
           bastion_sg_id: selector:::sg_bastion_info::sg_id
           bastion_subnet_ids: selector:::public_subnet_info::subnet_id:csv
           bastion_config_destroy: true
-          mongodb_cluster: mongodb-cluster-dev
-          hostname_random: true
           size: t3.micro
-          ssh_key_name: mongodb-cluster-ssh-dev
+          spot: true
           num_of_replicas: 3
           disksize: 25
           ip_key: public_ip
