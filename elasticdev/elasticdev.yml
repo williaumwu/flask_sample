@@ -71,18 +71,8 @@ selectors:
        must_be_one: True
        resource_type: security_group
 infrastructure:
-   ssh_upload:
-       stack_name: elasticdev:::ec2_ssh_upload
-       arguments:
-          name: kafka-cluster-ssh-dev
-          clobber: True
-       credentials:
-           - reference: eval-ed-iam
-             orchestration: true
    kafka:
        stack_name: elasticdev:::kafka_on_ec2
-       dependencies:
-          - infrastructure::ssh_upload
        arguments:
           spot: True
           kafka_cluster: kafka-cluster-dev
@@ -92,14 +82,11 @@ infrastructure:
           sg_id: selector:::sg_database_info::sg_id
           bastion_sg_id: selector:::sg_bastion_info::sg_id
           bastion_subnet_ids: selector:::public_subnet_info::subnet_id:csv
-          bastion_config_destroy: true
           ami_filter: Name=name,Values=ubuntu/images/hvm-ssd/ubuntu-bionic-18.04-amd64-server-*
           ami_owner: 099720109477 
           bastion_ami_filter: Name=name,Values=ubuntu/images/hvm-ssd/ubuntu-bionic-18.04-amd64-server-*
           bastion_ami_owner: 099720109477 
-          bastion_config_destroy: true
           instance_type: t3.micro
-          ssh_key_name: kafka-cluster-ssh-dev
           num_of_zookeeper: 1
           num_of_broker: 1
           num_of_schema_registry: 1
