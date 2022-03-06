@@ -45,7 +45,7 @@ selectors:
        resource_type: subnet
 infrastructure:
    eks-workshop:
-       stack_name: elasticdev:::eks-workshop
+       stack_name: elasticdev:::eks_workshop
        arguments:
           workshop_name: eks-workshop
           vpc_name: selector:::vpc_info::name
