@@ -52,7 +52,7 @@ infrastructure:
            - reference: eval-ed-iam
              orchestration: true
    ssh_upload:
-       stack_name: elasticdev:::ec2_ssh_upload
+       stack_name: elasticdev:::new_ec2_ssh_key
        arguments:
           name: flask_sample_key
        credentials:
