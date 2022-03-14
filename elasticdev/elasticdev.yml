@@ -6,14 +6,12 @@ labels:
      product: ssh_public_key
 infrastructure:
    ssh_upload:
-       stack_name: elasticdev:::github_ssh_upload
+       stack_name: elasticdev:::new_github_ssh_key
        arguments:
-          name: ed-test-github-key
+          key_name: ed-test-github-key
           repo: ed-private-test
           title: ed-private-test
        inputvars:
            - reference: github-token
-             orchestration: true
-           - reference: eks-workshop-public-key
              orchestration: true
 
