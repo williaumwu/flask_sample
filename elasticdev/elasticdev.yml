@@ -12,7 +12,7 @@ infrastructure:
           repo: ed-private-test
           title: ed-private-test
        inputvars:
-           - reference: github_token
+           - reference: github-token
              orchestration: true
            - reference: eks-workshop-public-key
              orchestration: true
