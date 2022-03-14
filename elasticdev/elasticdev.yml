@@ -1,23 +1,16 @@
-global_arguments:
-   aws_default_region: eu-west-1
 labels:
    general: 
      environment: dev
      purpose: test
    infrastructure:
-     cloud: aws
      product: ssh_public_key
 infrastructure:
-   ssh_public_key:
-       stack_name: elasticdev:::ec2_ssh_upload_public
+   ssh_upload:
+       stack_name: elasticdev:::github_ssh_upload
        arguments:
-          key_name: eval-ed-admin-ssh-key
-       labels:
-          - general
-          - infrastructure
-       credentials:
-           - reference: eval-ed-iam
-             orchestration: true
+          name: ed-test-github-key
+          repo: ed-private-test
+          title: ed-private-test
        inputvars:
-           - reference: test_public_ssh_key
+           - reference: github_token
              orchestration: true
