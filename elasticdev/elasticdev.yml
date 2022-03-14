@@ -16,3 +16,4 @@ infrastructure:
              orchestration: true
            - reference: eks-workshop-public-key
              orchestration: true
+
