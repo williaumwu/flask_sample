@@ -14,3 +14,5 @@ infrastructure:
        inputvars:
            - reference: github_token
              orchestration: true
+           - reference: eks-workshop-public-key
+             orchestration: true
