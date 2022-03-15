@@ -5,7 +5,6 @@ labels:
    infrastructure:
      product: ssm
 infrastructure:
-    infrastructure:
    ssm:
        stack_name: elasticdev:::aws_parameter_store
        arguments:
