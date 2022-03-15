@@ -5,7 +5,7 @@ labels:
    infrastructure:
      product: webhook
 infrastructure:
-   ssh_upload:
+   webhook:
        stack_name: elasticdev:::github_webhook
        arguments:
           name: ed-private-test-webhook
