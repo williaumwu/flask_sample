@@ -3,15 +3,17 @@ labels:
      environment: dev
      purpose: test
    infrastructure:
-     product: ssh_public_key
+     product: webhook
 infrastructure:
    ssh_upload:
-       stack_name: elasticdev:::new_github_ssh_key
+       stack_name: elasticdev:::github_webhook
        arguments:
-          key_name: ed-test-github-key
+          name: ed-private-test-webhook
           repo: ed-private-test
+          url: https://app-api.elasticedev.io/webhook
+       labels:
+          - general
+          - infrastructure
        inputvars:
            - reference: github-token
              orchestration: true
-
-
