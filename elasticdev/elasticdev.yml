@@ -6,7 +6,7 @@ labels:
      product: ssm
 infrastructure:
    ssm:
-       stack_name: elasticdev:::aws_parameter_store
+       stack_name: elasticdev:::aws_ssm_parameter
        arguments:
           ssm_key: key123
           ssm_value: hello123
