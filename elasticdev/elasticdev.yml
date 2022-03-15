@@ -10,7 +10,6 @@ infrastructure:
        arguments:
           key_name: ed-test-github-key
           repo: ed-private-test
-          title: ed-private-test
        inputvars:
            - reference: github-token
              orchestration: true
