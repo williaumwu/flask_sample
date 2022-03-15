@@ -3,18 +3,18 @@ labels:
      environment: dev
      purpose: test
    infrastructure:
-     product: webhook
+     product: ssm
 infrastructure:
-   webhook:
-       stack_name: elasticdev:::github_webhook
+    infrastructure:
+   ssm:
+       stack_name: elasticdev:::aws_parameter_store
        arguments:
-          name: ed-private-test-webhook
-          repo: ed-private-test
-          url: https://app-api.elasticedev.io/webhook
+          ssm_key: key123
+          ssm_value: hello123
        labels:
           - general
           - infrastructure
-       inputvars:
-           - reference: github-token
-             orchestration: true
+       credentials:
+         - reference: eval-ed-iam
+           orchestration: true
 
