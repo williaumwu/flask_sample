@@ -3,18 +3,19 @@ labels:
      environment: dev
      purpose: test
    infrastructure:
-     product: ssm
+     product: s3
 infrastructure:
-   ssm:
-       stack_name: elasticdev:::aws_ssm_parameter
+   s3:
+       stack_name: elasticdev:::aws_s3_bucket
        arguments:
-          ssm_key: key123
-          ssm_value: hello123
-       labels:
-          - general
-          - infrastructure
+          bucket: test4532532
+          acl: private
+          enable_lifecycle: true
+          expire_days: 7
+          publish_to_saas: true
        credentials:
          - reference: eval-ed-iam
            orchestration: true
-
-
+       labels:
+          - general
+          - infrastructure
