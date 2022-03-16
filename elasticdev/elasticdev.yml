@@ -6,7 +6,7 @@ infrastructure:
    s3:
        stack_name: elasticdev:::codebuild_ci
        arguments:
-          codebuild_name: flask_sample_private
+          codebuild_name: flask-sample-private
           bucket_acl: private
           bucket_expire_days: 2
           aws_default_region: eu-west-1
