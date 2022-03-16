@@ -3,7 +3,7 @@ labels:
      environment: dev
      purpose: test
 infrastructure:
-   s3:
+   codebuild:
        stack_name: elasticdev:::codebuild_ci
        arguments:
           codebuild_name: flask-sample-private
