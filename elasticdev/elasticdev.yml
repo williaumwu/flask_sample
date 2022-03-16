@@ -2,21 +2,16 @@ labels:
    general: 
      environment: dev
      purpose: test
-   infrastructure:
-     product: s3
 infrastructure:
    s3:
-       stack_name: elasticdev:::aws_s3_bucket
+       stack_name: elasticdev:::codebuild_ci
        arguments:
-          bucket: test453253234234
-          acl: private
-          enable_lifecycle: true
-          expire_days: 7
-          publish_to_saas: true
-          versioning: true
+          codebuild_name: flask_sample_private
+          bucket_acl: private
+          bucket_expire_days: 2
+          aws_default_region: eu-west-1
        credentials:
          - reference: eval-ed-iam
            orchestration: true
        labels:
           - general
-          - infrastructure
