@@ -13,6 +13,7 @@ infrastructure:
           enable_lifecycle: true
           expire_days: 7
           publish_to_saas: true
+          versioning: true
        credentials:
          - reference: eval-ed-iam
            orchestration: true
