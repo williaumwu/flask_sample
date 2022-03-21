@@ -4,13 +4,24 @@ labels:
      purpose: ci
 infrastructure:
    codebuild:
-       stack_name: elasticdev:::codebuild_ci
+       stack_name: elasticdev:::aws_codebuild
        arguments:
-          repo: flask_sample-private
-          codebuild_name: flask-sample-private
-          bucket_acl: private
-          bucket_expire_days: 2
           aws_default_region: eu-west-1
+          s3_bucket: flask-sample-private-codebuild-ci
+          s3_bucket_cache: flask-sample-private-codebuild-cache
+          codebuild_name: flask-sample-private
+          git_url: git@github.com:williaumwu/flask_sample-private.git
+          ssm_ssh_key: codebuild/flask-sample-private/sshkeys/private
+          codebuild_env_vars_hash:
+            GIT_URL: git@github.com:williaumwu/flask_sample-private.git
+          cloud_tags_hash:
+            codebuild_name: flask-sample-private
+            environmental: dev
+            phase: ci
+            publish_to_saas: true
+       to_base64:
+         - cloud_tags_hash
+         - codebuild_env_vars_hash
        credentials:
          - reference: eval-ed-iam
            orchestration: true

@@ -1,0 +1,21 @@
+labels:
+   general: 
+     environment: dev
+     purpose: ci
+infrastructure:
+   codebuild:
+       stack_name: elasticdev:::codebuild_ci
+       arguments:
+          repo: flask_sample-private
+          codebuild_name: flask-sample-private
+          bucket_acl: private
+          bucket_expire_days: 2
+          aws_default_region: eu-west-1
+       credentials:
+         - reference: eval-ed-iam
+           orchestration: true
+       inputvars:
+         - reference: github-token
+           orchestration: true
+       labels:
+          - general
