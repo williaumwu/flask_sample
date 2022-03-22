@@ -18,7 +18,6 @@ infrastructure:
             codebuild_name: flask-sample-private
             environmental: dev
             phase: ci
-            publish_to_saas: 'true'
        to_base64:
          - cloud_tags_hash
          - codebuild_env_vars_hash
