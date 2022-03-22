@@ -10,10 +10,10 @@ infrastructure:
           s3_bucket: flask-sample-private-codebuild-ci
           s3_bucket_cache: flask-sample-private-codebuild-cache
           codebuild_name: flask-sample-private
-          git_url: git@github.com:williaumwu/flask_sample-private.git
           ssm_ssh_key: /codebuild/flask-sample-private/sshkeys/private
           codebuild_env_vars_hash:
             GIT_URL: git@github.com:williaumwu/flask_sample-private.git
+            IMAGE_REPO_NAME: flask_sample
           cloud_tags_hash:
             codebuild_name: flask-sample-private
             environmental: dev
