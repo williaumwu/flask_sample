@@ -10,18 +10,20 @@ infrastructure:
           s3_bucket: flask-sample-private-codebuild-ci
           s3_bucket_cache: flask-sample-private-codebuild-cache
           codebuild_name: flask-sample-private
-          ssm_ssh_key: /codebuild/flask-sample-private/sshkeys/private
+          docker_registry: ecr
+          ssm_params_hash:
+            SSH_KEY: /codebuild/flask-sample-private/sshkeys/private
           codebuild_env_vars_hash:
             GIT_URL: git@github.com:williaumwu/flask_sample-private.git
             IMAGE_REPO_NAME: flask_sample
-            SSM_SSH_KEY: /codebuild/flask-sample-private/sshkeys/private
           cloud_tags_hash:
-            codebuild_name: flask-sample-private
+            billing_reference: flask-sample
             environmental: dev
             phase: ci
        to_base64:
          - cloud_tags_hash
          - codebuild_env_vars_hash
+         - ssm_params_hash
        credentials:
          - reference: eval-ed-iam
            orchestration: true
