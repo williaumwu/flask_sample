@@ -12,6 +12,7 @@ infrastructure:
        stack_name: elasticdev:::aws_iam
        arguments:
           iam_name: eval-ed-iam
+          allow: "s3:*,codebuild:*,lambda:*,codepipeline:*,ecr:*,ec2:*,ssm:*,eks:*,rds:*,dynamodb:*,iam:*"
           policy_name: eval-ed-iam
        labels:
           - general
