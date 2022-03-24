@@ -1,5 +1,8 @@
 global_arguments:
    aws_default_region: eu-west-1
+   cloud_tags_hash:
+       environment: dev
+       purpose: eval-ed
 labels:
    general: 
      environment: dev
@@ -57,6 +60,8 @@ infrastructure:
           allocated_storage: 14
           db_name: app
           publish_creds: true
+       to_base64:
+         - cloud_tags_hash
        labels:
          - general
          - infrastructure
