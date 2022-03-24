@@ -1,21 +1,44 @@
+global_arguments:
+   aws_default_region: eu-west-1
+   ci_environment: ed-eval
+   suffix_id: 645633
+   cloud_tags_hash:
+       environment: dev
+       purpose: ci
+       billing_code: 87deo
 labels:
    general: 
      environment: dev
      purpose: ci
 infrastructure:
-   dynamodb:
-       stack_name: elasticdev:::aws_dynamodb
+   codebuild-init:
+       stack_name: elasticdev:::codebuild_ci_init
        arguments:
-          aws_default_region: eu-west-1
-          dynamodb_name: codebuild-ci
-          cloud_tags_hash:
-            billing_reference: database
-            environmental: dev
-            phase: infrastructure
+          bucket_expire_days: 1
        to_base64:
          - cloud_tags_hash
        credentials:
          - reference: eval-ed-iam
+           orchestration: true
+       labels:
+          - general
+   codebuild:
+       stack_name: elasticdev:::codebuild_ci
+       dependencies: 
+           - infrastructure::codebuild-init
+       arguments:
+          codebuild_name: flask-sample-private
+          git_repo: flask_sample-private
+          git_url: git@github.com:williaumwu/flask_sample-private.git
+          docker_repo_name: flask_sample
+          docker_registry: ecr
+       to_base64:
+         - cloud_tags_hash
+       credentials:
+         - reference: eval-ed-iam
+           orchestration: true
+       inputvars:
+         - reference: github-token
            orchestration: true
        labels:
           - general
