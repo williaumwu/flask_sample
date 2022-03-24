@@ -1,7 +1,3 @@
-global_arguments:
-   aws_default_region: eu-west-1
-   ci_environment: ed-eval
-   suffix_id: 645633
 labels:
    general: 
      environment: dev
@@ -10,6 +6,9 @@ infrastructure:
    codebuild-init:
        stack_name: elasticdev:::codebuild_ci_init
        arguments:
+          aws_default_region: eu-west-1
+          ci_environment: ed-eval
+          suffix_id: 645633
           bucket_expire_days: 1
           cloud_tags_hash:
               environment: dev
