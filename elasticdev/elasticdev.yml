@@ -5,7 +5,7 @@ labels:
 global_arguments:
    aws_default_region: eu-west-1
    ci_environment: ed-eval
-   suffix_id: b645633
+   suffix_id: c645633
    cloud_tags_hash:
        environment: dev
        purpose: ci
