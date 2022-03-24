@@ -28,7 +28,7 @@ infrastructure:
                  - eks:*
                  - rds:*
                  - dynamodb:*
-                 - iam:*"
+                 - iam:*
        to_base64:
          - allows_hash
        labels:
