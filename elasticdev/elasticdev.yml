@@ -4,18 +4,23 @@ labels:
      purpose: ci
 infrastructure:
    codebuild:
-       stack_name: elasticdev:::codebuild_ci
+       stack_name: elasticdev:::aws_lambda
        arguments:
-          git_repo: flask_sample-private
-          codebuild_name: flask-sample-private
-          bucket_acl: private
-          bucket_expire_days: 2
           aws_default_region: eu-west-1
-          billing_reference: flask-sample
-          environmental: dev
-          git_url: git@github.com:williaumwu/flask_sample-private.git
-          docker_repo_name: flask_sample
-          docker_registry: ecr
+          s3_bucket: flask-sample-private-codebuild-ci
+          s3_bucket: lambda-bucket
+          s3_key:    test-lambda.zip
+          lambda_name: test-lambda
+          lambda_layers: arn:aws:lambda:eu-west-1:553035198032:layer:git-lambda2:8
+          lambda_env_vars_hash:
+            ENV: "test"
+          cloud_tags_hash:
+            billing_reference: flask-sample
+            environmental: dev
+            phase: ci
+       to_base64:
+         - cloud_tags_hash
+         - lambda_env_vars_hash
        credentials:
          - reference: eval-ed-iam
            orchestration: true
