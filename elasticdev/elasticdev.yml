@@ -31,6 +31,9 @@ infrastructure:
           git_url: git@github.com:williaumwu/flask_sample-private.git
           docker_repo_name: flask_sample
           docker_registry: ecr
+          ci_environment: ed-eval
+          suffix_id: 645633
+          bucket_expire_days: 1
           cloud_tags_hash:
               environment: dev
               purpose: ci
