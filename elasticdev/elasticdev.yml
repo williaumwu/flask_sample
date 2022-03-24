@@ -2,18 +2,19 @@ labels:
    general: 
      environment: dev
      purpose: ci
-     aws_default_region: eu-west-1
-     ci_environment: ed-eval
-     suffix_id: b645633
+global_arguments:
+   aws_default_region: eu-west-1
+   ci_environment: ed-eval
+   suffix_id: b645633
+   cloud_tags_hash:
+       environment: dev
+       purpose: ci
+       billing_code: 87deo
 infrastructure:
    codebuild-init:
        stack_name: elasticdev:::codebuild_ci_init
        arguments:
           bucket_expire_days: 1
-          cloud_tags_hash:
-              environment: dev
-              purpose: ci
-              billing_code: 87deo
        to_base64:
          - cloud_tags_hash
        credentials:
@@ -31,10 +32,6 @@ infrastructure:
           git_url: git@github.com:williaumwu/flask_sample-private.git
           docker_repo_name: flask_sample
           docker_registry: ecr
-          cloud_tags_hash:
-              environment: dev
-              purpose: ci
-              billing_code: 87deo
        to_base64:
          - cloud_tags_hash
        credentials:
