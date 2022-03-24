@@ -7,7 +7,7 @@ infrastructure:
        stack_name: elasticdev:::aws_lambda
        arguments:
           aws_default_region: eu-west-1
-          s3_bucket: flask-sample-private-codebuild-ci
+          s3_bucket: flask-sample-private-2-codebuild-ci
           s3_bucket: lambda-bucket
           s3_key:    test-lambda.zip
           lambda_name: test-lambda
