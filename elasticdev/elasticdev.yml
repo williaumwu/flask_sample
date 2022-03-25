@@ -4,13 +4,15 @@ labels:
      purpose: ci
 infrastructure:
    lambda:
-       stack_name: elasticdev:::aws_lambda
+       stack_name: elasticdev:::aws-lambda-python
        arguments:
-          aws_default_region: eu-west-1
-          s3_bucket: codebuild-shared-ed-eval-d645633
-          s3_bucket: lambda-bucket
-          s3_key:    test-lambda.zip
+          ed_lambda_execgroup_name: elasticdev:::github::lambda_codebuild
           lambda_name: test-lambda
+          s3_bucket: codebuild-shared-ed-eval-c645633
+          s3_key: test-lambda.zip
+          handler: app.handler
+          runtime: python3.8
+          aws_default_region: eu-west-1
           lambda_layers: "arn:aws:lambda:eu-west-1:553035198032:layer:git-lambda2:8"
           lambda_env_vars_hash:
             ENV: dev
