@@ -2,38 +2,25 @@ labels:
    general: 
      environment: dev
      purpose: ci
-global_arguments:
-   aws_default_region: eu-west-1
-   ci_environment: ed-eval
-   suffix_id: d645633
-   cloud_tags_hash:
-       environment: dev
-       purpose: ci
-       billing_code: 87deo
 infrastructure:
-   codebuild-init:
-       stack_name: elasticdev:::codebuild_ci_init
+   lambda:
+       stack_name: elasticdev:::aws_lambda
        arguments:
-          bucket_expire_days: 1
+          aws_default_region: eu-west-1
+          s3_bucket: codebuild-shared-ed-eval-d645633
+          s3_bucket: lambda-bucket
+          s3_key:    test-lambda.zip
+          lambda_name: test-lambda
+          lambda_layers: "arn:aws:lambda:eu-west-1:553035198032:layer:git-lambda2:8"
+          lambda_env_vars_hash:
+            ENV: dev
+          cloud_tags_hash:
+            billing_reference: flask-sample
+            environmental: dev
+            phase: ci
        to_base64:
          - cloud_tags_hash
-       credentials:
-         - reference: eval-ed-iam
-           orchestration: true
-       labels:
-          - general
-   codebuild:
-       stack_name: elasticdev:::codebuild_ci
-       dependencies: 
-           - infrastructure::codebuild-init
-       arguments:
-          codebuild_name: flask-sample-private
-          git_repo: flask_sample-private
-          git_url: git@github.com:williaumwu/flask_sample-private.git
-          docker_repo_name: flask_sample
-          docker_registry: ecr
-       to_base64:
-         - cloud_tags_hash
+         - lambda_env_vars_hash
        credentials:
          - reference: eval-ed-iam
            orchestration: true
