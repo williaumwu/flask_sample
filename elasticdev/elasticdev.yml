@@ -7,9 +7,9 @@ infrastructure:
        stack_name: elasticdev:::aws-lambda-python
        arguments:
           ed_lambda_execgroup_name: elasticdev:::github::lambda_codebuild
-          lambda_name: test-lambda
+          lambda_name: trigger-codebuild
           s3_bucket: codebuild-shared-ed-eval-d645633
-          s3_key: test-lambda.zip
+          s3_key: trigger-codebuild.zip
           handler: app.handler
           runtime: python3.8
           aws_default_region: eu-west-1
