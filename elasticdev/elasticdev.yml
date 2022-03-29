@@ -1,16 +1,27 @@
+global_arguments:
+   aws_default_region: eu-west-1
 labels:
    general: 
      environment: dev
      purpose: ci
 infrastructure:
+   ecr_repo:
+       stack_name: elasticdev:::ecr_repo
+       arguments:
+          name: flask_sample
+          docker_repo: flask_sample
+       credentials:
+           - reference: eval-ed-iam
+             orchestration: true
    codebuild:
        stack_name: elasticdev:::codebuild_ci
+       dependencies: 
+           - infrastructure::ecr_repo
        arguments:
           git_repo: flask_sample-private
           codebuild_name: flask-sample-private-2
           bucket_acl: private
           bucket_expire_days: 2
-          aws_default_region: eu-west-1
           billing_reference: flask-sample
           environmental: dev
           git_url: git@github.com:williaumwu/flask_sample-private.git
