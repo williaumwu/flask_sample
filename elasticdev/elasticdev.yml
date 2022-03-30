@@ -14,6 +14,7 @@ infrastructure:
           runtime: python3.8
           aws_default_region: eu-west-1
           debug: true
+          lambda_layers: "arn:aws:lambda:eu-west-1:553035198032:layer:git-lambda2:8"
           lambda_env_vars_hash:
             ENV: dev
             DEBUG_LAMBDA: "true"
