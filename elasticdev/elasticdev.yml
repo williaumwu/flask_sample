@@ -11,21 +11,22 @@ global_arguments:
        purpose: ci
        billing_code: 87deo
 infrastructure:
-   codebuild:
-       stack_name: elasticdev:::codebuild_ci
+   ecr_repo:
+       stack_name: elasticdev:::ecr_repo
        arguments:
-          codebuild_name: flask-sample-private
-          git_repo: flask_sample-private
-          git_url: git@github.com:williaumwu/flask_sample-private.git
-          docker_repo_name: flask_sample
-          docker_registry: ecr
+          name: flask_sample
+          docker_repo: flask_sample
+       credentials:
+           - reference: eval-ed-iam
+             orchestration: true
+   codebuild-init:
+       stack_name: elasticdev:::codebuild_ci_init
+       arguments:
+          bucket_expire_days: 1
        to_base64:
          - cloud_tags_hash
        credentials:
          - reference: eval-ed-iam
-           orchestration: true
-       inputvars:
-         - reference: github-token
            orchestration: true
        labels:
           - general
