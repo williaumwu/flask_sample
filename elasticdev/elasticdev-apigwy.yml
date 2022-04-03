@@ -1,0 +1,22 @@
+labels:
+   general: 
+     environment: dev
+     purpose: ci
+infrastructure:
+   apigw-codebuild:
+       stack_name: elasticdev:::apigw_lambda-integ
+       arguments:
+          aws_default_region: eu-west-1
+          lambda_name: repo-webhook 
+          apigateway_name: codename-ci
+          cloud_tags_hash:
+            billing_reference: ci
+            environmental: dev
+            phase: infrastructure
+       to_base64:
+         - cloud_tags_hash
+       credentials:
+         - reference: eval-ed-iam
+           orchestration: true
+       labels:
+          - general

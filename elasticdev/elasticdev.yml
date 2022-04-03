@@ -3,20 +3,38 @@ labels:
      environment: dev
      purpose: ci
 infrastructure:
-   apigw-codebuild:
-       stack_name: elasticdev:::apigw_lambda-integ
+   lambda-webhook:
+       stack_name: elasticdev:::aws-lambda-python
        arguments:
+          ed_lambda_execgroup_name: elasticdev:::github::lambda_webhook
+          lambda_name: repo-webhook
+          s3_bucket: codebuild-shared-ed-eval-d645633
+          s3_key: repo-webhook.zip
+          handler: app.handler
+          runtime: python3.8
           aws_default_region: eu-west-1
-          lambda_name: repo-webhook 
-          apigateway_name: codename-ci
+          debug: true
+          lambda_layers: "arn:aws:lambda:eu-west-1:553035198032:layer:git-lambda2:8"
+          lambda_env_vars_hash:
+            ENV: dev
+            DEBUG_LAMBDA: "true"
+            BUILD_TTL: "60"
+            DISABLE_SRC_IP_CHECK: "true"
+            DISABLE_SECRET_CHECK: "true"
+            DISABLE_BRANCH_CHECK: "false"
+            DISABLE_EVENT_CHECK: "false"
           cloud_tags_hash:
-            billing_reference: ci
+            billing_reference: ed-eval-ci
             environmental: dev
-            phase: infrastructure
+            phase: ci
        to_base64:
          - cloud_tags_hash
+         - lambda_env_vars_hash
        credentials:
          - reference: eval-ed-iam
+           orchestration: true
+       inputvars:
+         - reference: github-token
            orchestration: true
        labels:
           - general
