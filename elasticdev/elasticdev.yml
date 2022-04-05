@@ -10,7 +10,7 @@ global_arguments:
        environment: dev
        purpose: ci
        billing_code: 87deo
-build:
+infrastructure:
    codebuild:
        create_webhook: false
        create_deploy_key: false
