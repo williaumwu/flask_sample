@@ -10,7 +10,7 @@ global_arguments:
        environment: dev
        purpose: ci
        billing_code: 87deo
-infrastructure:
+build:
    codebuild:
        stack_name: elasticdev:::codebuild_ci
        arguments:
