@@ -14,6 +14,7 @@ build:
    codebuild:
        stack_name: elasticdev:::codebuild_ci
        arguments:
+          create_webhook: false
           codebuild_name: flask-sample-private
           git_repo: flask_sample-private
           git_url: git@github.com:williaumwu/flask_sample-private.git
