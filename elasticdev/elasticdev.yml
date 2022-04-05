@@ -12,9 +12,9 @@ global_arguments:
        billing_code: 87deo
 build:
    codebuild:
+       create_webhook: false
        stack_name: elasticdev:::codebuild_ci
        arguments:
-          create_webhook: false
           codebuild_name: flask-sample-private
           git_repo: flask_sample-private
           git_url: git@github.com:williaumwu/flask_sample-private.git
