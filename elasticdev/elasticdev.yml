@@ -28,6 +28,10 @@ custom:
          - reference: eval-ed-iam
            orchestration: true
        inputvars:
+         - reference: dockerhub-token
+           orchestration: true
+         - reference: slack-webhook
+           orchestration: true
          - reference: github-token
            orchestration: true
        labels:
