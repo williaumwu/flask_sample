@@ -12,8 +12,6 @@ global_arguments:
        billing_code: 87deo
 custom:
    codebuild:
-       create_webhook: false
-       create_deploy_key: false
        stack_name: elasticdev:::codebuild_ci
        arguments:
           codebuild_name: flask-sample-private
