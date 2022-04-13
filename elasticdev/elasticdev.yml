@@ -20,8 +20,8 @@ custom:
           git_repo: flask_sample-private
           git_url: git@github.com:williaumwu/flask_sample-private.git
           branch: ci
-          docker_repo_name: flask_sample
-          docker_registry: ecr
+          ecr_repo_name: flask_sample
+          docker_username: williaumwu
        to_base64:
          - cloud_tags_hash
        credentials:
