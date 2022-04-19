@@ -21,6 +21,8 @@ custom:
              orchestration: true
    codebuild:
        stack_name: elasticdev:::codebuild_ci
+       dependencies: 
+           - infrastructure::ecr_repo
        arguments:
           codebuild_name: flask-sample-private
           git_repo: flask_sample-private
