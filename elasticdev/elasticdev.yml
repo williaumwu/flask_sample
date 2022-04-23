@@ -11,8 +11,8 @@ global_arguments:
        purpose: ci
        billing_code: 87deo
 infrastructure:
-   codebuild-init:
-       stack_name: elasticdev:::codebuild_ci_init
+   setup_codebuild:
+       stack_name: elasticdev:::setup_codebuild_ci
        arguments:
           bucket_expire_days: 1
        to_base64:
