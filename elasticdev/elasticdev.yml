@@ -4,14 +4,16 @@ labels:
      purpose: ci
 global_arguments:
    aws_default_region: us-east-2
-   suffix_id: 04252022
    cloud_tags_hash:
        environment: dev
        purpose: demo
        billing_code: 2022 
 infrastructure:
    setup_codebuild:
-       stack_name: williaumwu:::aws-nodejs-example
+       stack_name: williamwu:::aws-nodejs-example
+         arguments: 
+           apigateway_name: nodejs-example
+           suffix_id: 04252022
        to_base64:
          - cloud_tags_hash
        credentials:
