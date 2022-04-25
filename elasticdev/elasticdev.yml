@@ -10,7 +10,7 @@ global_arguments:
        billing_code: 2022 
 infrastructure:
    setup_codebuild:
-       stack_name: williamwu:::aws-nodejs-example
+       stack_name: williaumwu:::aws-nodejs-example
        arguments: 
          apigateway_name: nodejs-example
          suffix_id: 04252022
