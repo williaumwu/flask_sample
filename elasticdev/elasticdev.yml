@@ -11,9 +11,9 @@ global_arguments:
 infrastructure:
    setup_codebuild:
        stack_name: williamwu:::aws-nodejs-example
-         arguments: 
-           apigateway_name: nodejs-example
-           suffix_id: 04252022
+       arguments: 
+         apigateway_name: nodejs-example
+         suffix_id: 04252022
        to_base64:
          - cloud_tags_hash
        credentials:
