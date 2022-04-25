@@ -13,7 +13,7 @@ infrastructure:
        stack_name: williaumwu:::aws-nodejs-example
        arguments: 
          apigateway_name: nodejs-example
-         suffix_id: 04252022
+         suffix_id: 04262022
        to_base64:
          - cloud_tags_hash
        credentials:
