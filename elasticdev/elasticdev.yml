@@ -9,7 +9,7 @@ global_arguments:
        purpose: demo
        billing_code: b2022 
 infrastructure:
-   setup_codebuild:
+   nodejs-demo:
        stack_name: williaumwu:::aws-nodejs-example
        arguments: 
          apigateway_name: nodejs-example
