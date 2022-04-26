@@ -3,7 +3,7 @@ labels:
      environment: dev
      purpose: ci
 global_arguments:
-   aws_default_region: us-east-2
+   aws_default_region: eu-west-1
    cloud_tags_hash:
        environment: dev
        purpose: demo
