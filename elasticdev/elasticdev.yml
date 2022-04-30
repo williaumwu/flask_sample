@@ -18,7 +18,7 @@ labels:
      region: eu-west-1
 selectors:
    vpc_info:
-     match_base: label:::aws
+     match_base: test
      match_params:
        must_exists: True
        resource_type: vpc
