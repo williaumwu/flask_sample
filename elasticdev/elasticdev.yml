@@ -10,10 +10,7 @@ labels:
 selectors:
    vpc_info:
      match_labels:
-       car: bmw
-       model: 320i
        environment: dev
-       app_tier: networking
      match_keys:
        provider: aws
        region: eu-west-1
@@ -22,10 +19,7 @@ selectors:
        resource_type: vpc
    private_subnet_info:
      match_labels:
-       car: bmw
-       model: 320i
        environment: dev
-       app_tier: networking
      match_keys:
        provider: aws
        region: eu-west-1
@@ -34,10 +28,7 @@ selectors:
        resource_type: subnet
    public_subnet_info:
      match_labels:
-       car: bmw
-       model: 320i
        environment: dev
-       app_tier: networking
      match_keys:
        provider: aws
        region: eu-west-1
@@ -46,10 +37,7 @@ selectors:
        resource_type: subnet
    sg_database_info:
      match_labels:
-       car: bmw
-       model: 320i
        environment: dev
-       app_tier: networking
      match_keys:
        provider: aws
        region: eu-west-1
@@ -59,10 +47,7 @@ selectors:
        resource_type: security_group
    sg_bastion_info:
      match_labels:
-       car: bmw
-       model: 320i
        environment: dev
-       app_tier: networking
      match_keys:
        provider: aws
        region: eu-west-1
