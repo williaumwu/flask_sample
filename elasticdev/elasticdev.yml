@@ -1,5 +1,11 @@
-global_arguments:
-   aws_default_region: eu-west-1
+global:
+   arguments: 
+     aws_default_region: eu-west-1
+   selectors: 
+     test:
+       match_labels:
+         direction: west
+         orientation: landscape
 labels:
    general: 
      environment: dev
@@ -7,50 +13,37 @@ labels:
    infrastructure:
      cloud: aws
      product: mongodb
+   aws:
+     provider: aws
+     region: eu-west-1
 selectors:
    vpc_info:
-     match_labels:
-       environment: dev
-     match_keys:
-       provider: aws
-       region: eu-west-1
+     match_base: labels:::aws
      match_params:
        must_exists: True
        resource_type: vpc
    private_subnet_info:
-     match_labels:
-       environment: dev
+     match_base: label:::aws
      match_keys:
-       provider: aws
-       region: eu-west-1
        name: private
      match_params:
        resource_type: subnet
    public_subnet_info:
-     match_labels:
-       environment: dev
+     match_base: labels:::aws
      match_keys:
-       provider: aws
-       region: eu-west-1
        name: public
      match_params:
        resource_type: subnet
    sg_database_info:
-     match_labels:
-       environment: dev
+     match_base: labels:::aws
      match_keys:
-       provider: aws
-       region: eu-west-1
        name: database
      match_params:
        must_be_one: True
        resource_type: security_group
    sg_bastion_info:
-     match_labels:
-       environment: dev
+     match_base: labels:::aws
      match_keys:
-       provider: aws
-       region: eu-west-1
        name: bastion
      match_params:
        must_be_one: True
