@@ -18,31 +18,31 @@ labels:
      region: eu-west-1
 selectors:
    vpc_info:
-     match_base: test
+     match_ref: test
      match_params:
        must_exists: True
        resource_type: vpc
    private_subnet_info:
-     match_base: label:::aws
+     match_ref: label:::aws
      match_keys:
        name: private
      match_params:
        resource_type: subnet
    public_subnet_info:
-     match_base: label:::aws
+     match_ref: label:::aws
      match_keys:
        name: public
      match_params:
        resource_type: subnet
    sg_database_info:
-     match_base: label:::aws
+     match_ref: label:::aws
      match_keys:
        name: database
      match_params:
        must_be_one: True
        resource_type: security_group
    sg_bastion_info:
-     match_base: label:::aws
+     match_ref: label:::aws
      match_keys:
        name: bastion
      match_params:
