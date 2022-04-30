@@ -4,8 +4,8 @@ global:
    selectors: 
      test:
        match_labels:
-         direction: west
-         orientation: landscape
+         provider: aws
+         region: eu-west-1
 labels:
    general: 
      environment: dev
