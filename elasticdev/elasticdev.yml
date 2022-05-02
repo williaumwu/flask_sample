@@ -6,6 +6,8 @@ global:
        match_keys:
          provider: aws
          region: eu-west-1
+       match_labels:
+         environment: dev
 labels:
    general: 
      environment: dev
