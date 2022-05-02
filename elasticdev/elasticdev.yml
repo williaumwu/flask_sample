@@ -87,6 +87,8 @@ infrastructure:
          - private_subnet_info
          - sg_bastion_info
          - sg_database_info
+       labels:
+         - general
        credentials:
            - reference: eval-ed-iam
              orchestration: true
