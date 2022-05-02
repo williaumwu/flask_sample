@@ -81,14 +81,15 @@ infrastructure:
           volume_fstype: xfs
           mongodb_username: admin123
           mongodb_password: admin123
+       labels:
+         - general
+         - infrastructure
        selectors:
          - vpc_info
          - public_subnet_info
          - private_subnet_info
          - sg_bastion_info
          - sg_database_info
-       labels:
-         - general
        credentials:
            - reference: eval-ed-iam
              orchestration: true
