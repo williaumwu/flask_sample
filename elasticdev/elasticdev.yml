@@ -6,8 +6,10 @@ global:
        match_keys:
          provider: aws
          region: eu-west-1
+         nickname: williaumwu
        match_labels:
          environment: dev
+         purpose: jimmy
 labels:
    general: 
      environment: dev
