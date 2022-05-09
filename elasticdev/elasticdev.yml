@@ -14,8 +14,6 @@ labels:
 selectors:
    vpc_info:
      labels:
-       car: bmw
-       model: 320i
        environment: dev
        app_tier: networking
      keys:
@@ -26,8 +24,6 @@ selectors:
        resource_type: vpc
    sg_info:
      labels:
-       car: bmw
-       model: 320i
        environment: dev
        app_tier: networking
      keys:
@@ -39,8 +35,6 @@ selectors:
        resource_type: security_group
    subnet_info:
      labels:
-       car: bmw
-       model: 320i
        environment: dev
        app_tier: networking
      keys:
