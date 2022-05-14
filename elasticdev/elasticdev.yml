@@ -2,23 +2,14 @@ labels:
    general: 
      environment: dev
      purpose: ci
-global_arguments:
-   aws_default_region: eu-west-1
-   cloud_tags_hash:
-       environment: dev
-       purpose: demo
-       billing_code: b2022 
 infrastructure:
-   nodejs-demo:
-       stack_name: williaumwu:::aws-nodejs-example
-       arguments: 
-         apigateway_name: nodejs-example
-         suffix_id: s04262022-07
-         runtime: nodejs12.x
-       to_base64:
-         - cloud_tags_hash
-       credentials:
-         - reference: eval-ed-iam
-           orchestration: true
+   subgroup:
+       stack_name: elasticdev:::gitlab_subgroup
+       arguments:
+          group_name: gitlabci-101
+          visibility_level: public
+       inputvars:
+           - reference: gitlab-parent-group
+             orchestration: true
        labels:
-          - general
+           - general
