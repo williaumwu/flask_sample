@@ -11,5 +11,7 @@ infrastructure:
        inputvars:
            - reference: gitlab-parent-group
              orchestration: true
+           - reference: gitlab-token
+             orchestration: true
        labels:
            - general
