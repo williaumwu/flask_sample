@@ -7,7 +7,7 @@ infrastructure:
        stack_name: elasticdev:::gitlab_subgroup
        arguments:
           group_name: gitlabci-101
-          visibility_level: public
+          visibility_level: private
        inputvars:
            - reference: gitlab-parent-group
              orchestration: true
