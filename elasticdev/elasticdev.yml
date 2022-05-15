@@ -8,6 +8,7 @@ infrastructure:
        arguments:
           group_name: gitlabci-101
           visibility_level: private
+          publish_to_saas: true
        inputvars:
            - reference: gitlab-parent-group
              orchestration: true
