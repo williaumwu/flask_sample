@@ -3,13 +3,14 @@ labels:
      environment: dev
      purpose: ci
 infrastructure:
-   project:
-       stack_name: elasticdev:::gitlab_project
+   subgroup:
+       stack_name: elasticdev:::gitlab_subgroup
        arguments:
-          project_name: test101
-          group_id: 53181696
+          group_name: gitlabci-101
           visibility_level: private
        inputvars:
+           - reference: gitlab-parent-group
+             orchestration: true
            - reference: gitlab-token
              orchestration: true
        labels:
