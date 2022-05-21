@@ -6,7 +6,7 @@ infrastructure:
    custom:
        stack_name: elasticdev:::gitlab_project
        arguments:
-          project_name: test101
+          gitlab_project_name: test101
           group_id: 53181696
           visibility_level: private
        inputvars:
