@@ -3,7 +3,7 @@ labels:
      environment: dev
      purpose: ci
 infrastructure:
-   project:
+   custom:
        stack_name: elasticdev:::gitlab_project
        arguments:
           project_name: test101
