@@ -2,23 +2,16 @@ labels:
    general: 
      environment: dev
      purpose: ci
-global_arguments:
-   aws_default_region: eu-west-1
-   ci_environment: ed-eval
-   suffix_id: d645633
-   cloud_tags_hash:
-       environment: dev
-       purpose: ci
-       billing_code: 87deo
 infrastructure:
-   setup_codebuild:
-       stack_name: elasticdev:::setup_codebuild_ci
+   subgroup:
+       stack_name: elasticdev:::gitlab_subgroup
        arguments:
-          bucket_expire_days: 1
-       to_base64:
-         - cloud_tags_hash
-       credentials:
-         - reference: eval-ed-iam
-           orchestration: true
+          group_name: gitlabci-101
+          visibility_level: private
+       inputvars:
+           - reference: gitlab-parent-group
+             orchestration: true
+           - reference: gitlab-token
+             orchestration: true
        labels:
-          - general
+           - general
