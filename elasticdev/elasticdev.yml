@@ -17,6 +17,7 @@ infrastructure:
        arguments:
          vpc_name: eval-ed-vpc-simple
          eks_cluster: eval-ed-eks
+         publish_to_saas: true
        labels:
          - general
          - infrastructure
