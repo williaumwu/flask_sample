@@ -1,5 +1,10 @@
 global_arguments:
    aws_default_region: eu-west-1
+   cloud_tags_hash:
+       environment: dev
+       purpose: eval-ed
+       database: nosql
+       user: test
 labels:
    general: 
      environment: dev
@@ -83,6 +88,8 @@ infrastructure:
           num_of_rest: 1
           num_of_ksql: 1
           disksize: 25
+       to_base64:
+         - cloud_tags_hash
        selectors:
          - vpc_info
          - public_subnet_info
