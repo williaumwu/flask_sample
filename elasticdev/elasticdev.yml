@@ -1,10 +1,11 @@
-global_arguments:
-   aws_default_region: eu-west-1
-   cloud_tags_hash:
-       environment: dev
-       purpose: eval-ed
-       database: nosql
-       user: test
+global:
+   arguments:
+     aws_default_region: eu-west-1
+     cloud_tags_hash:
+         environment: dev
+         purpose: eval-ed
+         database: nosql
+         user: test
 labels:
    general: 
      environment: dev
