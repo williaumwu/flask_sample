@@ -6,6 +6,11 @@ global:
        match_keys:
          provider: aws
          region: eu-west-1
+   cloud_tags_hash:
+       environment: dev
+       purpose: eval-ed
+       database: nosql
+       user: test
 labels:
    general: 
      environment: dev
@@ -71,6 +76,8 @@ infrastructure:
           volume_fstype: xfs
           mongodb_username: admin123
           mongodb_password: admin123
+       to_base64:
+         - cloud_tags_hash
        selectors:
          - vpc_info
          - public_subnet_info
