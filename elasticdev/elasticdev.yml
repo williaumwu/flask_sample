@@ -12,7 +12,7 @@ global_arguments:
        billing_code: 87deo
 infrastructure:
    setup_codebuild:
-       stack_name: elasticdev:::setup_gitlab_setup
+       stack_name: elasticdev:::setup_gitlab_ci
        arguments:
           visibility_level: private
        to_base64:
