@@ -11,7 +11,7 @@ global_arguments:
        purpose: ci
        billing_code: 87deo
 infrastructure:
-   setup_codebuild:
+   setup_gitlab:
        stack_name: elasticdev:::setup_gitlab_ci
        arguments:
           visibility_level: private
