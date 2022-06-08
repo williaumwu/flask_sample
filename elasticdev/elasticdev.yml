@@ -24,7 +24,22 @@ selectors:
    runner_token_info:
      match_params:
        must_exists: True
-       resource_type: vpc
+       resource_type: gitlab_runner
+     keys:
+       provider: gitlab
+     labels:
+       platform: gitlab
+       component: runner
+   aws_gitlab_cred:
+     labels:
+       platform: gitlab
+       component: runner
+     keys:
+       provider: aws
+       region: eu-west-1
+     parameters:
+       must_exists: True
+       resource_type: credentials
    vpc_info:
      match_ref: aws
      match_params:
@@ -48,6 +63,9 @@ infrastructure:
        stack_name: elasticdev:::setup_gitlab_ci
        arguments:
           visibility_level: private
+          gitlab_token: selector:::runner_token_info::runner_token
+          gitlab_runner_aws_access_key: selector:::aws_gitlab_cred::username
+          gitlab_runner_aws_secret_key: selector:::aws_gitlab_cred::password
           vpc_name: selector:::vpc_info::name
           subnet_ids: selector:::public_subnet_info::subnet_id:csv
           sg_id: selector:::sg_database_info::sg_id
@@ -60,6 +78,8 @@ infrastructure:
          - vpc_info
          - public_subnet_info
          - sg_bastion_info
+         - aws_gitlab_cred
+         - runner_token_info
        credentials:
          - reference: eval-ed-iam
            orchestration: true
