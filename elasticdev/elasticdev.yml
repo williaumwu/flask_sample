@@ -7,11 +7,11 @@ global:
      aws_default_region: eu-west-1
      ci_environment: ed-eval
      suffix_id: d645633
-   cloud_tags_hash:
-     environment: dev
-     purpose: ci
-     billing_code: 87deo
-     platform: gitlab
+     cloud_tags_hash:
+       environment: dev
+       purpose: ci
+       billing_code: 87deo
+       platform: gitlab
 labels:
    general: 
      environment: dev
