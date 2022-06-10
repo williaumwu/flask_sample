@@ -64,8 +64,8 @@ infrastructure:
        arguments:
           visibility_level: private
           gitlab_token: selector:::runner_token_info::runner_token
-          gitlab_runner_aws_access_key: selector:::aws_gitlab_cred::username
-          gitlab_runner_aws_secret_key: selector:::aws_gitlab_cred::password
+          gitlab_runner_aws_access_key: selector:::aws_gitlab_cred::AWS_ACCESS_KEY_ID
+          gitlab_runner_aws_secret_key: selector:::aws_gitlab_cred::AWS_SECRET_ACCESS_KEY
           vpc_name: selector:::vpc_info::name
           subnet_ids: selector:::public_subnet_info::subnet_id:csv
           sg_id: selector:::sg_bastion_info::sg_id
