@@ -24,7 +24,7 @@ selectors:
    runner_token_info:
      match_params:
        must_exists: True
-       resource_type: gitlab_runner
+       resource_type: gitlab_group
      keys:
        provider: gitlab
      labels:
