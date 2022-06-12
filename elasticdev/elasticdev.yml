@@ -21,7 +21,7 @@ labels:
      platform: gitlab
      component: runner
 selectors:
-   runner_token_info:
+   runners_token_info:
      match_params:
        must_exists: True
        resource_type: gitlab_group
@@ -63,7 +63,7 @@ infrastructure:
        arguments:
           visibility_level: private
           spot_price: 0.05
-          gitlab_token: selector:::runner_token_info::runner_token
+          gitlab_runners_token_hash: selector:::runners_token_info::runners_token
           gitlab_runner_aws_access_key: selector:::aws_gitlab_cred::AWS_ACCESS_KEY_ID
           gitlab_runner_aws_secret_key: selector:::aws_gitlab_cred::AWS_SECRET_ACCESS_KEY
           vpc_name: selector:::vpc_info::name
@@ -79,7 +79,7 @@ infrastructure:
          - public_subnet_info
          - sg_bastion_info
          - aws_gitlab_cred
-         - runner_token_info
+         - runners_token_info
        credentials:
          - reference: eval-ed-iam
            orchestration: true
