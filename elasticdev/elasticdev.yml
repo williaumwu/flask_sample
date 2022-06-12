@@ -36,7 +36,6 @@ selectors:
        component: runner
      keys:
        provider: aws
-       region: eu-west-1
      parameters:
        must_exists: True
        resource_type: credentials
@@ -63,6 +62,7 @@ infrastructure:
        stack_name: elasticdev:::setup_gitlab_ci
        arguments:
           visibility_level: private
+          spot_price: 0.05
           gitlab_token: selector:::runner_token_info::runner_token
           gitlab_runner_aws_access_key: selector:::aws_gitlab_cred::AWS_ACCESS_KEY_ID
           gitlab_runner_aws_secret_key: selector:::aws_gitlab_cred::AWS_SECRET_ACCESS_KEY
@@ -71,7 +71,7 @@ infrastructure:
           sg_id: selector:::sg_bastion_info::sg_id
           vpc_id: selector:::vpc_info::vpc_id
           bastion_sg_id: selector:::sg_bastion_info::sg_id
-          instance_type: t3.micro
+          instance_type: t3.medium
        to_base64:
          - cloud_tags_hash
        selectors:
