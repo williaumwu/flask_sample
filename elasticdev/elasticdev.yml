@@ -54,6 +54,7 @@ infrastructure:
           allocated_storage: 14
           db_name: app
           publish_creds: true
+          publish_to_saas: true
        to_base64:
          - cloud_tags_hash
        labels:
