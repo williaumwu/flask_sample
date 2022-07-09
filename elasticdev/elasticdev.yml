@@ -89,6 +89,7 @@ infrastructure:
           num_of_rest: 1
           num_of_ksql: 1
           disksize: 25
+          publish_to_saas: true
        to_base64:
          - cloud_tags_hash
        selectors:
