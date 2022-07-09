@@ -75,6 +75,7 @@ infrastructure:
           volume_fstype: xfs
           mongodb_username: admin123
           mongodb_password: admin123
+          publish_to_saas: true
        to_base64:
          - cloud_tags_hash
        selectors:
