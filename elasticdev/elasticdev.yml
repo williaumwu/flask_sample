@@ -10,7 +10,7 @@ global_arguments:
        environment: dev
        purpose: ci
        billing_code: 87deo
-custom:
+infrastructure:
    ecr_repo:
        stack_name: elasticdev:::ecr_repo
        arguments:
@@ -19,8 +19,9 @@ custom:
        credentials:
            - reference: eval-ed-iam
              orchestration: true
+custom:
    codebuild:
-       stack_name: elasticdev:::codebuild_ci
+       stack_name: elasticdev:::add_codebuild_ci
        dependencies: 
            - infrastructure::ecr_repo
        arguments:
