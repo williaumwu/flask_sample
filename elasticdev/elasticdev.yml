@@ -19,7 +19,6 @@ infrastructure:
                actions: 
                  - codebuild:*
                  - codepipeline:*
-                 - execute-api:*
                  - lambda:*
                  - ecr:*
                  - s3:*
@@ -28,6 +27,9 @@ infrastructure:
                  - eks:*
                  - rds:*
                  - dynamodb:*
+                 - iam:*
+                 - execute-api:/*/*/*
+                 - kms:*
                  - iam:*
        to_base64:
          - allows_hash
