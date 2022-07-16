@@ -3,15 +3,14 @@ global_arguments:
 labels:
    general: 
      environment: dev
-     purpose: test
+     purpose: training
      eks_cluster: eks-workshop
    infrastructure:
      cloud: aws
+     product: eks
 selectors:
    vpc_info:
      match_labels:
-       car: bmw
-       model: 320i
        environment: dev
        app_tier: networking
      match_keys:
@@ -33,8 +32,6 @@ selectors:
        resource_type: security_group
    public_subnet_info:
      match_labels:
-       car: bmw
-       model: 320i
        environment: dev
        app_tier: networking
      match_keys:
@@ -71,5 +68,3 @@ infrastructure:
        inputvars:
            - reference: eks-workshop-public-key
              orchestration: true
-destroy:
-   stack_name: elasticdev:::ed_core::callback_delete
