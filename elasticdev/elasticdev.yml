@@ -14,8 +14,8 @@ infrastructure:
    ecr_repo:
        stack_name: elasticdev:::ecr_repo
        arguments:
-          name: flask_sample
-          docker_repo: flask_sample
+          name: maven_sample
+          docker_repo: maven_sample
        credentials:
            - reference: eval-ed-iam
              orchestration: true
@@ -25,11 +25,11 @@ custom:
        dependencies: 
            - infrastructure::ecr_repo
        arguments:
-          codebuild_name: flask-sample-private
-          git_repo: flask_sample-private
-          git_url: git@github.com:williaumwu/flask_sample-private.git
+          codebuild_name: maven-sample-private
+          git_repo: maven_sample-private
+          git_url: git@github.com:williaumwu/maven_sample-private.git
           branch: ci
-          ecr_repo_name: flask_sample
+          ecr_repo_name: maven_sample
           docker_username: williaumwu
           docker_registry: ecr
           slack_channel: testing
