@@ -17,44 +17,40 @@ infrastructure:
              - resources: 
                  - "*"
                actions: 
-                 - codebuild:*
-                 - codepipeline:*
-                 - lambda:*
-                 - ecr:*
-                 - s3:*
-                 - ec2:*
-                 - ssm:*
-                 - eks:*
                  - rds:*
-                 - dynamodb:*
-                 - execute-api:/*/*/*
-                 - execute-api:*
-                 - kms:*
-                 - iam:*
-                 - events:*
-                 - elasticfilesystem:*
                  - kafka:*
-                 - appmesh:*
-                 - cloudtrail:*
-                 - efs:*
-                 - devicefarm:*
-                 - cloudformation:*
-                 - glacier:*
-                 - kinesis:*
                  - logs:*
-                 - servicediscovery:*
-                 - sns:*
-                 - acm:*
+                 - cloudtrail:*
+                 - dynamodb:*
                  - sqs:*
+                 - codebuild:*
+                 - appmesh:*
+                 - servicediscovery:*
                  - cloudfront:*
+                 - kms:*
+                 - kinesis:*
+                 - xray:*
+                 - events:*
+                 - sns:*
+                 - elasticfilesystem:*
+                 - states:*
+                 - apigateway:*
+                 - s3:*
+                 - cloudformation:*
+                 - iam:*
+                 - devicefarm:*
+                 - glacier:*
                  - cloudwatch:*
-                 - docdb:*
-                 - ecs:*
+                 - ssm:*
+                 - aws-portal:*
                  - route53:*
-                 - stepfunctions:*
-                 - apigatewayv2:*
-                 - apigatewaymanagementapi:*
-                 - discovery:*
+                 - lambda:*
+                 - ecs:*
+                 - ecr:*
+                 - codepipeline:*
+                 - ec2:*
+                 - eks:*
+                 - acm:*
        to_base64:
          - allows_hash
        labels:
