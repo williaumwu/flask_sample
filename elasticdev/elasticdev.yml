@@ -28,6 +28,7 @@ infrastructure:
                  - rds:*
                  - dynamodb:*
                  - execute-api:/*/*/*
+                 - execute-api:*
                  - kms:*
                  - iam:*
                  - events:*
@@ -51,6 +52,9 @@ infrastructure:
                  - ecs:*
                  - route53:*
                  - stepfunctions:*
+                 - apigatewayv2:*"
+                 - apigatewaymanagementapi:*"
+                 - discovery:*"
        to_base64:
          - allows_hash
        labels:
