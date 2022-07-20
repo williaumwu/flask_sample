@@ -52,9 +52,9 @@ infrastructure:
                  - ecs:*
                  - route53:*
                  - stepfunctions:*
-                 - apigatewayv2:*"
-                 - apigatewaymanagementapi:*"
-                 - discovery:*"
+                 - apigatewayv2:*
+                 - apigatewaymanagementapi:*
+                 - discovery:*
        to_base64:
          - allows_hash
        labels:
