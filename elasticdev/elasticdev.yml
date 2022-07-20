@@ -27,10 +27,30 @@ infrastructure:
                  - eks:*
                  - rds:*
                  - dynamodb:*
-                 - iam:*
                  - execute-api:/*/*/*
                  - kms:*
                  - iam:*
+                 - events:*
+                 - elasticfilesystem:*
+                 - kafka:*
+                 - appmesh:*
+                 - cloudtrail:*
+                 - efs:*
+                 - devicefarm:*
+                 - cloudformation:*
+                 - glacier:*
+                 - kinesis:*
+                 - logs:*
+                 - servicediscovery:*
+                 - sns:*
+                 - acm:*
+                 - sqs:*
+                 - cloudfront:*
+                 - cloudwatch:*
+                 - docdb:*
+                 - ecs:*
+                 - route53:*
+                 - stepfunctions:*
        to_base64:
          - allows_hash
        labels:
