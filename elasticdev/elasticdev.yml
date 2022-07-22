@@ -1,108 +1,78 @@
 global_arguments:
    aws_default_region: eu-west-1
-   docker_repo: flask_sample
 labels:
-   ci: 
+   general: 
      environment: dev
      purpose: test
-selectors:
-   vpc_info:
-     match_labels:
-       car: bmw
-       model: 320i
-       environment: dev
-       app_tier: networking
-     match_keys:
-       provider: aws
-       region: eu-west-1
-     match_params:
-       must_exists: True
-       resource_type: vpc
-   public_subnet_info:
-     match_labels:
-       car: bmw
-       model: 320i
-       environment: dev
-       app_tier: networking
-     match_keys:
-       provider: aws
-       region: eu-west-1
-       name: public
-     match_params:
-       resource_type: subnet
-   sg_bastion_info:
-     match_labels:
-       car: bmw
-       model: 320i
-       environment: dev
-       app_tier: networking
-     match_keys:
-       provider: aws
-       region: eu-west-1
-       name: bastion
-     match_params:
-       must_be_one: True
-       resource_type: security_group
+   iam:
+     cloud: aws
+     product: iam
+   vpc:
+     cloud: aws
+     product: vpc
 infrastructure:
-   ecr_repo:
-       stack_name: elasticdev:::ecr_repo
+   iam:
+       stack_name: elasticdev:::aws_iam
        arguments:
-          name: flask_sample
+          iam_name: demo-ed-iam
+          policy_name: demo-ed-iam
+          allows_hash: 
+             - resources: 
+                 - "*"
+               actions: 
+                 - rds:*
+                 - kafka:*
+                 - logs:*
+                 - cloudtrail:*
+                 - dynamodb:*
+                 - sqs:*
+                 - codebuild:*
+                 - appmesh:*
+                 - servicediscovery:*
+                 - cloudfront:*
+                 - kms:*
+                 - kinesis:*
+                 - xray:*
+                 - events:*
+                 - sns:*
+                 - elasticfilesystem:*
+                 - states:*
+                 - apigateway:*
+                 - s3:*
+                 - cloudformation:*
+                 - iam:*
+                 - devicefarm:*
+                 - glacier:*
+                 - cloudwatch:*
+                 - ssm:*
+                 - aws-portal:*
+                 - route53:*
+                 - lambda:*
+                 - ecs:*
+                 - ecr:*
+                 - codepipeline:*
+                 - ec2:*
+                 - eks:*
+                 - acm:*
+       to_base64:
+         - allows_hash
+       labels:
+          - general
+          - iam
        credentials:
-           - reference: eval-ed-iam
+           - reference: aws
              orchestration: true
-   ssh_upload:
-       stack_name: elasticdev:::new_ec2_ssh_key
-       arguments:
-          name: flask_sample_key
-       credentials:
-           - reference: eval-ed-iam
-             orchestration: true
-   dockerhost:
-       stack_name: elasticdev:::ec2_docker_host
+   vpc:
        dependencies: 
-           - infrastructure::ssh_upload
-           - infrastructure::ecr_repo
+           - infrastructure::iam
+       stack_name: elasticdev:::aws_vpc-simple
        arguments:
-          instance_type: t2.micro
-          disksize: 25
-          ssh_key_name: flask_sample_key
-       stack_vars:
-           - name: elasticdev:::ubuntu::ec2_ubuntu
-             arguments:
-                  ip_key: public_ip
-                  vpc_name: selector:::vpc_info::name
-                  vpc_id: selector:::vpc_info::vpc_id
-                  sg_id: selector:::sg_bastion_info::sg_id
-                  subnet_ids: selector:::public_subnet_info::subnet_id:csv
+         vpc_name: demo-ed-vpc-simple
+         eks_cluster: demo-ed-eks
+         publish_to_saas: true
+       labels:
+         - general
+         - vpc
        credentials:
-           - reference: eval-ed-iam
-             orchestration: true
-       selectors:
-         - vpc_info
-         - public_subnet_info
-         - sg_bastion_info
-build:
-   ci_example:
-       create_webhook: true
-       dependencies: 
-           - infrastructure::dockerhost
-           - infrastructure::ecr_repo
-       stack_name: elasticdev:::ec2_ci
-       arguments:
-           repo_url: https://github.com/williaumwu/flask_sample
-           repo_branch: ci
-           dockerfile: Dockerfile
-           dockerfile_test: Dockerfile_test
-           triggered_branches:
-             - ci
-       credentials:
-           - reference: eval-ed-iam
-             orchestration: true
-           - reference: docker
-             delegation: true
-       inputvars:
-           - reference: docker_build
-             delegation: true
-destroy:
-   stack_name: elasticdev:::ed_core::callback_delete
+         - reference: demo-ed-iam
+           orchestration: true
