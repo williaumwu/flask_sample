@@ -83,7 +83,6 @@ infrastructure:
           bastion_ami_owner: 099720109477 
           instance_type: t3.micro
           num_of_zookeeper: 1
-          num_of_broker: 1
           num_of_schema_registry: 1
           num_of_broker: 1
           num_of_rest: 1
