@@ -64,12 +64,10 @@ infrastructure:
           bastion_ami_owner: 099720109477 
           bastion_sg_id: selector:::sg_bastion_info::sg_id
           bastion_subnet_ids: selector:::public_subnet_info::subnet_id:csv
-          bastion_config_destroy: true
-          size: t3.micro
+          instance_type: t3.micro
           spot: true
           num_of_replicas: 3
           disksize: 25
-          ip_key: public_ip
           volume_size: 25
           volume_mount: /var/lib/mongodb
           volume_fstype: xfs
