@@ -2,15 +2,12 @@ global_arguments:
    aws_default_region: eu-west-1
 labels:
    general: 
-     environment: dev
+     environment: eval
      purpose: test
    infrastructure:
      cloud: aws
      product: vpc
      app_tier: networking
-   vehicle:
-     car: bmw
-     model: 320i
 infrastructure:
    vpc:
        stack_name: elasticdev:::aws_vpc-simple
@@ -21,11 +18,6 @@ infrastructure:
        labels:
          - general
          - infrastructure
-         - vehicle
        credentials:
          - reference: eval-ed-iam
            orchestration: true
-destroy:
-   stack_name: elasticdev:::ed_core::callback_delete
-   arguments:
-       parallel: null
