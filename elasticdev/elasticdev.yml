@@ -2,7 +2,7 @@ global_arguments:
    aws_default_region: eu-west-1
 labels:
    general: 
-     environment: dev
+     environment: eval
      purpose: test
    infrastructure:
      cloud: aws
@@ -10,9 +10,8 @@ labels:
 selectors:
    vpc_info:
      match_labels:
-       car: bmw
-       model: 320i
-       environment: dev
+       environment: eval
+       purpose: test
        app_tier: networking
      match_keys:
        provider: aws
@@ -22,7 +21,8 @@ selectors:
        resource_type: vpc
    sg_bastion_info:
      match_labels:
-       environment: dev
+       environment: eval
+       purpose: test
        app_tier: networking
      match_keys:
        provider: aws
@@ -33,9 +33,8 @@ selectors:
        resource_type: security_group
    subnet_info:
      match_labels:
-       car: bmw
-       model: 320i
-       environment: dev
+       environment: eval
+       purpose: test
        app_tier: networking
      match_keys:
        provider: aws
