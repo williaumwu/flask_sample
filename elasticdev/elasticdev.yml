@@ -2,13 +2,13 @@ global:
    arguments:
      aws_default_region: eu-west-1
      cloud_tags_hash:
-         environment: dev
-         purpose: eval-ed
+         environment: eval
+         purpose: test
          database: nosql
          user: test
 labels:
    general: 
-     environment: dev
+     environment: eval
      purpose: test
    infrastructure:
      cloud: aws
@@ -16,7 +16,8 @@ labels:
 selectors:
    vpc_info:
      match_labels:
-       environment: dev
+       environment: eval
+       purpose: test
        app_tier: networking
      match_keys:
        provider: aws
@@ -26,7 +27,8 @@ selectors:
        resource_type: vpc
    private_subnet_info:
      match_labels:
-       environment: dev
+       environment: eval
+       purpose: test
        app_tier: networking
      match_keys:
        provider: aws
@@ -36,7 +38,8 @@ selectors:
        resource_type: subnet
    public_subnet_info:
      match_labels:
-       environment: dev
+       environment: eval
+       purpose: test
        app_tier: networking
      match_keys:
        provider: aws
@@ -46,7 +49,8 @@ selectors:
        resource_type: subnet
    sg_database_info:
      match_labels:
-       environment: dev
+       environment: eval
+       purpose: test
        app_tier: networking
      match_keys:
        provider: aws
@@ -100,5 +104,3 @@ infrastructure:
        credentials:
            - reference: eval-ed-iam
              orchestration: true
-destroy:
-   stack_name: elasticdev:::ed_core::callback_delete
