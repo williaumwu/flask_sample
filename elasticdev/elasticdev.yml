@@ -1,11 +1,11 @@
 global_arguments:
    aws_default_region: eu-west-1
    cloud_tags_hash:
-       environment: dev
-       purpose: eval-ed
+       environment: eval
+       purpose: test
 labels:
    general: 
-     environment: dev
+     environment: eval
      purpose: test
    infrastructure:
      cloud: aws
@@ -14,7 +14,8 @@ labels:
 selectors:
    vpc_info:
      labels:
-       environment: dev
+       environment: eval
+       purpose: test
        app_tier: networking
      keys:
        provider: aws
@@ -24,7 +25,8 @@ selectors:
        resource_type: vpc
    sg_info:
      labels:
-       environment: dev
+       environment: eval
+       purpose: test
        app_tier: networking
      keys:
        provider: aws
@@ -35,7 +37,8 @@ selectors:
        resource_type: security_group
    subnet_info:
      labels:
-       environment: dev
+       environment: eval
+       purpose: test
        app_tier: networking
      keys:
        provider: aws
