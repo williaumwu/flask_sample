@@ -3,7 +3,7 @@ global:
      aws:
        match_keys:
          provider: aws
-       labels:
+       match_labels:
          environment: eval
          purpose: test
    arguments: 
