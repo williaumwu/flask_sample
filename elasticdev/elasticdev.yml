@@ -3,16 +3,19 @@ global:
      aws:
        match_keys:
          provider: aws
+       labels:
+         environment: eval
+         purpose: test
    arguments: 
      aws_default_region: eu-west-1
      cloud_tags_hash:
-       environment: dev
-       purpose: eval-ed
+       environment: eval
+       purpose: test
        database: nosql
        user: test
 labels:
    general: 
-     environment: dev
+     environment: eval
      purpose: test
    infrastructure:
      cloud: aws
@@ -85,5 +88,3 @@ infrastructure:
        credentials:
            - reference: eval-ed-iam
              orchestration: true
-destroy:
-   stack_name: elasticdev:::ed_core::callback_delete
