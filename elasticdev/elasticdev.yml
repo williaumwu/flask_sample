@@ -53,8 +53,9 @@ infrastructure:
        arguments:
           environment_name: demo
           vpc_name: selector:::vpc_info::name
-          subnet_ids: selector:::public_subnet_info::subnet_id:csv
-          sg_id: selector:::sg_database_info::sg_id
+          public_subnet_ids: selector:::public_subnet_info::subnet_id:csv
+          private_subnet_ids: selector:::private_subnet_info::subnet_id:csv
+          database_sg_id: selector:::sg_database_info::sg_id
           vpc_id: selector:::vpc_info::vpc_id
           bastion_sg_id: selector:::sg_bastion_info::sg_id
           bastion_subnet_ids: selector:::public_subnet_info::subnet_id:csv
@@ -70,6 +71,8 @@ infrastructure:
           num_of_broker: 1
           num_of_rest: 1
           num_of_ksql: 1
+          rds_allocated_storage: 20
+          rds_db_name: app
        to_base64:
          - cloud_tags_hash
        selectors:
