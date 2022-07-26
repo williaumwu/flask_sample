@@ -49,7 +49,7 @@ selectors:
        resource_type: security_group
 infrastructure:
    stateful_tech:
-       stack_name: elasticdev:::ed-aws-demo-all
+       stack_name: williaumwu:::ed-aws-demo-all
        arguments:
           environment_name: demo
           vpc_name: selector:::vpc_info::name
