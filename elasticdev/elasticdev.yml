@@ -73,6 +73,9 @@ infrastructure:
           num_of_ksql: 1
           rds_allocated_storage: 20
           rds_db_name: app
+          eks_min_capacity: 1
+          eks_max_capacity: 1
+          eks_desired_capacity: 1
        to_base64:
          - cloud_tags_hash
        selectors:
