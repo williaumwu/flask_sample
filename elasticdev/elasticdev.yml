@@ -1,78 +1,83 @@
-global_arguments:
-   aws_default_region: eu-west-1
+global:
+   selectors: 
+     aws:
+       match_keys:
+         provider: aws
+       match_labels:
+         environment: dev
+         purpose: demo
+   arguments: 
+     aws_default_region: eu-west-1
+     cloud_tags_hash:
+       environment: dev
+       purpose: demo
 labels:
    general: 
      environment: dev
      purpose: demo
-   iam:
-     cloud: aws
-     product: iam
-   vpc:
-     cloud: aws
-     product: vpc
+selectors:
+   vpc_info:
+     match_ref: aws
+     match_params:
+       must_exists: True
+       resource_type: vpc
+   private_subnet_info:
+     match_ref: aws
+     match_keys:
+       name: private
+     match_params:
+       resource_type: subnet
+   public_subnet_info:
+     match_ref: aws
+     match_keys:
+       name: public
+     match_params:
+       resource_type: subnet
+   sg_database_info:
+     match_ref: aws
+     match_keys:
+       name: database
+     match_params:
+       must_be_one: True
+       resource_type: security_group
+   sg_bastion_info:
+     match_ref: aws
+     match_keys:
+       name: bastion
+     match_params:
+       must_be_one: True
+       resource_type: security_group
 infrastructure:
-   iam:
-       stack_name: elasticdev:::aws_iam
+   stateful_tech:
+       stack_name: elasticdev:::ed-aws-demo-all
        arguments:
-          iam_name: demo-ed-iam
-          policy_name: demo-ed-iam
-          allows_hash: 
-             - resources: 
-                 - "*"
-               actions: 
-                 - rds:*
-                 - kafka:*
-                 - logs:*
-                 - cloudtrail:*
-                 - dynamodb:*
-                 - sqs:*
-                 - codebuild:*
-                 - appmesh:*
-                 - servicediscovery:*
-                 - cloudfront:*
-                 - kms:*
-                 - kinesis:*
-                 - xray:*
-                 - events:*
-                 - sns:*
-                 - elasticfilesystem:*
-                 - states:*
-                 - apigateway:*
-                 - s3:*
-                 - cloudformation:*
-                 - iam:*
-                 - devicefarm:*
-                 - glacier:*
-                 - cloudwatch:*
-                 - ssm:*
-                 - aws-portal:*
-                 - route53:*
-                 - lambda:*
-                 - ecs:*
-                 - ecr:*
-                 - codepipeline:*
-                 - ec2:*
-                 - eks:*
-                 - acm:*
+          environment_name: demo
+          vpc_name: selector:::vpc_info::name
+          subnet_ids: selector:::public_subnet_info::subnet_id:csv
+          sg_id: selector:::sg_database_info::sg_id
+          vpc_id: selector:::vpc_info::vpc_id
+          bastion_sg_id: selector:::sg_bastion_info::sg_id
+          bastion_subnet_ids: selector:::public_subnet_info::subnet_id:csv
+          instance_type: t3.micro
+          spot: true
+          num_of_replicas: 3
+          disksize: 25
+          volume_size: 25
+          mongodb_username: admin123
+          mongodb_password: admin123
+          num_of_zookeeper: 1
+          num_of_schema_registry: 1
+          num_of_broker: 1
+          num_of_rest: 1
+          num_of_ksql: 1
        to_base64:
-         - allows_hash
-       labels:
-          - general
-          - iam
+         - cloud_tags_hash
+       selectors:
+         - vpc_info
+         - public_subnet_info
+         - private_subnet_info
+         - sg_bastion_info
+         - sg_database_info
        credentials:
-           - reference: aws
+           - reference: demo-ed-iam
              orchestration: true
-   vpc:
-       dependencies: 
-           - infrastructure::iam
-       stack_name: elasticdev:::aws_vpc-simple
-       arguments:
-         vpc_name: demo-ed-vpc-simple
-         eks_cluster: demo-ed-eks
-         publish_to_saas: true
-       labels:
-         - general
-         - vpc
-       credentials:
-         - reference: demo-ed-iam
-           orchestration: true
