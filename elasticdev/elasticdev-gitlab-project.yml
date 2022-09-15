@@ -24,3 +24,5 @@ infrastructure:
              orchestration: true
        labels:
            - general
+       selectors:
+         - gitlab_group_info
