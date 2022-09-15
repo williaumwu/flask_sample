@@ -2,12 +2,22 @@ labels:
    general: 
      environment: dev
      purpose: ci
+selectors:
+   runners_token_info:
+     match_params:
+       must_exists: True
+       resource_type: gitlab_group
+     keys:
+       provider: gitlab
+     labels:
+       platform: gitlab
+       component: runner
 infrastructure:
    custom:
        stack_name: elasticdev:::gitlab_project
        arguments:
           gitlab_project_name: test101
-          group_id: 53181696
+          group_id: selector:::gitlab_group_info::id
           visibility_level: private
        inputvars:
            - reference: gitlab-token
