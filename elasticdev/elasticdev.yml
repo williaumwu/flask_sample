@@ -13,7 +13,7 @@ selectors:
        platform: gitlab
        component: runner
 infrastructure:
-   custom:
+   project:
        stack_name: elasticdev:::gitlab_project
        arguments:
           gitlab_project_name: test101
