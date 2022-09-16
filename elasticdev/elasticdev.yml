@@ -5,7 +5,7 @@ global:
          provider: aws
    arguments: 
      aws_default_region: eu-west-1
-     ci_environment: ed-eval
+     ci_environment: python
      suffix_id: d645633
      cloud_tags_hash:
        environment: dev
@@ -61,6 +61,9 @@ infrastructure:
    setup_gitlab:
        stack_name: elasticdev:::setup_gitlab_ci
        arguments:
+          parent_id: 57929601
+          disksize: 20
+          gitlab_runners_ami: ami-0f03fd8a6e34800c0
           visibility_level: private
           spot_price: 0.05
           gitlab_runners_token_hash: selector:::gitlab_group_info::runners_token
