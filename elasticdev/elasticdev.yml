@@ -28,8 +28,8 @@ selectors:
      keys:
        provider: gitlab
      labels:
-       platform: gitlab
-       component: runner
+       environment: dev
+       purpose: ci
    aws_gitlab_cred:
      labels:
        platform: gitlab
