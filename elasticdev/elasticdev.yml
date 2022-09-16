@@ -3,61 +3,28 @@ global_arguments:
 labels:
    general: 
      environment: dev
-     purpose: test
-   infrastructure:
-     cloud: aws
-     product: iam
+     purpose: ci
+     provider: gitlab
+   gitlab: 
+     platform: gitlab
+     component: runner
 infrastructure:
    iam:
        stack_name: elasticdev:::aws_iam
        arguments:
-          iam_name: eval-ed-iam
-          policy_name: eval-ed-iam
+          iam_name: gitlab-runner
+          policy_name: gitlab-runner
           allows_hash: 
              - resources: 
                  - "*"
                actions: 
-                 - rds:*
-                 - kafka:*
-                 - logs:*
-                 - cloudtrail:*
-                 - dynamodb:*
-                 - sqs:*
-                 - codebuild:*
-                 - appmesh:*
-                 - servicediscovery:*
-                 - cloudfront:*
-                 - kms:*
-                 - kinesis:*
-                 - xray:*
-                 - events:*
-                 - sns:*
-                 - elasticfilesystem:*
-                 - states:*
-                 - apigateway:*
                  - s3:*
-                 - cloudformation:*
-                 - iam:*
-                 - devicefarm:*
-                 - glacier:*
-                 - cloudwatch:*
-                 - ssm:*
-                 - aws-portal:*
-                 - route53:*
-                 - lambda:*
-                 - ecs:*
-                 - ecr:*
-                 - codepipeline:*
                  - ec2:*
-                 - eks:*
-                 - acm:*
        to_base64:
          - allows_hash
        labels:
           - general
-          - infrastructure
+          - gitlab
        credentials:
            - reference: aws
              orchestration: true
-destroy:
-   stack_name: elasticdev:::ed_core::callback_delete
