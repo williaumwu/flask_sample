@@ -50,6 +50,20 @@ selectors:
      match_params:
        must_be_one: True
        resource_type: security_group
+   sg_web_info:
+     match_ref: aws
+     match_keys:
+       name: web
+     match_params:
+       must_be_one: True
+       resource_type: security_group
+   sg_api_info:
+     match_ref: aws
+     match_keys:
+       name: api
+     match_params:
+       must_be_one: True
+       resource_type: security_group
 custom:
    vars_set:
        stack_name: elasticdev:::vars_set
@@ -68,6 +82,8 @@ custom:
            private_subnet_ids: selector:::private_subnet_info::subnet_id:csv
            db_sg_id: selector:::sg_database_info::sg_id
            bastion_sg_id: selector:::sg_bastion_info::sg_id
+           web_sg_id: selector:::sg_web_info::sg_id
+           api_sg_id: selector:::sg_api_info::sg_id
            ami_filter: Name=name,Values=ubuntu/images/hvm-ssd/ubuntu-bionic-18.04-amd64-server-*
            ami_owner: 099720109477 
        to_base64:
