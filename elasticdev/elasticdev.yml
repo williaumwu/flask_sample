@@ -6,26 +6,24 @@ global:
        match_labels:
          environment: eval
          purpose: test
-   arguments: 
-     aws_default_region: eu-west-1
-     cloud_tags_hash:
-       environment: eval
-       purpose: test
-       database: nosql
-       user: test
 labels:
    general: 
      environment: eval
      purpose: test
-   infrastructure:
      cloud: aws
-     product: mongodb
+     product: elasticdev
 selectors:
    vpc_info:
      match_ref: aws
      match_params:
        must_exists: True
        resource_type: vpc
+   private_subnet_info:
+     match_ref: aws
+     match_keys:
+       name: private
+     match_params:
+       resource_type: subnet
    private_subnet_info:
      match_ref: aws
      match_keys:
@@ -52,33 +50,30 @@ selectors:
      match_params:
        must_be_one: True
        resource_type: security_group
-infrastructure:
-   mongodb_replica:
-       stack_name: elasticdev:::mongodb_replica_on_ec2
-       arguments:
-          mongodb_cluster: mongodb-cluster-dev
-          vpc_name: selector:::vpc_info::name
-          subnet_ids: selector:::public_subnet_info::subnet_id:csv
-          sg_id: selector:::sg_database_info::sg_id
-          vpc_id: selector:::vpc_info::vpc_id
-          ami_filter: Name=name,Values=ubuntu/images/hvm-ssd/ubuntu-bionic-18.04-amd64-server-*
-          ami_owner: 099720109477 
-          bastion_ami_filter: Name=name,Values=ubuntu/images/hvm-ssd/ubuntu-bionic-18.04-amd64-server-*
-          bastion_ami_owner: 099720109477 
-          bastion_sg_id: selector:::sg_bastion_info::sg_id
-          bastion_subnet_ids: selector:::public_subnet_info::subnet_id:csv
-          instance_type: t3.micro
-          spot: true
-          num_of_replicas: 3
-          disksize: 25
-          volume_size: 25
-          volume_mount: /var/lib/mongodb
-          volume_fstype: xfs
-          mongodb_username: admin123
-          mongodb_password: admin123
-          publish_to_saas: true
+custom:
+   vars_set:
+       stack_name: elasticdev:::vars_set
+       arguments: 
+         env_vars:
+           AWS_DEFAULT_REGION: eu-west-1
+         labels:
+           aws_default_region: eu-west-1
+           environment: eval
+           purpose: test
+           product: elasticdev
+         stackargs:
+           vpc_name: selector:::vpc_info::name
+           vpc_id: selector:::vpc_info::vpc_id
+           public_subnet_ids: selector:::public_subnet_info::subnet_id:csv
+           private_subnet_ids: selector:::private_subnet_info::subnet_id:csv
+           db_sg_id: selector:::sg_database_info::sg_id
+           bastion_sg_id: selector:::sg_bastion_info::sg_id
+           ami_filter: Name=name,Values=ubuntu/images/hvm-ssd/ubuntu-bionic-18.04-amd64-server-*
+           ami_owner: 099720109477 
        to_base64:
-         - cloud_tags_hash
+         - env_vars
+         - labels
+         - stackargs
        selectors:
          - vpc_info
          - public_subnet_info
