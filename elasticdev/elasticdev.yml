@@ -75,7 +75,7 @@ custom:
            environment: eval
            purpose: test
            product: elasticdev
-         stackargs_hash:
+         arguments_hash:
            vpc_name: selector:::vpc_info::name
            vpc_id: selector:::vpc_info::vpc_id
            public_subnet_ids: selector:::public_subnet_info::subnet_id:csv
@@ -89,7 +89,7 @@ custom:
        to_base64:
          - env_vars_hash
          - labels_hash
-         - stackargs_hash
+         - arguments_hash
        selectors:
          - vpc_info
          - public_subnet_info
