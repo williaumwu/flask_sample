@@ -1,6 +1,5 @@
 global_arguments:
    aws_default_region: eu-west-1
-   docker_repo: flask_sample
 labels:
    ci: 
      environment: dev
@@ -8,8 +7,6 @@ labels:
 selectors:
    vpc_info:
      match_labels:
-       car: bmw
-       model: 320i
        environment: dev
        app_tier: networking
      match_keys:
@@ -20,8 +17,6 @@ selectors:
        resource_type: vpc
    public_subnet_info:
      match_labels:
-       car: bmw
-       model: 320i
        environment: dev
        app_tier: networking
      match_keys:
@@ -32,8 +27,6 @@ selectors:
        resource_type: subnet
    sg_bastion_info:
      match_labels:
-       car: bmw
-       model: 320i
        environment: dev
        app_tier: networking
      match_keys:
@@ -47,14 +40,14 @@ infrastructure:
    ecr_repo:
        stack_name: elasticdev:::ecr_repo
        arguments:
-          name: flask_sample
+          name: gitlab_runner_manager
        credentials:
            - reference: eval-ed-iam
              orchestration: true
    ssh_upload:
        stack_name: elasticdev:::new_ec2_ssh_key
        arguments:
-          name: flask_sample_key
+          name: gitlab_runner_manager_key
        credentials:
            - reference: eval-ed-iam
              orchestration: true
@@ -66,7 +59,7 @@ infrastructure:
        arguments:
           instance_type: t2.micro
           disksize: 25
-          ssh_key_name: flask_sample_key
+          ssh_key_name: gitlab_runner_manager_key
        stack_vars:
            - name: elasticdev:::ubuntu::ec2_ubuntu
              arguments:
@@ -104,5 +97,3 @@ build:
        inputvars:
            - reference: docker_build
              delegation: true
-destroy:
-   stack_name: elasticdev:::ed_core::callback_delete
