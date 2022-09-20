@@ -68,6 +68,8 @@ custom:
    vars_set:
        stack_name: elasticdev:::vars_set
        arguments: 
+         vars_set_name: vpcinfo_dev
+         evaluate: true
          env_vars_hash:
            AWS_DEFAULT_REGION: eu-west-1
          labels_hash:
