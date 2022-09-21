@@ -8,8 +8,8 @@ labels:
 selectors:
    vpc_info:
      match_labels:
-       environment: dev
-       app_tier: networking
+       environment: eval
+       purpose: test
      match_keys:
        provider: aws
        region: eu-west-1
@@ -18,8 +18,8 @@ selectors:
        resource_type: vpc
    sg_bastion_info:
      match_labels:
-       environment: dev
-       app_tier: networking
+       environment: eval
+       purpose: test
      match_keys:
        provider: aws
        region: eu-west-1
@@ -29,8 +29,8 @@ selectors:
        resource_type: security_group
    public_subnet_info:
      match_labels:
-       environment: dev
-       app_tier: networking
+       environment: eval
+       purpose: test
      match_keys:
        provider: aws
        region: eu-west-1
