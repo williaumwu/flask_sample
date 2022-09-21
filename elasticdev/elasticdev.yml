@@ -1,9 +1,10 @@
 global_arguments:
    aws_default_region: eu-west-1
 labels:
-   ci: 
+   general: 
      environment: dev
-     purpose: test
+   infrastructure:
+     cloud: aws
 selectors:
    vpc_info:
      match_labels:
@@ -15,16 +16,6 @@ selectors:
      match_params:
        must_exists: True
        resource_type: vpc
-   public_subnet_info:
-     match_labels:
-       environment: dev
-       app_tier: networking
-     match_keys:
-       provider: aws
-       region: eu-west-1
-       name: public
-     match_params:
-       resource_type: subnet
    sg_bastion_info:
      match_labels:
        environment: dev
@@ -36,64 +27,35 @@ selectors:
      match_params:
        must_be_one: True
        resource_type: security_group
+   public_subnet_info:
+     match_labels:
+       environment: dev
+       app_tier: networking
+     match_keys:
+       provider: aws
+       region: eu-west-1
+       name: public
+     match_params:
+       resource_type: subnet
 infrastructure:
-   ecr_repo:
-       stack_name: elasticdev:::ecr_repo
+   docker-build:
+       stack_name: elasticdev:::docker_build_2
        arguments:
-          name: gitlab_runner_manager
-       credentials:
-           - reference: eval-ed-iam
-             orchestration: true
-   ssh_upload:
-       stack_name: elasticdev:::new_ec2_ssh_key
-       arguments:
-          name: gitlab_runner_manager_key
-       credentials:
-           - reference: eval-ed-iam
-             orchestration: true
-   dockerhost:
-       stack_name: elasticdev:::ec2_docker_host
-       dependencies: 
-           - infrastructure::ssh_upload
-           - infrastructure::ecr_repo
-       arguments:
-          instance_type: t2.micro
+          docker_host: docker-temp-build-001
+          vpc_name: selector:::vpc_info::name
+          vpc_id: selector:::vpc_info::vpc_id
+          subnet_ids: selector:::public_subnet_info::subnet_id:csv
+          sg_id: selector:::sg_bastion_info::sg_id
+          bastion_sg_id: selector:::sg_bastion_info::sg_id
+          instance_type: t3.micro
           disksize: 25
-          ssh_key_name: gitlab_runner_manager_key
-       stack_vars:
-           - name: elasticdev:::ubuntu::ec2_ubuntu
-             arguments:
-                  ip_key: public_ip
-                  vpc_name: selector:::vpc_info::name
-                  vpc_id: selector:::vpc_info::vpc_id
-                  sg_id: selector:::sg_bastion_info::sg_id
-                  subnet_ids: selector:::public_subnet_info::subnet_id:csv
-       credentials:
-           - reference: eval-ed-iam
-             orchestration: true
+       labels:
+          - general
+          - infrastructure
        selectors:
          - vpc_info
          - public_subnet_info
          - sg_bastion_info
-build:
-   ci_example:
-       create_webhook: true
-       dependencies: 
-           - infrastructure::dockerhost
-           - infrastructure::ecr_repo
-       stack_name: elasticdev:::ec2_ci
-       arguments:
-           repo_url: https://github.com/williaumwu/flask_sample
-           repo_branch: ci
-           dockerfile: Dockerfile
-           dockerfile_test: Dockerfile_test
-           triggered_branches:
-             - ci
        credentials:
            - reference: eval-ed-iam
              orchestration: true
-           - reference: docker
-             delegation: true
-       inputvars:
-           - reference: docker_build
-             delegation: true
