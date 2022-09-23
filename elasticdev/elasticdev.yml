@@ -41,7 +41,7 @@ infrastructure:
    docker-build:
        stack_name: elasticdev:::docker_build_2
        arguments:
-          docker_host: docker-temp-build-013
+          docker_host: docker-temp-build-014
           vpc_name: selector:::vpc_info::name
           vpc_id: selector:::vpc_info::vpc_id
           subnet_ids: selector:::public_subnet_info::subnet_id:csv
