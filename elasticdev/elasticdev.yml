@@ -48,6 +48,8 @@ infrastructure:
           sg_id: selector:::sg_bastion_info::sg_id
           bastion_sg_id: selector:::sg_bastion_info::sg_id
           instance_type: t3.micro
+          docker_image_tag: latest
+          docker_repo_name: flask_sample
           disksize: 25
        labels:
           - general
