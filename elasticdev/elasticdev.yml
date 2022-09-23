@@ -61,3 +61,7 @@ infrastructure:
        credentials:
            - reference: eval-ed-iam
              orchestration: true
+       inputvars:
+           - reference: aws_account_id
+             orchestration: true
+
