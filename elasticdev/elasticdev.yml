@@ -39,9 +39,9 @@ selectors:
        resource_type: subnet
 infrastructure:
    docker-build:
-       stack_name: elasticdev:::docker_build_2
+       stack_name: elasticdev:::docker_build_to_ecr
        arguments:
-          docker_host: docker-temp-build-055
+          docker_host: docker-temp-build-057
           vpc_name: selector:::vpc_info::name
           vpc_id: selector:::vpc_info::vpc_id
           subnet_ids: selector:::public_subnet_info::subnet_id:csv
