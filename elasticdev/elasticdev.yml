@@ -1,10 +1,27 @@
-global_arguments:
-   aws_default_region: eu-west-1
+global:
+   selectors: 
+     aws:
+       match_keys:
+         provider: aws
+   arguments: 
+     aws_default_region: eu-west-1
+     ci_environment: ed-eval
+     suffix_id: d645633
+     cloud_tags_hash:
+       environment: dev
+       purpose: ci
+       billing_code: 87deo
+       platform: gitlab
 labels:
    general: 
      environment: dev
+     purpose: ci
+     provider: gitlab
    infrastructure:
      cloud: aws
+   gitlab: 
+     platform: gitlab
+     component: runner
 selectors:
    vpc_info:
      match_labels:
@@ -37,10 +54,31 @@ selectors:
        name: public
      match_params:
        resource_type: subnet
+   gitlab_group_info:
+     match_params:
+       must_exists: True
+       resource_type: gitlab_group
+     keys:
+       provider: gitlab
+     labels:
+       environment: dev
+       purpose: ci
+   aws_gitlab_cred:
+     labels:
+       platform: gitlab
+       component: runner
+     keys:
+       provider: aws
+     parameters:
+       must_exists: True
+       resource_type: credentials
 infrastructure:
    docker-build:
        stack_name: elasticdev:::gitlab_runner_fargate
        arguments:
+          gitlab_runners_token_hash: selector:::gitlab_group_info::runners_token
+          gitlab_runner_aws_access_key: selector:::aws_gitlab_cred::AWS_ACCESS_KEY_ID
+          gitlab_runner_aws_secret_key: selector:::aws_gitlab_cred::AWS_SECRET_ACCESS_KEY
           docker_host: docker-temp-build-065
           vpc_name: selector:::vpc_info::name
           vpc_id: selector:::vpc_info::vpc_id
@@ -54,14 +92,20 @@ infrastructure:
        labels:
           - general
           - infrastructure
+          - gitlab
        selectors:
          - vpc_info
          - public_subnet_info
          - sg_bastion_info
+         - aws_gitlab_cred
+         - gitlab_group_info
        credentials:
            - reference: eval-ed-iam
              orchestration: true
        inputvars:
            - reference: aws_account_id
              orchestration: true
-
+           - reference: gitlab-token
+             orchestration: true
+           - reference: gitlab-parent-group
+             orchestration: true
