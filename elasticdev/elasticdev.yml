@@ -39,7 +39,7 @@ selectors:
        resource_type: subnet
 infrastructure:
    docker-build:
-       stack_name: elasticdev:::docker_build_to_ecr
+       stack_name: elasticdev:::gitlab_runner_fargate
        arguments:
           docker_host: docker-temp-build-065
           vpc_name: selector:::vpc_info::name
