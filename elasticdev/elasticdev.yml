@@ -79,7 +79,7 @@ infrastructure:
           gitlab_runners_token_hash: selector:::gitlab_group_info::runners_token
           gitlab_runner_aws_access_key: selector:::aws_gitlab_cred::AWS_ACCESS_KEY_ID
           gitlab_runner_aws_secret_key: selector:::aws_gitlab_cred::AWS_SECRET_ACCESS_KEY
-          docker_host: docker-temp-build-069
+          docker_host: docker-temp-build-070
           vpc_name: selector:::vpc_info::name
           vpc_id: selector:::vpc_info::vpc_id
           subnet_ids: selector:::public_subnet_info::subnet_id:csv
