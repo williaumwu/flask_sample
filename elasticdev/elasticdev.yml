@@ -64,7 +64,6 @@ infrastructure:
           name: gitlab
        labels:
           - general
-          - infrastructure
           - gitlab
        credentials:
            - reference: eval-ed-iam
