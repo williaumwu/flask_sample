@@ -58,20 +58,8 @@ selectors:
        must_be_one: True
        resource_type: security_group
 infrastructure:
-   ecr_repo:
-       stack_name: elasticdev:::ecr_repo
-       arguments:
-          name: gitlab
-       labels:
-          - general
-          - gitlab
-       credentials:
-           - reference: eval-ed-iam
-             orchestration: true
    setup_gitlab:
        stack_name: elasticdev:::setup_gitlab_ci
-       dependencies: 
-           - infrastructure::ecr_repo
        arguments:
           parent_id: 57929601
           disksize: 20
