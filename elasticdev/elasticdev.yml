@@ -58,8 +58,21 @@ selectors:
        must_be_one: True
        resource_type: security_group
 infrastructure:
+   ecr_repo:
+       stack_name: elasticdev:::ecr_repo
+       arguments:
+          name: gitlab
+       labels:
+          - general
+          - infrastructure
+          - gitlab
+       credentials:
+           - reference: eval-ed-iam
+             orchestration: true
    setup_gitlab:
        stack_name: elasticdev:::setup_gitlab_ci
+       dependencies: 
+           - infrastructure::ecr_repo
        arguments:
           parent_id: 57929601
           disksize: 20
@@ -74,7 +87,10 @@ infrastructure:
           sg_id: selector:::sg_bastion_info::sg_id
           vpc_id: selector:::vpc_info::vpc_id
           bastion_sg_id: selector:::sg_bastion_info::sg_id
-          instance_type: t3.medium
+          docker_host: docker-temp-build-074
+          docker_image_tag: latest
+          docker_repo_name: gitlab
+          disksize: 25
        to_base64:
          - cloud_tags_hash
        selectors:
