@@ -94,6 +94,8 @@ infrastructure:
              orchestration: true
            - reference: gitlab-token
              orchestration: true
+           - reference: aws_account_id
+             orchestration: true
        labels:
            - general
            - gitlab
