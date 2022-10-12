@@ -6,7 +6,7 @@ global:
    arguments: 
      aws_default_region: eu-west-1
      ci_environment: python
-     suffix_id: e645633
+     suffix_id: f645633
      cloud_tags_hash:
        environment: dev
        purpose: ci
