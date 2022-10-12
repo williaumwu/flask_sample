@@ -59,7 +59,7 @@ selectors:
        resource_type: security_group
 infrastructure:
    setup_gitlab:
-       stack_name: elasticdev:::setup_gitlab_ci
+       stack_name: elasticdev:::setup_gitlab_fargate_runner
        arguments:
           parent_id: 57929601
           disksize: 20
