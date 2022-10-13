@@ -98,6 +98,8 @@ custom:
          - private_subnet_info
          - sg_bastion_info
          - sg_database_info
+         - sg_web_info
+         - sg_api_info
        credentials:
            - reference: eval-ed-iam
              orchestration: true
