@@ -18,9 +18,9 @@ infrastructure:
           doks_cluster_pool_size: s-1vcpu-2gb-amd
           doks_cluster_autoscale_max: 4
           doks_cluster_autoscale_min: 1
-       credentials:
-           - reference: do-token
-             orchestration: true
        labels:
            - general
            - doks
+       credentials:
+         - reference: do-token
+           orchestration: true
