@@ -19,7 +19,7 @@ infrastructure:
           doks_cluster_autoscale_max: 4
           doks_cluster_autoscale_min: 1
        credentials:
-           - reference: do
+           - reference: do-token
              orchestration: true
        labels:
            - general
