@@ -2,7 +2,7 @@ global_arguments:
    aws_default_region: eu-west-1
 labels:
    general: 
-     environment: dev
+     environment: eval
      purpose: training
      eks_cluster: eks-workshop
    infrastructure:
@@ -21,7 +21,7 @@ selectors:
        resource_type: vpc
    sg_bastion_info:
      match_labels:
-       environment: dev
+       environment: eval
        app_tier: networking
      match_keys:
        provider: aws
@@ -32,7 +32,7 @@ selectors:
        resource_type: security_group
    public_subnet_info:
      match_labels:
-       environment: dev
+       environment: eval
        app_tier: networking
      match_keys:
        provider: aws
