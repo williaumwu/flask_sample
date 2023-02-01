@@ -1,8 +1,9 @@
-global_arguments:
-   aws_default_region: eu-west-1
-   cloud_tags_hash:
-       environment: eval
-       purpose: test
+global:
+   arguments:
+     aws_default_region: eu-west-1
+     cloud_tags_hash:
+         environment: eval
+         purpose: test
 labels:
    general: 
      environment: eval
