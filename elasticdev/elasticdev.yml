@@ -1,3 +1,16 @@
+global:
+   selectors: 
+     aws_base:
+       match_keys:
+         provider: aws
+       match_labels:
+         environment: eval
+         purpose: test
+labels:
+   general: 
+     environment: eval
+     purpose: test
+   infrastructure:
 labels:
    general: 
      environment: eval
@@ -13,6 +26,13 @@ selectors:
        purpose: test
        area: networking
        cloud: aws
+   sg_bastion_info:
+     match_base: aws_base
+     match_keys:
+       name: bastion
+     match_params:
+       must_be_one: True
+       resource_type: security_group
 infrastructure:
    rds:
        stack_name: elasticdev:::aws_rds
