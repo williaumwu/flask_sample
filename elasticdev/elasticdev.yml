@@ -6,12 +6,6 @@ global:
        match_labels:
          environment: eval
          purpose: test
-labels:
-   general: 
-     environment: eval
-     purpose: test
-     cloud: aws
-     product: elasticdev
 selectors:
    vpc_info:
      match_base: aws_base
@@ -77,6 +71,8 @@ custom:
            environment: eval
            purpose: test
            product: elasticdev
+           area: networking
+           cloud: aws
          arguments_hash:
            vpc_name: selector:::vpc_info::name
            vpc_id: selector:::vpc_info::vpc_id
