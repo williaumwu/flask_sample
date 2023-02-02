@@ -56,7 +56,6 @@ infrastructure:
          - infrastructure
        selectors:
          - network_vars
-         - sg_bastion_info
        credentials:
            - reference: eval-ed-iam
              orchestration: true
