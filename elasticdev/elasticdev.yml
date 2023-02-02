@@ -63,7 +63,7 @@ custom:
        stack_name: elasticdev:::vars_set
        arguments: 
          vars_set_name: ed_eval_networking
-         evaluate: null
+         evaluate: True
          arguments_hash:
            vpc_name: selector:::vpc_info::name
            vpc_id: selector:::vpc_info::vpc_id
