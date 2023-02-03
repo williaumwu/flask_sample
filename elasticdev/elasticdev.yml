@@ -3,7 +3,7 @@ global_arguments:
 labels:
    general: 
      environment: dev
-     purpose: test
+     purpose: eval-ed
    infrastructure:
      cloud: aws
      product: iam
