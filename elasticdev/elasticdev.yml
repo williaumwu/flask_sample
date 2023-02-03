@@ -2,12 +2,12 @@ global_arguments:
    aws_default_region: eu-west-1
 labels:
    general: 
-     environment: eval
-     purpose: test
+     environment: dev
+     purpose: eval-ed
    infrastructure:
      cloud: aws
      product: vpc
-     app_tier: networking
+     area: network
 infrastructure:
    vpc:
        stack_name: elasticdev:::aws_vpc-simple
