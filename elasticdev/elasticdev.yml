@@ -1,11 +1,6 @@
 global:
-   selectors: 
-     aws_base:
-       match_keys:
-         provider: aws
-       match_labels:
-         environment: dev
-         purpose: eval-ed
+   arguments: 
+     aws_default_region: eu-west-1
 labels:
    general: 
      environment: dev
@@ -29,7 +24,6 @@ infrastructure:
           vpc_name: selector:::network_vars::vpc_name
           sg_id: selector:::network_vars::db_sg_id
           subnet_ids: selector:::network_vars::private_subnet_ids:csv
-          aws_default_region: eu-west-1
           rds_name: eval-ed-rds
           allocated_storage: 14
           db_name: app
@@ -48,5 +42,3 @@ infrastructure:
        credentials:
          - reference: eval-ed-iam
            orchestration: true
-destroy:
-   stack_name: elasticdev:::ed_core::callback_delete
