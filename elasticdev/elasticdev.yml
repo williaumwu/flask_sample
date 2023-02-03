@@ -83,7 +83,6 @@ custom:
            ami_filter: Name=name,Values=ubuntu/images/hvm-ssd/ubuntu-bionic-18.04-amd64-server-*
            ami_owner: 099720109477 
        to_base64:
-         - env_vars_hash
          - labels_hash
          - arguments_hash
        selectors:
