@@ -61,38 +61,38 @@ selectors:
        resource_type: security_group
 custom:
    vars_set:
-       stack_name: elasticdev:::vars_set
-       arguments: 
-         vars_set_name: ed-eval-network
-         evaluate: null
-         labels_hash:
-           region: eu-west-1
-           environment: dev
-           purpose: eval-ed
-           area: network
-           cloud: aws
-         arguments_hash:
-           vpc_name: selector:::vpc_info::name
-           vpc_id: selector:::vpc_info::vpc_id
-           public_subnet_ids: selector:::public_subnet_info::subnet_id:csv
-           private_subnet_ids: selector:::private_subnet_info::subnet_id:csv
-           db_sg_id: selector:::sg_database_info::sg_id
-           bastion_sg_id: selector:::sg_bastion_info::sg_id
-           web_sg_id: selector:::sg_web_info::sg_id
-           api_sg_id: selector:::sg_api_info::sg_id
-           ami_filter: Name=name,Values=ubuntu/images/hvm-ssd/ubuntu-bionic-18.04-amd64-server-*
-           ami_owner: 099720109477 
-       to_base64:
-         - labels_hash
-         - arguments_hash
-       selectors:
-         - vpc_info
-         - public_subnet_info
-         - private_subnet_info
-         - sg_bastion_info
-         - sg_database_info
-         - sg_web_info
-         - sg_api_info
-       credentials:
-           - reference: eval-ed-iam
-             orchestration: true
+     stack_name: elasticdev:::vars_set
+     arguments: 
+       vars_set_name: ed-eval-network
+       evaluate: null
+       labels_hash:
+         region: eu-west-1
+         environment: dev
+         purpose: eval-ed
+         area: network
+         cloud: aws
+       arguments_hash:
+         vpc_name: selector:::vpc_info::name
+         vpc_id: selector:::vpc_info::vpc_id
+         public_subnet_ids: selector:::public_subnet_info::subnet_id:csv
+         private_subnet_ids: selector:::private_subnet_info::subnet_id:csv
+         db_sg_id: selector:::sg_database_info::sg_id
+         bastion_sg_id: selector:::sg_bastion_info::sg_id
+         web_sg_id: selector:::sg_web_info::sg_id
+         api_sg_id: selector:::sg_api_info::sg_id
+         ami_filter: Name=name,Values=ubuntu/images/hvm-ssd/ubuntu-bionic-18.04-amd64-server-*
+         ami_owner: 099720109477 
+     to_base64:
+       - labels_hash
+       - arguments_hash
+     selectors:
+       - vpc_info
+       - public_subnet_info
+       - private_subnet_info
+       - sg_bastion_info
+       - sg_database_info
+       - sg_web_info
+       - sg_api_info
+     credentials:
+       - reference: eval-ed-iam
+         orchestration: true
