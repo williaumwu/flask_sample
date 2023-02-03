@@ -23,7 +23,7 @@ infrastructure:
        arguments:
           vpc_name: selector:::network_vars::vpc_name
           sg_id: selector:::network_vars::db_sg_id
-          subnet_ids: selector:::network_vars::private_subnet_ids:csv
+          subnet_ids: selector:::network_vars::private_subnet_ids
           rds_name: eval-ed-rds
           allocated_storage: 14
           db_name: app
