@@ -26,13 +26,6 @@ selectors:
        purpose: test
        area: networking
        cloud: aws
-   sg_bastion_info:
-     match_base: aws_base
-     match_keys:
-       name: bastion
-     match_params:
-       must_be_one: True
-       resource_type: security_group
 infrastructure:
    rds:
        stack_name: elasticdev:::aws_rds
@@ -40,15 +33,15 @@ infrastructure:
           vpc_name: selector:::network_vars::vpc_name
           sg_id: selector:::network_vars::db_sg_id
           subnet_ids: selector:::network_vars::private_subnet_ids:csv
-          cloud_tags_hash:
-              environment: eval
-              purpose: test
           aws_default_region: eu-west-1
           rds_name: eval-ed-rds
           allocated_storage: 14
           db_name: app
           publish_creds: true
           publish_to_saas: true
+          cloud_tags_hash:
+              environment: eval
+              purpose: test
        to_base64:
          - cloud_tags_hash
        labels:
