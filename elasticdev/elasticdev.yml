@@ -4,27 +4,23 @@ global:
        match_keys:
          provider: aws
        match_labels:
-         environment: eval
-         purpose: test
+         environment: dev
+         purpose: eval-ed
 labels:
    general: 
-     environment: eval
-     purpose: test
-   infrastructure:
-labels:
-   general: 
-     environment: eval
-     purpose: test
+     environment: dev
+     purpose: eval-ed
    infrastructure:
      cloud: aws
      product: rds
-     app_tier: database
+     area: database
 selectors:
    network_vars:
      labels:
-       environment: eval
-       purpose: test
-       area: networking
+       environment: dev
+       purpose: eval-ed
+       area: network
+       region: eu-west-1
        cloud: aws
 infrastructure:
    rds:
@@ -40,8 +36,8 @@ infrastructure:
           publish_creds: true
           publish_to_saas: true
           cloud_tags_hash:
-              environment: eval
-              purpose: test
+            environment: dev
+            purpose: eval-ed
        to_base64:
          - cloud_tags_hash
        labels:
@@ -49,12 +45,8 @@ infrastructure:
          - infrastructure
        selectors:
          - network_vars
-         - sg_bastion_info
        credentials:
-           - reference: eval-ed-iam
-             orchestration: true
-       inputvars:
-           - reference: rds
-             orchestration: true
+         - reference: eval-ed-iam
+           orchestration: true
 destroy:
    stack_name: elasticdev:::ed_core::callback_delete
