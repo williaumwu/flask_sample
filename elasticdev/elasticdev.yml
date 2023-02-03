@@ -1,5 +1,6 @@
-global_arguments:
-   aws_default_region: eu-west-1
+global:
+   arguments: 
+     aws_default_region: eu-west-1
 labels:
    general: 
      environment: dev
@@ -10,14 +11,14 @@ labels:
      area: network
 infrastructure:
    vpc:
-       stack_name: elasticdev:::aws_vpc-simple
-       arguments:
-         vpc_name: eval-ed-vpc-simple
-         eks_cluster: eval-ed-eks
-         publish_to_saas: true
-       labels:
-         - general
-         - infrastructure
-       credentials:
-         - reference: eval-ed-iam
-           orchestration: true
+     stack_name: elasticdev:::aws_vpc-simple
+     arguments:
+       vpc_name: eval-ed-vpc-simple
+       eks_cluster: eval-ed-eks
+       publish_to_saas: true
+     labels:
+       - general
+       - infrastructure
+     credentials:
+       - reference: eval-ed-iam
+         orchestration: true
