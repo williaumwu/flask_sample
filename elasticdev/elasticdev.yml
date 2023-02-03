@@ -1,24 +1,27 @@
+global:
+   arguments: 
+     aws_default_region: eu-west-1
+     cloud_tags_hash:
+       environment: dev
+       purpose: eval-ed
+       billing_code: 87deo
+       area: ci
 labels:
    general: 
      environment: dev
-     purpose: ci
-global_arguments:
-   aws_default_region: eu-west-1
-   ci_environment: ed-eval
-   suffix_id: d645633
-   cloud_tags_hash:
-       environment: dev
-       purpose: ci
-       billing_code: 87deo
+     purpose: eval-ed
+     area: ci
 infrastructure:
    setup_codebuild:
-       stack_name: elasticdev:::setup_codebuild_ci
-       arguments:
-          bucket_expire_days: 1
-       to_base64:
-         - cloud_tags_hash
-       credentials:
-         - reference: eval-ed-iam
-           orchestration: true
-       labels:
-          - general
+     stack_name: elasticdev:::setup_codebuild_ci
+     arguments:
+        ci_environment: ed-eval
+        suffix_id: d645633
+        bucket_expire_days: 1
+     to_base64:
+       - cloud_tags_hash
+     labels:
+       - general
+     credentials:
+       - reference: eval-ed-iam
+         orchestration: true
