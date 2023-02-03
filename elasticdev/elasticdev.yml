@@ -62,8 +62,15 @@ custom:
    vars_set:
        stack_name: elasticdev:::vars_set
        arguments: 
-         vars_set_name: ed_eval_networking
-         evaluate: True
+         vars_set_name: vpcinfo_dev
+         evaluate: null
+         labels_hash:
+           aws_default_region: eu-west-1
+           environment: eval
+           purpose: test
+           product: elasticdev
+           area: networking
+           cloud: aws
          arguments_hash:
            vpc_name: selector:::vpc_info::name
            vpc_id: selector:::vpc_info::vpc_id
@@ -76,6 +83,8 @@ custom:
            ami_filter: Name=name,Values=ubuntu/images/hvm-ssd/ubuntu-bionic-18.04-amd64-server-*
            ami_owner: 099720109477 
        to_base64:
+         - env_vars_hash
+         - labels_hash
          - arguments_hash
        selectors:
          - vpc_info
