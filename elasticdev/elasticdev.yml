@@ -62,8 +62,8 @@ custom:
    vars_set:
        stack_name: elasticdev:::vars_set
        arguments: 
-         vars_set_name: vpcinfo_dev
-         evaluate: null
+         vars_set_name: ed-eval-network
+         evaluate: True
          labels_hash:
            aws_default_region: eu-west-1
            environment: eval
