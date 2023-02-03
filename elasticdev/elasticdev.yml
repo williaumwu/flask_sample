@@ -4,7 +4,9 @@ global:
      cloud_tags_hash:
        environment: dev
        purpose: eval-ed
-       database: nosql
+       database: mongodb
+       product: ec2
+       database_type: nosql
 labels:
    general: 
      environment: dev
@@ -13,70 +15,42 @@ labels:
      cloud: aws
      product: mongodb
 selectors:
-   vpc_info:
-     match_base: aws_base
-     match_params:
-       must_exists: True
-       resource_type: vpc
-   private_subnet_info:
-     match_base: aws_base
-     match_keys:
-       name: private
-     match_params:
-       resource_type: subnet
-   public_subnet_info:
-     match_base: aws_base
-     match_keys:
-       name: public
-     match_params:
-       resource_type: subnet
-   sg_database_info:
-     match_base: aws_base
-     match_keys:
-       name: database
-     match_params:
-       must_be_one: True
-       resource_type: security_group
-   sg_bastion_info:
-     match_base: aws_base
-     match_keys:
-       name: bastion
-     match_params:
-       must_be_one: True
-       resource_type: security_group
+   network_vars:
+     labels:
+       environment: dev
+       purpose: eval-ed
+       area: network
+       region: eu-west-1
+       cloud: aws
 infrastructure:
    mongodb_replica:
-       stack_name: elasticdev:::mongodb_replica_on_ec2
-       arguments:
-          mongodb_cluster: mongodb-cluster-dev
-          vpc_name: selector:::vpc_info::name
-          subnet_ids: selector:::public_subnet_info::subnet_id:csv
-          sg_id: selector:::sg_database_info::sg_id
-          vpc_id: selector:::vpc_info::vpc_id
-          ami_filter: Name=name,Values=ubuntu/images/hvm-ssd/ubuntu-bionic-18.04-amd64-server-*
-          ami_owner: 099720109477 
-          bastion_ami_filter: Name=name,Values=ubuntu/images/hvm-ssd/ubuntu-bionic-18.04-amd64-server-*
-          bastion_ami_owner: 099720109477 
-          bastion_sg_id: selector:::sg_bastion_info::sg_id
-          bastion_subnet_ids: selector:::public_subnet_info::subnet_id:csv
-          instance_type: t3.micro
-          spot: true
-          num_of_replicas: 3
-          disksize: 25
-          volume_size: 25
-          volume_mount: /var/lib/mongodb
-          volume_fstype: xfs
-          mongodb_username: admin123
-          mongodb_password: admin123
-          publish_to_saas: true
-       to_base64:
-         - cloud_tags_hash
-       selectors:
-         - vpc_info
-         - public_subnet_info
-         - private_subnet_info
-         - sg_bastion_info
-         - sg_database_info
-       credentials:
-           - reference: eval-ed-iam
-             orchestration: true
+     stack_name: elasticdev:::mongodb_replica_on_ec2
+     arguments:
+        vpc_name: selector:::network_vars::vpc_name
+        vpc_id: selector:::network_vars::vpc_id
+        subnet_ids: selector:::network_vars::public_subnet_ids
+        sg_id: selector:::network_vars::db_sg_id
+        bastion_sg_id: selector:::network_vars::bastion_sg_id
+        bastion_subnet_ids: selector:::network_vars::public_subnet_ids
+        mongodb_cluster: mongodb-cluster-dev
+        ami_filter: Name=name,Values=ubuntu/images/hvm-ssd/ubuntu-bionic-18.04-amd64-server-*
+        ami_owner: 099720109477 
+        bastion_ami_filter: Name=name,Values=ubuntu/images/hvm-ssd/ubuntu-bionic-18.04-amd64-server-*
+        bastion_ami_owner: 099720109477 
+        instance_type: t3.micro
+        spot: true
+        num_of_replicas: 3
+        disksize: 25
+        volume_size: 25
+        volume_mount: /var/lib/mongodb
+        volume_fstype: xfs
+        mongodb_username: admin123
+        mongodb_password: admin123
+        publish_to_saas: true
+     to_base64:
+       - cloud_tags_hash
+     selectors:
+       - network_vars
+     credentials:
+       - reference: eval-ed-iam
+         orchestration: true
