@@ -4,8 +4,9 @@ global:
        match_keys:
          provider: aws
        match_labels:
-         environment: eval
-         purpose: test
+         environment: dev
+         purpose: eval-ed
+         area: network
 selectors:
    vpc_info:
      match_base: aws_base
@@ -65,11 +66,10 @@ custom:
          vars_set_name: ed-eval-network
          evaluate: null
          labels_hash:
-           aws_default_region: eu-west-1
-           environment: eval
-           purpose: test
-           product: elasticdev
-           area: networking
+           region: eu-west-1
+           environment: dev
+           purpose: eval-ed
+           area: network
            cloud: aws
          arguments_hash:
            vpc_name: selector:::vpc_info::name
