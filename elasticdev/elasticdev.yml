@@ -1,55 +1,35 @@
-global_arguments:
-   aws_default_region: eu-west-1
+global:
+   arguments: 
+     aws_default_region: eu-west-1
+     cloud_tags_hash:
+       environment: dev
+       purpose: eval-ed
+       product: eks
 labels:
    general: 
-     environment: eval
-     purpose: training
-     eks_cluster: eks-workshop
+     environment: dev
+     purpose: eval-ed
    infrastructure:
      cloud: aws
      product: eks
 selectors:
-   vpc_info:
-     match_labels:
-       environment: eval
-       app_tier: networking
-     match_keys:
-       provider: aws
+   network_vars:
+     labels:
+       environment: dev
+       purpose: eval-ed
+       area: network
        region: eu-west-1
-     match_params:
-       must_exists: True
-       resource_type: vpc
-   sg_bastion_info:
-     match_labels:
-       environment: eval
-       app_tier: networking
-     match_keys:
-       provider: aws
-       region: eu-west-1
-       name: bastion
-     match_params:
-       must_be_one: True
-       resource_type: security_group
-   public_subnet_info:
-     match_labels:
-       environment: eval
-       app_tier: networking
-     match_keys:
-       provider: aws
-       region: eu-west-1
-       name: public
-     match_params:
-       resource_type: subnet
+       cloud: aws
 infrastructure:
    eks-workshop:
        stack_name: elasticdev:::eks_workshop
        arguments:
+          vpc_name: selector:::network_vars::vpc_name
+          vpc_id: selector:::network_vars::vpc_id
+          sg_id: selector:::network_vars::bastion_sg_id
+          subnet_ids: selector:::network_vars::public_subnet_ids
+          bastion_sg_id: selector:::network_vars::bastion_sg_id
           workshop_name: eks-workshop
-          vpc_name: selector:::vpc_info::name
-          vpc_id: selector:::vpc_info::vpc_id
-          subnet_ids: selector:::public_subnet_info::subnet_id:csv
-          sg_id: selector:::sg_bastion_info::sg_id
-          bastion_sg_id: selector:::sg_bastion_info::sg_id
           eks_min_capacity: 1
           eks_max_capacity: 1
           eks_desired_capacity: 1
@@ -59,12 +39,10 @@ infrastructure:
           - general
           - infrastructure
        selectors:
-         - vpc_info
-         - public_subnet_info
-         - sg_bastion_info
+          - network_vars
        credentials:
-           - reference: eval-ed-iam
-             orchestration: true
+          - reference: eval-ed-iam
+            orchestration: true
        inputvars:
-           - reference: eks-workshop-public-key
-             orchestration: true
+          - reference: eks-workshop-public-key
+            orchestration: true
