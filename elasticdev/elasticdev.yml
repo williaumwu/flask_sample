@@ -64,7 +64,7 @@ custom:
      stack_name: elasticdev:::vars_set
      arguments: 
        vars_set_name: ed-eval-network
-       evaluate: null
+       evaluate: True
        labels_hash:
          region: eu-west-1
          environment: dev
