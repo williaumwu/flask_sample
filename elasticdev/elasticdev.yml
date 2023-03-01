@@ -47,6 +47,8 @@ infrastructure:
        - reference: eval-ed-iam
          orchestration: true
    eks_nodegroup:
+     dependencies: 
+       - infrastructure::eks_cluster
      stack_name: elasticdev:::aws_eks_nodegroup
      arguments:
        eks_subnet_ids: selector:::network_vars::private_subnet_ids:csv
