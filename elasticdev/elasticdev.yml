@@ -17,8 +17,8 @@ selectors:
        region: eu-west-1
        cloud: aws
 infrastructure:
-   eks:
-     stack_name: elasticdev:::aws_eks
+   eks_cluster:
+     stack_name: elasticdev:::aws_eks_cluster
      arguments:
        vpc_name: selector:::network_vars::vpc_name
        vpc_id: selector:::network_vars::vpc_id
@@ -27,15 +27,6 @@ infrastructure:
        eks_cluster: eval-ed-eks
        eks_cluster_version: 1.23
        publish_to_saas: true
-       eks_node_min_capacity: 1
-       eks_node_max_capacity: 1
-       eks_node_desired_capacity: 1
-       eks_node_disksize: 25
-       eks_node_capacity_type: ON_DEMAND
-       eks_node_group_name: eval-ed-eks-main
-       eks_node_instance_types: 
-         - t3.medium
-         - t3.large
      labels:
        - general
        - infrastructure
