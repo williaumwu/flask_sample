@@ -53,6 +53,7 @@ infrastructure:
        - infrastructure
      selectors:
        - network_vars
+       - eks_info
      credentials:
        - reference: eval-ed-iam
          orchestration: true
