@@ -22,7 +22,6 @@ selectors:
         environment: dev
         purpose: eval-ed
         cloud: aws
-        region: eu-west-1
 infrastructure:
    eks:
      stack_name: elasticdev:::aws_eks_nodegroup
