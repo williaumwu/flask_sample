@@ -1,93 +1,54 @@
 global:
-   selectors: 
-     aws:
-       match_keys:
-         provider: aws
    arguments: 
      aws_default_region: eu-west-1
-     ci_environment: ed-eval
-     suffix_id: d645633
-     cloud_tags_hash:
-       environment: dev
-       purpose: ci
-       billing_code: 87deo
-       platform: gitlab
 labels:
    general: 
      environment: dev
-     purpose: ci
-     provider: gitlab
-   gitlab: 
-     platform: gitlab
-     component: runner
+     purpose: eval-ed
+   infrastructure:
+     cloud: aws
+     product: eks
 selectors:
-   runners_token_info:
-     match_params:
-       must_exists: True
-       resource_type: gitlab_group
-     keys:
-       provider: gitlab
+   network_vars:
      labels:
-       platform: gitlab
-       component: runner
-   aws_gitlab_cred:
-     labels:
-       platform: gitlab
-       component: runner
-     keys:
-       provider: aws
-     parameters:
-       must_exists: True
-       resource_type: credentials
-   vpc_info:
-     match_ref: aws
-     match_params:
-       must_exists: True
-       resource_type: vpc
-   public_subnet_info:
-     match_ref: aws
-     match_keys:
-       name: public
-     match_params:
-       resource_type: subnet
-   sg_bastion_info:
-     match_ref: aws
-     match_keys:
-       name: bastion
-     match_params:
-       must_be_one: True
-       resource_type: security_group
+       environment: dev
+       purpose: eval-ed
+       area: network
+       region: eu-west-1
+       cloud: aws
+   eks_info:
+      resource_type: eks
+      labels:
+        environment: dev
+        purpose: eval-ed
+        cloud: aws
+        region: eu-west-1
 infrastructure:
-   setup_gitlab:
-       stack_name: elasticdev:::setup_gitlab_ci
-       arguments:
-          visibility_level: private
-          spot_price: 0.05
-          gitlab_runners_token_hash: selector:::runners_token_info::runners_token
-          gitlab_runner_aws_access_key: selector:::aws_gitlab_cred::AWS_ACCESS_KEY_ID
-          gitlab_runner_aws_secret_key: selector:::aws_gitlab_cred::AWS_SECRET_ACCESS_KEY
-          vpc_name: selector:::vpc_info::name
-          subnet_ids: selector:::public_subnet_info::subnet_id:csv
-          sg_id: selector:::sg_bastion_info::sg_id
-          vpc_id: selector:::vpc_info::vpc_id
-          bastion_sg_id: selector:::sg_bastion_info::sg_id
-          instance_type: t3.medium
-       to_base64:
-         - cloud_tags_hash
-       selectors:
-         - vpc_info
-         - public_subnet_info
-         - sg_bastion_info
-         - aws_gitlab_cred
-         - runners_token_info
-       credentials:
-         - reference: eval-ed-iam
-           orchestration: true
-       inputvars:
-           - reference: gitlab-parent-group
-             orchestration: true
-           - reference: gitlab-token
-             orchestration: true
-       labels:
-           - general
-           - gitlab
+   eks:
+     stack_name: elasticdev:::aws_eks_nodegroup
+     arguments:
+       vpc_name: selector:::network_vars::vpc_name
+       vpc_id: selector:::network_vars::vpc_id
+       sg_id: selector:::network_vars::bastion_sg_id
+       eks_subnet_ids: selector:::network_vars::private_subnet_ids:csv
+       eks_node_role_arn: selector:::eks_info::node_role_arn
+       eks_cluster: eval-ed-eks
+       eks_node_capacity_type: ON_DEMAND
+       eks_node_ami_type: AL2_x86_64
+       eks_node_max_capacity: 1
+       eks_node_min_capacity: 1
+       eks_node_desired_capacity: 1
+       eks_node_disksize: 25
+       eks_node_group_name: eval-ed-eks-main
+       publish_to_saas: true
+       eks_node_instance_types: 
+         - t3.medium
+         - t3.large
+     labels:
+       - general
+       - infrastructure
+     selectors:
+       - network_vars
+     credentials:
+       - reference: eval-ed-iam
+         orchestration: true
