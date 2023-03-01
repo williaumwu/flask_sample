@@ -17,7 +17,9 @@ selectors:
        region: eu-west-1
        cloud: aws
    eks_info:
-      resource_type: eks
+      match_params:
+        must_exists: True
+        resource_type: eks
       labels:
         environment: dev
         purpose: eval-ed
