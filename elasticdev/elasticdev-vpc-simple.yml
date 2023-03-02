@@ -3,8 +3,8 @@ global:
      aws_default_region: eu-west-1
 labels:
    general: 
-     environment: dev
-     purpose: eval-ed
+     environment: dev-1
+     purpose: eval-ed-1
    infrastructure:
      cloud: aws
      product: vpc
