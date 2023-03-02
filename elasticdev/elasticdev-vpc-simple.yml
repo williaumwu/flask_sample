@@ -11,9 +11,9 @@ labels:
      area: network
 infrastructure:
    vpc:
-     stack_name: elasticdev:::aws_vpc_simple
+       stack_name: elasticdev:::aws_vpc_simple:1
      arguments:
-       vpc_name: eval-ed-vpc-simple
+       vpc_name: eval-ed-vpc-simple-1
        eks_cluster: eval-ed-eks
        publish_to_saas: true
      labels:
