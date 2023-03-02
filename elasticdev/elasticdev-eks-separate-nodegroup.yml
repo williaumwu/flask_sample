@@ -17,13 +17,13 @@ selectors:
        region: eu-west-1
        cloud: aws
    eks_info:
-     match_keys:
+     keys:
        provider: aws
        region: eu-west-1
-     match_params:
+     params:
        must_exists: True
        resource_type: eks
-     match_labels:
+     labels:
        environment: dev
        purpose: eval-ed
        cloud: aws
@@ -33,7 +33,7 @@ infrastructure:
      arguments:
        vpc_name: selector:::network_vars::vpc_name
        vpc_id: selector:::network_vars::vpc_id
-       subnet_ids: selector:::network_vars::private_subnet_ids:csv
+       subnet_ids: selector:::network_vars::public_subnet_ids:csv
        sg_id: selector:::network_vars::bastion_sg_id
        eks_cluster: eval-ed-eks
        eks_cluster_version: 1.25
