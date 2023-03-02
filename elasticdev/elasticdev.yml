@@ -24,7 +24,7 @@ infrastructure:
        vpc_id: selector:::network_vars::vpc_id
        subnet_ids: selector:::network_vars::public_subnet_ids:csv
        sg_id: selector:::network_vars::bastion_sg_id
-       eks_cluster: eval-ed-eks
+       eks_cluster: eval-ed-eks-1
        eks_cluster_version: 1.25
        eks_node_min_capacity: 1
        eks_node_max_capacity: 1
