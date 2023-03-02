@@ -21,7 +21,6 @@ selectors:
        provider: aws
        region: eu-west-1
      params:
-       must_exists: True
        resource_type: eks
      labels:
        environment: dev
