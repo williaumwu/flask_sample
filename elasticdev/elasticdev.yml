@@ -30,10 +30,12 @@ infrastructure:
           subnet_ids: selector:::network_vars::public_subnet_ids
           bastion_sg_id: selector:::network_vars::bastion_sg_id
           workshop_name: eks-workshop
-          eks_min_capacity: 1
-          eks_max_capacity: 1
-          eks_desired_capacity: 1
-          eks_instance_type: t3.medium
+          eks_node_min_capacity: 1
+          eks_node_max_capacity: 1
+          eks_node_desired_capacity: 1
+          eks_node_instance_types: 
+            - t3.small
+            - t3.medium
           instance_type: t3.micro
           disksize: 25
        labels:
