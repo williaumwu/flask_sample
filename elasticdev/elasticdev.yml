@@ -21,6 +21,7 @@ infrastructure:
    rds:
        stack_name: elasticdev:::aws_ec2_server
        arguments:
+          key_name: default
           sg_id: selector:::network_vars::web_sg_id
           subnet_ids: selector:::network_vars::public_subnet_ids
           hostname: test-demo
