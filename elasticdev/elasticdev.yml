@@ -25,6 +25,7 @@ infrastructure:
           sg_id: selector:::network_vars::web_sg_id
           subnet_ids: selector:::network_vars::public_subnet_ids
           hostname: test-demo
+          remote_stateful_bucket: s3://app-env.customer-provider.tfstatefile
           cloud_tags_hash:
             environment: dev
             purpose: eval-ed
