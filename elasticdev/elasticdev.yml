@@ -22,6 +22,7 @@ infrastructure:
        stack_name: elasticdev:::aws_ec2_server
        arguments:
           key_name: default
+          hostname: server101
           sg_id: selector:::network_vars::web_sg_id
           subnet_ids: selector:::network_vars::public_subnet_ids
           remote_stateful_bucket: s3://app-env.customer-provider.tfstatefile
