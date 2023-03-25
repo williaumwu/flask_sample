@@ -1,44 +1,49 @@
 global:
    arguments: 
      aws_default_region: eu-west-1
-labels:
-   general: 
-     environment: dev
-     purpose: eval-ed
-   infrastructure:
-     cloud: aws
-     product: rds
-     area: database
-selectors:
-   network_vars:
+   metadata:   
      labels:
-       environment: dev
-       purpose: eval-ed
-       area: network
-       region: eu-west-1
-       cloud: aws
+        general: 
+          environment: dev
+          purpose: eval-ed
+        infrastructure:
+          cloud: aws
+          product: rds
+          area: database
+     matchSelectors:
+        network_vars:
+          labels:
+            environment: dev
+            purpose: eval-ed
+            area: network
+            region: eu-west-1
+            cloud: aws
 infrastructure:
    rds:
        stack_name: elasticdev:::aws_rds
        arguments:
-          vpc_name: selector:::network_vars::vpc_name
-          sg_id: selector:::network_vars::db_sg_id
-          subnet_ids: selector:::network_vars::private_subnet_ids
-          rds_name: eval-ed-rds
-          allocated_storage: 14
-          db_name: app
-          publish_creds: true
-          publish_to_saas: true
-          cloud_tags_hash:
-            environment: dev
-            purpose: eval-ed
-       to_base64:
-         - cloud_tags_hash
-       labels:
-         - general
-         - infrastructure
-       selectors:
-         - network_vars
-       credentials:
-         - reference: eval-ed-iam
-           orchestration: true
+         vpc_name: selector:::network_vars::vpc_name
+         sg_id: selector:::network_vars::db_sg_id
+         subnet_ids: selector:::network_vars::private_subnet_ids
+         rds_name: eval-ed-rds
+         allocated_storage: 14
+         db_name: app
+         publish_creds: true
+         publish_to_saas: true
+         cloud_tags_hash:
+           environment: dev
+           purpose: eval-ed
+       spec:
+         serialization:
+           b64:
+             arguments:
+               - cloud_tags_hash
+       metadata:
+         labels:
+           - general
+           - infrastructure
+         selectors:
+           - network_vars
+         credentials:
+           - reference: eval-ed-iam
+             orchestration: true
