@@ -16,9 +16,10 @@ infrastructure:
        vpc_name: eval-ed-vpc-simple-1
        eks_cluster: eval-ed-eks
        publish_to_saas: true
-     labels:
-       - general
-       - infrastructure
-     credentials:
-       - reference: eval-ed-iam
-         orchestration: true
+     metadata:
+       labels:
+         - general
+         - infrastructure
+       credentials:
+         - reference: eval-ed-iam
+           orchestration: true
