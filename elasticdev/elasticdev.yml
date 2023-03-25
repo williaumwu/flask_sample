@@ -1,40 +1,47 @@
-labels:
-   general: 
-     environment: dev
-     purpose: ci
-global_arguments:
-   aws_default_region: eu-west-1
-   ci_environment: ed-eval
-   suffix_id: d645633
-   cloud_tags_hash:
-       environment: dev
-       purpose: ci
-       billing_code: 87deo
+global:
+  arguments: 
+    aws_default_region: eu-west-1
+    ci_environment: ed-eval
+    suffix_id: d645633
+    cloud_tags_hash:
+        environment: dev
+        purpose: ci
+        billing_code: 87deo
+  metadata:   
+    labels:
+       general: 
+         environment: dev
+         purpose: ci
 infrastructure:
    ecr_repo:
-       stack_name: elasticdev:::ecr_repo
-       arguments:
-          name: flask_sample
-          docker_repo: flask_sample
+     stack_name: elasticdev:::ecr_repo
+     arguments:
+        name: flask_sample
+        docker_repo: flask_sample
+     metadata:
        credentials:
-           - reference: eval-ed-iam
-             orchestration: true
+         - reference: eval-ed-iam
+           orchestration: true
 custom:
    codebuild:
-       stack_name: elasticdev:::add_codebuild_ci
-       dependencies: 
+     stack_name: elasticdev:::add_codebuild_ci
+     arguments:
+       codebuild_name: flask-sample-private
+       git_repo: flask_sample-private
+       git_url: git@github.com:williaumwu/flask_sample-private.git
+       branch: ci
+       ecr_repo_name: flask_sample
+       docker_username: williaumwu
+       docker_registry: ecr
+       slack_channel: testing
+     spec:
+       serialization:
+         to_base64:
+           arguments:
+             - cloud_tags_hash
+         dependencies: 
            - infrastructure::ecr_repo
-       arguments:
-          codebuild_name: flask-sample-private
-          git_repo: flask_sample-private
-          git_url: git@github.com:williaumwu/flask_sample-private.git
-          branch: ci
-          ecr_repo_name: flask_sample
-          docker_username: williaumwu
-          docker_registry: ecr
-          slack_channel: testing
-       to_base64:
-         - cloud_tags_hash
+     metadata:
        credentials:
          - reference: eval-ed-iam
            orchestration: true
