@@ -1,10 +1,12 @@
-labels:
-   general: 
-     environment: dev
-     purpose: eval-ed
-   infrastructure:
-     cloud: aws
-     product: iam
+global:
+  metadata:   
+    labels:
+       general: 
+         environment: dev
+         purpose: eval-ed
+       infrastructure:
+         cloud: aws
+         product: iam
 infrastructure:
    iam:
      stack_name: elasticdev:::aws_iam
@@ -51,7 +53,7 @@ infrastructure:
                - acm:*
      spec:
        serialization:
-         b64:
+         to_base64:
            arguments:
              - allows_hash
      metadata:
