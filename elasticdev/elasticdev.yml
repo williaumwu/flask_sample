@@ -42,7 +42,7 @@ infrastructure:
          labels:
            - general
            - infrastructure
-         selectors:
+         matchSelectors:
            - network_vars
          credentials:
            - reference: eval-ed-iam
