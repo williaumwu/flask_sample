@@ -35,12 +35,12 @@ custom:
        docker_registry: ecr
        slack_channel: testing
      spec:
+       dependencies: 
+         - infrastructure::ecr_repo
        serialization:
          to_base64:
            arguments:
              - cloud_tags_hash
-         dependencies: 
-           - infrastructure::ecr_repo
      metadata:
        credentials:
          - reference: eval-ed-iam
