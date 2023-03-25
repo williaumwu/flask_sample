@@ -49,11 +49,15 @@ infrastructure:
                - ec2:*
                - eks:*
                - acm:*
-     to_base64:
-       - allows_hash
-     labels:
-       - general
-       - infrastructure
-     credentials:
-       - reference: aws
-         orchestration: true
+     spec:
+       serialization:
+         b64:
+           arguments:
+             - allows_hash
+     metadata:
+       labels:
+         - general
+         - infrastructure
+       credentials:
+         - reference: aws
+           orchestration: true
