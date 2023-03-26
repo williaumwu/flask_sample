@@ -16,9 +16,10 @@ infrastructure:
    setup_codebuild:
      stack_name: elasticdev:::setup_codebuild_ci
      arguments:
-        ci_environment: ed-eval
-        suffix_id: d645633
-        bucket_expire_days: 1
+       remote_stateful_bucket: s3://app-env.customer-provider.tfstatefile
+       ci_environment: ed-eval
+       suffix_id: d645633
+       bucket_expire_days: 1
      spec:
        serialization:
          to_base64:
