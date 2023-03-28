@@ -38,7 +38,7 @@ infrastructure:
       subnet_ids: selector:::network_vars::public_subnet_ids:csv
       sg_id: selector:::network_vars::bastion_sg_id
       eks_cluster: eval-ed-eks
-      eks_cluster_version: 1
+      eks_cluster_version: 1.25
       publish_to_saas: true
       # vpc with NAT, private_subet_ids is more secure
       eks_subnet_ids: selector:::network_vars::public_subnet_ids:csv
