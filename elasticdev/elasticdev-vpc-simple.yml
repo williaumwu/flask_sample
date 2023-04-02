@@ -12,9 +12,9 @@ global:
          area: network
 infrastructure:
   vpc:
-    stack_name: elasticdev:::aws_vpc_simple:1
+    stack_name: elasticdev:::aws_vpc_simple
     arguments:
-      vpc_name: eval-ed-vpc-simple-1
+      vpc_name: eval-ed-vpc-simple
       eks_cluster: eval-ed-eks
       publish_to_saas: true
       cloud_tags_hash:
