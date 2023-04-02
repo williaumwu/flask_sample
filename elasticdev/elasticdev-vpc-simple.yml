@@ -4,7 +4,7 @@ global:
   metadata:   
     labels:
        general: 
-         environment: dev-1
+         environment: dev
          purpose: eval-ed-1
        infrastructure:
          cloud: aws
