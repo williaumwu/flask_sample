@@ -17,6 +17,7 @@ infrastructure:
       vpc_name: eval-ed-vpc-simple
       eks_cluster: eval-ed-eks
       publish_to_saas: true
+      remote_stateful_bucket: s3://app-env.customer-provider.tfstatefile
       cloud_tags_hash:
         environment: dev
         purpose: eval-ed
