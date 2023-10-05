@@ -1,7 +1,6 @@
 global:
   arguments: 
     aws_default_region: eu-west-1
-    remote_stateful_bucket: s3://app-env.customer-provider.tfstatefile
   metadata:   
     labels:
        general: 
