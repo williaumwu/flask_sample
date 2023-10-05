@@ -22,7 +22,6 @@ infrastructure:
   rds:
     stack_name: elasticdev:::aws_rds
     arguments:
-      remote_stateful_bucket: s3://app-env.customer-provider.tfstatefile
       vpc_name: selector:::network_vars::vpc_name
       sg_id: selector:::network_vars::db_sg_id
       subnet_ids: selector:::network_vars::private_subnet_ids
