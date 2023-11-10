@@ -5,7 +5,7 @@ global:
     labels:
        general: 
          environment: dev
-         purpose: eval-ed
+         purpose: eval-config0
        infrastructure:
          cloud: aws
          product: eks
@@ -13,7 +13,7 @@ global:
        network_vars:
          labels:
            environment: dev
-           purpose: eval-ed
+           purpose: eval-config0
            area: network
            region: eu-west-1
            cloud: aws
@@ -25,7 +25,7 @@ global:
            resource_type: eks
          labels:
            environment: dev
-           purpose: eval-ed
+           purpose: eval-config0
            cloud: aws
 infrastructure:
   eks:
@@ -36,7 +36,7 @@ infrastructure:
       # vpc with NAT, private_subet_ids is more secure
       subnet_ids: selector:::network_vars::public_subnet_ids:csv
       sg_id: selector:::network_vars::bastion_sg_id
-      eks_cluster: eval-ed-eks
+      eks_cluster: eval-config0-eks
       eks_cluster_version: 1.25
       publish_to_saas: true
       # vpc with NAT, private_subet_ids is more secure
@@ -53,7 +53,7 @@ infrastructure:
         - t3.large
       cloud_tags_hash:
         environment: dev
-        purpose: eval-ed
+        purpose: eval-config0
     spec:
       serialization:
         to_base64:
@@ -67,5 +67,5 @@ infrastructure:
         - network_vars
         - eks_info
       credentials:
-        - reference: eval-ed-iam
+        - reference: eval-config0-iam
           orchestration: true
