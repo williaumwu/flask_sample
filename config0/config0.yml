@@ -5,7 +5,7 @@ global:
          provider: aws
        match_labels:
          environment: dev
-         purpose: eval-ed
+         purpose: eval-config0
          area: network
 selectors:
    vpc_info:
@@ -63,12 +63,12 @@ custom:
    vars_set:
      stack_name: elasticdev:::vars_set
      arguments: 
-       vars_set_name: ed-eval-network
+       vars_set_name: config0-eval-network
        evaluate: False
        labels_hash:
          region: eu-west-1
          environment: dev
-         purpose: eval-ed
+         purpose: eval-config0
          area: network
          cloud: aws
        arguments_hash:
@@ -94,5 +94,5 @@ custom:
        - sg_web_info
        - sg_api_info
      credentials:
-       - reference: eval-ed-iam
+       - reference: eval-config0-iam
          orchestration: true
