@@ -53,7 +53,7 @@ infrastructure:
           vpc_name: selector:::vpc_info::name
           sg_id: selector:::sg_info::sg_id
           subnet_ids: selector:::subnet_info::subnet_id:csv
-          rds_name: eval-ed-rds
+          rds_name: eval-config0-rds
           allocated_storage: 14
           db_name: app
        labels:
@@ -66,5 +66,3 @@ infrastructure:
        credentials:
            - reference: aws_2
              orchestration: true
-destroy:
-   stack_name: elasticdev:::ed_core::callback_delete

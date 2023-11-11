@@ -5,7 +5,7 @@ global:
     labels:
       general: 
         environment: dev
-        purpose: eval-ed
+        purpose: eval-config0
       infrastructure:
         cloud: aws
         product: rds
@@ -14,7 +14,7 @@ global:
       network_vars:
         labels:
           environment: dev
-          purpose: eval-ed
+          purpose: eval-config0
           area: network
           region: eu-west-1
           cloud: aws
@@ -25,14 +25,14 @@ infrastructure:
       vpc_name: selector:::network_vars::vpc_name
       sg_id: selector:::network_vars::db_sg_id
       subnet_ids: selector:::network_vars::private_subnet_ids
-      rds_name: eval-ed-rds
+      rds_name: eval-config0-rds
       allocated_storage: 14
       db_name: app
       publish_creds: true
       publish_to_saas: true
       cloud_tags_hash:
         environment: dev
-        purpose: eval-ed
+        purpose: eval-config0
     spec:
       serialization:
         to_base64:
@@ -45,5 +45,5 @@ infrastructure:
       matchSelectors:
         - network_vars
       credentials:
-        - reference: eval-ed-iam
+        - reference: eval-config0-iam
           orchestration: true
