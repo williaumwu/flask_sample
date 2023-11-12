@@ -3,7 +3,7 @@ global:
      aws_default_region: eu-west-1
      cloud_tags_hash:
        environment: dev
-       purpose: eval-ed
+       purpose: eval-config0
        message_queue: kafka
        product: ec2
 labels:
@@ -17,7 +17,7 @@ selectors:
    network_vars:
      labels:
        environment: dev
-       purpose: eval-ed
+       purpose: eval-config0
        area: network
        region: eu-west-1
        cloud: aws
@@ -50,5 +50,5 @@ infrastructure:
      selectors:
        - network_vars
      credentials:
-       - reference: eval-ed-iam
+       - reference: eval-config0-iam
          orchestration: true
