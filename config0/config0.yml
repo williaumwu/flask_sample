@@ -61,7 +61,7 @@ infrastructure:
           - general
           - infrastructure
        credentials:
-           - reference: eval-ed-iam
+           - reference: eval-config0-iam
              orchestration: true
        inputvars:
            - reference: eks-workshop-public-key
@@ -95,5 +95,5 @@ infrastructure:
          - sg_bastion_info
          - instance_profile_info
        credentials:
-         - reference: eval-ed-iam
+         - reference: eval-config0-iam
            orchestration: true
