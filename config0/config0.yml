@@ -5,7 +5,7 @@ global:
          provider: aws
    arguments: 
      aws_default_region: eu-west-1
-     ci_environment: ed-eval
+     ci_environment: config0-eval
      suffix_id: d645633
      cloud_tags_hash:
        environment: dev
@@ -81,7 +81,7 @@ infrastructure:
          - aws_gitlab_cred
          - gitlab_group_info
        credentials:
-         - reference: eval-ed-iam
+         - reference: eval-config0-iam
            orchestration: true
        inputvars:
            - reference: gitlab-parent-group
