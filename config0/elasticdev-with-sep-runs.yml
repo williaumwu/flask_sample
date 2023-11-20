@@ -1,0 +1,60 @@
+labels:
+   general: 
+     environment: dev
+     purpose: test
+   infrastructure:
+     cloud: do
+selectors:
+   ssh_key_info:
+     match_labels:
+       cloud: do
+       environment: dev
+     match_keys:
+       provider: do
+     match_params:
+       must_exists: True
+       resource_type: ssh_public_key
+infrastructure:
+   ssh_upload:
+       stack_name: elasticdev:::new_do_ssh_key
+       arguments:
+          name: ed-jenkins-key
+       labels:
+         - general
+         - infrastructure
+       credentials:
+           - reference: do-token
+             orchestration: true
+   droplet:
+       stack_name: elasticdev:::droplet
+       dependencies:
+          - infrastructure::ssh_upload
+       labels:
+         - general
+         - infrastructure
+       selectors:
+         - ssh_key_info
+       arguments:
+          ssh_key_id: selector:::ssh_key_info::id
+          hostname: ed-jenkins-master
+          region: NYC1
+          size: s-1vcpu-2gb
+          with_monitoring: True
+          with_backups: false
+          with_ipv6: false
+          with_private_networking: false
+          with_resize_disk: false
+       credentials:
+           - reference: do-token
+             orchestration: true
+   jenkins_ans:
+       stack_name: elasticdev:::jenkins_on_docker
+       dependencies:
+          - infrastructure::ssh_upload
+          - infrastructure::droplet
+       arguments:
+          ssh_key_name: ed-jenkins-key
+          hostname: ed-jenkins-master
+       labels:
+         - general
+         - infrastructure
