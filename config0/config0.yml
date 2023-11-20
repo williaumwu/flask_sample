@@ -3,12 +3,12 @@ global:
      aws_default_region: eu-west-1
      cloud_tags_hash:
        environment: dev
-       purpose: eval-ed
+       purpose: eval-config0
        product: eks
 labels:
    general: 
      environment: dev
-     purpose: eval-ed
+     purpose: eval-config0
    infrastructure:
      cloud: aws
      product: eks
@@ -16,7 +16,7 @@ selectors:
    network_vars:
      labels:
        environment: dev
-       purpose: eval-ed
+       purpose: eval-config0
        area: network
        region: eu-west-1
        cloud: aws
@@ -44,7 +44,7 @@ infrastructure:
        selectors:
           - network_vars
        credentials:
-          - reference: eval-ed-iam
+          - reference: eval-config0-iam
             orchestration: true
        inputvars:
           - reference: eks-workshop-public-key
