@@ -1,7 +1,7 @@
 global:
   arguments: 
     aws_default_region: eu-west-1
-    ci_environment: ed-eval
+    ci_environment: config0-eval
     suffix_id: d645633
     cloud_tags_hash:
         environment: dev
@@ -20,7 +20,7 @@ infrastructure:
         docker_repo: flask_sample
      metadata:
        credentials:
-         - reference: eval-ed-iam
+         - reference: eval-config0-iam
            orchestration: true
 custom:
    codebuild:
@@ -43,7 +43,7 @@ custom:
              - cloud_tags_hash
      metadata:
        credentials:
-         - reference: eval-ed-iam
+         - reference: eval-config0-iam
            orchestration: true
        inputvars:
          - reference: dockerhub-token
