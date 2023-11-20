@@ -18,7 +18,7 @@ infrastructure:
    ssh_upload:
        stack_name: elasticdev:::new_do_ssh_key
        arguments:
-          name: ed-jenkins-example
+          name: config0-jenkins-example
        labels:
          - general
          - infrastructure
@@ -36,7 +36,7 @@ infrastructure:
          - ssh_key_info
        arguments:
           ssh_key_id: selector:::ssh_key_info::id
-          hostname: ed-jenkins-example
+          hostname: config0-jenkins-example
           region: NYC1
           size: s-1vcpu-2gb
           with_monitoring: True
@@ -53,8 +53,8 @@ infrastructure:
           - infrastructure::ssh_upload
           - infrastructure::droplet
        arguments:
-          ssh_key_name: ed-jenkins-example
-          hostname: ed-jenkins-example
+          ssh_key_name: config0-jenkins-example
+          hostname: config0-jenkins-example
        labels:
          - general
          - infrastructure
