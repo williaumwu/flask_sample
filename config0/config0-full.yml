@@ -12,6 +12,16 @@ global:
        general: 
          environment: dev
          purpose: ci
+infrastructure:
+   ecr_repo:
+     stack_name: elasticdev:::ecr_repo
+     arguments:
+        name: maven_sample
+        docker_repo: maven_sample
+     metadata:
+       credentials:
+         - reference: eval-config0-iam
+           orchestration: true
 custom:
    codebuild:
      stack_name: elasticdev:::add_codebuild_ci
@@ -25,6 +35,8 @@ custom:
        docker_registry: ecr
        slack_channel: testing
      spec:
+       dependencies: 
+         - infrastructure::ecr_repo
        serialization:
          to_base64:
            arguments:
