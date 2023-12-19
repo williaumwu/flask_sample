@@ -29,7 +29,7 @@ global:
            cloud: aws
 infrastructure:
   eks:
-    stack_name: elasticdev:::aws_eks
+    stack_name: config0-publish:::aws_eks
     arguments:
       vpc_name: selector:::network_vars::vpc_name
       vpc_id: selector:::network_vars::vpc_id
