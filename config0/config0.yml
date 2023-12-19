@@ -9,7 +9,7 @@ global:
          product: iam
 infrastructure:
    iam:
-     stack_name: elasticdev:::aws_iam
+     stack_name: config0-publish:::aws_iam
      arguments:
         iam_name: eval-config0-iam
         policy_name: eval-config0-iam
