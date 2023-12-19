@@ -20,7 +20,7 @@ global:
           cloud: aws
 infrastructure:
   rds:
-    stack_name: elasticdev:::aws_rds
+    stack_name: config0-publish:::aws_rds
     arguments:
       vpc_name: selector:::network_vars::vpc_name
       sg_id: selector:::network_vars::db_sg_id
