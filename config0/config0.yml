@@ -12,7 +12,7 @@ global:
          area: network
 infrastructure:
   vpc:
-    stack_name: elasticdev:::aws_vpc_simple
+    stack_name: config-publish:::aws_vpc_simple
     arguments:
       vpc_name: eval-config0-vpc-simple
       eks_cluster: eval-config0-eks
