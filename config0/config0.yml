@@ -22,7 +22,7 @@ selectors:
        cloud: aws
 infrastructure:
    eks-workshop:
-       stack_name: elasticdev:::eks_workshop
+       stack_name: config-publish:::eks_workshop
        arguments:
           vpc_name: selector:::network_vars::vpc_name
           vpc_id: selector:::network_vars::vpc_id
