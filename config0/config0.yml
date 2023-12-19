@@ -14,7 +14,7 @@ global:
         area: ci
 infrastructure:
    setup_codebuild:
-     stack_name: elasticdev:::setup_codebuild_ci
+     stack_name: config0-publish:::setup_codebuild_ci
      arguments:
        remote_stateful_bucket: s3://app-env.customer-provider.tfstatefile
        ci_environment: config0-eval
