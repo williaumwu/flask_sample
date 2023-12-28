@@ -21,6 +21,7 @@ global:
          keys:
            provider: aws
            region: eu-west-1
+           aws_default_region: eu-west-1
          params:
            resource_type: eks
          labels:
