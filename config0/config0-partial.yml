@@ -1,0 +1,33 @@
+global:
+  arguments: 
+    aws_default_region: eu-west-1
+    cloud_tags_hash:
+      environment: dev
+      purpose: eval-config0
+      billing_code: 87deo
+      area: ci
+  metadata:   
+    labels:
+      general: 
+        environment: dev
+        purpose: eval-config0
+        area: ci
+infrastructure:
+   setup_codebuild:
+     stack_name: config0-publish:::setup_codebuild_ci
+     arguments:
+       remote_stateful_bucket: s3://app-env.customer-provider.tfstatefile
+       ci_environment: config0-eval
+       suffix_id: d645633
+       bucket_expire_days: 1
+     spec:
+       serialization:
+         to_base64:
+           arguments:
+             - cloud_tags_hash
+     metadata:
+       labels:
+         - general
+       credentials:
+         - reference: eval-config0-iam
+           orchestration: true
