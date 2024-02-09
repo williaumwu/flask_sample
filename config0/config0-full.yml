@@ -14,7 +14,7 @@ global:
          purpose: ci
 infrastructure:
    ecr_repo:
-     stack_name: elasticdev:::ecr_repo
+     stack_name: config0-publish:::ecr_repo
      arguments:
         name: maven_sample
         docker_repo: maven_sample
@@ -24,7 +24,7 @@ infrastructure:
            orchestration: true
 custom:
    codebuild:
-     stack_name: elasticdev:::add_codebuild_ci
+     stack_name: config0-publish:::add_codebuild_ci
      arguments:
        codebuild_name: maven-sample-private
        git_repo: maven_sample-private
