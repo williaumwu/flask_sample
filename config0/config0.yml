@@ -12,13 +12,33 @@ global:
        general: 
          environment: dev
          purpose: ci
-infrastructure:
-   ecr_repo:
-     stack_name: config0-publish:::ecr_repo
+custom:
+   codebuild:
+     stack_name: config0-publish:::add_codebuild_ci
      arguments:
-        name: flask_sample
-        docker_repo: flask_sample
+       codebuild_name: flask-sample-private
+       git_repo: flask_sample-private
+       git_url: git@github.com:williaumwu/flask_sample-private.git
+       branch: ci
+       ecr_repo_name: flask_sample
+       docker_username: williaumwu
+       docker_registry: ecr
+       slack_channel: testing
+     spec:
+       serialization:
+         to_base64:
+           arguments:
+             - cloud_tags_hash
      metadata:
        credentials:
          - reference: eval-config0-iam
            orchestration: true
+       inputvars:
+         - reference: dockerhub-token
+           orchestration: true
+         - reference: slack-webhook
+           orchestration: true
+         - reference: github-token
+           orchestration: true
+       labels:
+          - general
