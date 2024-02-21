@@ -16,7 +16,7 @@ selectors:
        resource_type: ssh_public_key
 infrastructure:
    jenkins:
-       stack_name: elasticdev:::jenkins_on_do
+       stack_name: config0-publish:::jenkins_on_do
        arguments:
           name: eval-jenkins
           region: NYC1
