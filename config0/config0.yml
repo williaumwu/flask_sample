@@ -46,9 +46,9 @@ custom:
          - reference: eval-config0-iam
            orchestration: true
        inputvars:
-         - reference: dockerhub-token
+         - reference: docker-token
            orchestration: true
-         - reference: slack-webhook
+         - reference: slack-webhook-hash
            orchestration: true
          - reference: github-token
            orchestration: true
