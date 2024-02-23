@@ -33,7 +33,7 @@ custom:
        ecr_repo_name: flask_sample
        docker_username: williaumwu
        docker_registry: ecr
-       slack_channel: testing
+       slack_channel: support
      spec:
        dependencies: 
          - infrastructure::ecr_repo
