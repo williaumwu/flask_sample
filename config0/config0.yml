@@ -41,7 +41,7 @@ custom:
        ecr_repo_name: flask_sample
        docker_username: williaumwu
        docker_registry: ecr
-       slack_channel: support
+       slack_channel: opentofu
        security_group_id: selector:::network_vars::bastion_sg_id
        subnet_ids: selector:::network_vars::private_subnet_ids
        vpc_id: selector:::network_vars::vpc_id
