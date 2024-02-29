@@ -53,3 +53,5 @@ custom:
            orchestration: true
        labels:
           - general
+       selectors:
+          - network_vars
