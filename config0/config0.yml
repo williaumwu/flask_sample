@@ -12,6 +12,14 @@ global:
        general: 
          environment: dev
          purpose: ci
+selectors:
+   network_vars:
+     labels:
+       environment: dev
+       purpose: eval-config0
+       area: network
+       region: eu-west-1
+       cloud: aws
 infrastructure:
    ecr_repo:
      stack_name: config0-publish:::ecr_repo
@@ -34,6 +42,9 @@ custom:
        docker_username: williaumwu
        docker_registry: ecr
        slack_channel: support
+       security_group_id: selector:::network_vars::bastion_sg_id
+       subnet_ids: selector:::network_vars::private_subnet_ids
+       vpc_id: selector:::network_vars::vpc_id
      spec:
        dependencies: 
          - infrastructure::ecr_repo
