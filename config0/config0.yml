@@ -19,7 +19,7 @@ global:
           region: eu-west-1
           cloud: aws
 infrastructure:
-  rds:
+  natgw:
     stack_name: config0-publish:::aws_nat_vpc
     arguments:
       public_subnet_ids: selector:::network_vars::public_subnet_ids
