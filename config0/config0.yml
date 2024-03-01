@@ -7,70 +7,71 @@ global:
          environment: dev
          purpose: eval-config0
          area: network
-selectors:
-   vpc_info:
-     match_base: aws_base
-     match_params:
-       must_exists: True
-       resource_type: vpc
-   public_route_table:
-     match_base: aws_base
-     match_keys:
-       public_route_table: true
-     match_params:
-       resource_type: route_table
-   private_route_table:
-     match_base: aws_base
-     match_keys:
-       private_route_table: true
-     match_params:
-       resource_type: route_table
-   private_subnet_info:
-     match_base: aws_base
-     match_keys:
-       name: private
-     match_params:
-       resource_type: subnet
-   private_subnet_info:
-     match_base: aws_base
-     match_keys:
-       name: private
-     match_params:
-       resource_type: subnet
-   public_subnet_info:
-     match_base: aws_base
-     match_keys:
-       name: public
-     match_params:
-       resource_type: subnet
-   sg_database_info:
-     match_base: aws_base
-     match_keys:
-       name: database
-     match_params:
-       must_be_one: True
-       resource_type: security_group
-   sg_bastion_info:
-     match_base: aws_base
-     match_keys:
-       name: bastion
-     match_params:
-       must_be_one: True
-       resource_type: security_group
-   sg_web_info:
-     match_base: aws_base
-     match_keys:
-       name: web
-     match_params:
-       must_be_one: True
-       resource_type: security_group
-   sg_api_info:
-     match_base: aws_base
-     match_keys:
-       name: api
-     match_params:
-       must_be_one: True
-       resource_type: security_group
+   metadata:   
+     matchSelectors:
+        vpc_info:
+          match_base: aws_base
+          match_params:
+            must_exists: True
+            resource_type: vpc
+        public_route_table:
+          match_base: aws_base
+          match_keys:
+            public_route_table: true
+          match_params:
+            resource_type: route_table
+        private_route_table:
+          match_base: aws_base
+          match_keys:
+            private_route_table: true
+          match_params:
+            resource_type: route_table
+        private_subnet_info:
+          match_base: aws_base
+          match_keys:
+            name: private
+          match_params:
+            resource_type: subnet
+        private_subnet_info:
+          match_base: aws_base
+          match_keys:
+            name: private
+          match_params:
+            resource_type: subnet
+        public_subnet_info:
+          match_base: aws_base
+          match_keys:
+            name: public
+          match_params:
+            resource_type: subnet
+        sg_database_info:
+          match_base: aws_base
+          match_keys:
+            name: database
+          match_params:
+            must_be_one: True
+            resource_type: security_group
+        sg_bastion_info:
+          match_base: aws_base
+          match_keys:
+            name: bastion
+          match_params:
+            must_be_one: True
+            resource_type: security_group
+        sg_web_info:
+          match_base: aws_base
+          match_keys:
+            name: web
+          match_params:
+            must_be_one: True
+            resource_type: security_group
+        sg_api_info:
+          match_base: aws_base
+          match_keys:
+            name: api
+          match_params:
+            must_be_one: True
+            resource_type: security_group
 custom:
    vars_set:
      stack_name: config0-publish:::vars_set
@@ -96,16 +97,20 @@ custom:
          api_sg_id: selector:::sg_api_info::sg_id
          ami_filter: Name=name,Values=ubuntu/images/hvm-ssd/ubuntu-bionic-18.04-amd64-server-*
          ami_owner: 099720109477 
-     to_base64:
-       - labels_hash
-       - arguments_hash
-     selectors:
-       - vpc_info
-       - public_route_table
-       - private_route_table
-       - public_subnet_info
-       - private_subnet_info
-       - sg_bastion_info
-       - sg_database_info
-       - sg_web_info
-       - sg_api_info
+     spec:
+       serialization:
+         to_base64:
+           arguments:
+             - labels_hash
+             - arguments_hash
+     metadata:
+       matchSelectors:
+         - vpc_info
+         - public_route_table
+         - private_route_table
+         - public_subnet_info
+         - private_subnet_info
+         - sg_bastion_info
+         - sg_database_info
+         - sg_web_info
+         - sg_api_info
