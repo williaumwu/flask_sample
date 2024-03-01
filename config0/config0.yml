@@ -101,8 +101,8 @@ custom:
        - arguments_hash
      selectors:
        - vpc_info
-       - public_subnet_info
-       - private_subnet_info
+       - public_route_table
+       - private_route_table
        - public_subnet_info
        - private_subnet_info
        - sg_bastion_info
