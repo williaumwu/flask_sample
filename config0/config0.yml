@@ -13,7 +13,7 @@ global:
          product: ec2
        ssh:
          product: ssh_public_key
-    selectors:
+    matchSelectors:
        vpc_info:
          match_labels:
            environment: dev
@@ -93,7 +93,7 @@ infrastructure:
             - general
             - infrastructure
             - ec2
-          selectors:
+          matchSelectors:
             - vpc_info
             - public_subnet_info
             - sg_bastion_info
