@@ -13,6 +13,18 @@ selectors:
      match_params:
        must_exists: True
        resource_type: vpc
+   public_route_table:
+     match_base: aws_base
+     match_keys:
+       public_route_table: true
+     match_params:
+       resource_type: route_table
+   private_route_table:
+     match_base: aws_base
+     match_keys:
+       private_route_table: true
+     match_params:
+       resource_type: route_table
    private_subnet_info:
      match_base: aws_base
      match_keys:
@@ -76,6 +88,8 @@ custom:
          vpc_id: selector:::vpc_info::vpc_id
          public_subnet_ids: selector:::public_subnet_info::subnet_id:csv
          private_subnet_ids: selector:::private_subnet_info::subnet_id:csv
+         public_route_table_id: selector:::public_route_table::id
+         private_route_table_id: selector:::private_route_table::id
          db_sg_id: selector:::sg_database_info::sg_id
          bastion_sg_id: selector:::sg_bastion_info::sg_id
          web_sg_id: selector:::sg_web_info::sg_id
@@ -89,10 +103,9 @@ custom:
        - vpc_info
        - public_subnet_info
        - private_subnet_info
+       - public_subnet_info
+       - private_subnet_info
        - sg_bastion_info
        - sg_database_info
        - sg_web_info
        - sg_api_info
-     credentials:
-       - reference: eval-config0-iam
-         orchestration: true
