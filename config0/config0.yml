@@ -8,8 +8,8 @@ global:
         purpose: eval-config0
       infrastructure:
         cloud: aws
-        product: rds
-        area: database
+        product: natgw
+        area: networking
     matchSelectors:
       network_vars:
         labels:
@@ -20,16 +20,11 @@ global:
           cloud: aws
 infrastructure:
   rds:
-    stack_name: config0-publish:::aws_rds
+    stack_name: config0-publish:::aws_nat_vpc
     arguments:
-      vpc_name: selector:::network_vars::vpc_name
-      sg_id: selector:::network_vars::db_sg_id
-      subnet_ids: selector:::network_vars::private_subnet_ids
-      rds_name: eval-config0-rds
-      allocated_storage: 14
-      db_name: app
-      publish_creds: true
-      publish_to_saas: true
+      public_subnet_ids: selector:::network_vars::public_subnet_ids
+      nat_gateway_name: eval-config0-natgw
+      private_route_table_id: selector:::network_vars::private_route_table_id
       cloud_tags_hash:
         environment: dev
         purpose: eval-config0
@@ -44,6 +39,3 @@ infrastructure:
         - infrastructure
       matchSelectors:
         - network_vars
-      credentials:
-        - reference: eval-config0-iam
-          orchestration: true
