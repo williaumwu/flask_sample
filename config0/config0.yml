@@ -6,21 +6,22 @@ global:
        purpose: eval-config0
        message_queue: kafka
        product: ec2
-labels:
-   general: 
-     environment: eval
-     purpose: test
-   infrastructure:
-     cloud: aws
-     product: kafka
-selectors:
-   network_vars:
+   metadata:   
      labels:
-       environment: dev
-       purpose: eval-config0
-       area: network
-       region: eu-west-1
-       cloud: aws
+        general: 
+          environment: eval
+          purpose: test
+        infrastructure:
+          cloud: aws
+          product: kafka
+     selectors:
+        network_vars:
+          labels:
+            environment: dev
+            purpose: eval-config0
+            area: network
+            region: eu-west-1
+            cloud: aws
 infrastructure:
    kafka:
      stack_name: config0-publish:::kafka_on_ec2
@@ -46,10 +47,11 @@ infrastructure:
        num_of_ksql: 1
        disksize: 25
        publish_to_saas: true
-     to_base64:
-       - cloud_tags_hash
-     selectors:
-       - network_vars
-     credentials:
-       - reference: eval-config0-iam
-         orchestration: true
+     spec:
+       serialization:
+         to_base64:
+           arguments:
+             - cloud_tags_hash
+     metadata:   
+       selectors:
+         - network_vars
