@@ -14,7 +14,7 @@ global:
         infrastructure:
           cloud: aws
           product: kafka
-     selectors:
+     matchSelectors:
         network_vars:
           labels:
             environment: dev
@@ -53,5 +53,5 @@ infrastructure:
            arguments:
              - cloud_tags_hash
      metadata:   
-       selectors:
+       matchSelectors:
          - network_vars
