@@ -5,21 +5,22 @@ global:
        environment: dev
        purpose: eval-config0
        product: eks
-labels:
-   general: 
-     environment: dev
-     purpose: eval-config0
-   infrastructure:
-     cloud: aws
-     product: eks
-selectors:
-   network_vars:
+   metadata:   
      labels:
-       environment: dev
-       purpose: eval-config0
-       area: network
-       region: eu-west-1
-       cloud: aws
+        general: 
+          environment: dev
+          purpose: eval-config0
+        infrastructure:
+          cloud: aws
+          product: eks
+     selectors:
+        network_vars:
+          labels:
+            environment: dev
+            purpose: eval-config0
+            area: network
+            region: eu-west-1
+            cloud: aws
 infrastructure:
    eks-workshop:
        stack_name: config-publish:::eks_workshop
@@ -38,14 +39,12 @@ infrastructure:
           eks_node_instance_types: 
             - t3.micro
             - t3.small
-       labels:
-          - general
-          - infrastructure
-       selectors:
-          - network_vars
-       credentials:
-          - reference: eval-config0-iam
-            orchestration: true
-       inputvars:
-          - reference: eks-workshop-public-key
-            orchestration: true
+       metadata:   
+          labels:
+             - general
+             - infrastructure
+          selectors:
+             - network_vars
+          inputvars:
+             - reference: eks-workshop-public-key
+               orchestration: true
