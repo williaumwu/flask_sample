@@ -12,16 +12,14 @@ global:
        general: 
          environment: dev
          purpose: ci
-infrastructure:
-   ecr_repo:
-     stack_name: config0-publish:::ecr_repo
-     arguments:
-        name: maven_sample
-        docker_repo: maven_sample
-     metadata:
-       credentials:
-         - reference: eval-config0-iam
-           orchestration: true
+    selectors:
+       network_vars:
+         labels:
+           environment: dev
+           purpose: eval-config0
+           area: network
+           region: eu-west-1
+           cloud: aws
 custom:
    codebuild:
      stack_name: config0-publish:::add_codebuild_ci
@@ -33,18 +31,13 @@ custom:
        ecr_repo_name: maven_sample
        docker_username: williaumwu
        docker_registry: ecr
-       slack_channel: testing
+       slack_channel: opentofu
      spec:
-       dependencies: 
-         - infrastructure::ecr_repo
        serialization:
          to_base64:
            arguments:
              - cloud_tags_hash
      metadata:
-       credentials:
-         - reference: eval-config0-iam
-           orchestration: true
        inputvars:
          - reference: docker-token
            orchestration: true
@@ -54,3 +47,5 @@ custom:
            orchestration: true
        labels:
           - general
+       selectors:
+          - network_vars
