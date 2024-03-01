@@ -1,11 +1,12 @@
-labels:
-   general: 
-     environment: dev
-     purpose: test
-   infrastructure:
-     cloud: do
+global:
   metadata:   
-    selectors:
+    labels:
+       general: 
+         environment: dev
+         purpose: test
+       infrastructure:
+         cloud: do
+    matchSelectors:
        ssh_key_info:
          match_labels:
            cloud: do
@@ -31,7 +32,7 @@ infrastructure:
           labels:
             - general
             - infrastructure
-          selectors:
+          matchSelectors:
             - ssh_key_info
           credentials:
             - reference: do-token
