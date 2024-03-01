@@ -2,6 +2,6 @@ global_arguments:
    aws_default_region: eu-west-1
 infrastructure:
    debug:
-       stack_name: config0-publish:::debug
-       arguments:
-          ttl: 14400
+     stack_name: config0-publish:::debug
+     arguments:
+       ttl: 14400
