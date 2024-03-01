@@ -4,16 +4,17 @@ labels:
      purpose: test
    infrastructure:
      cloud: do
-selectors:
-   ssh_key_info:
-     match_labels:
-       cloud: do
-       environment: dev
-     match_keys:
-       provider: do
-     match_params:
-       must_exists: True
-       resource_type: ssh_public_key
+  metadata:   
+    selectors:
+       ssh_key_info:
+         match_labels:
+           cloud: do
+           environment: dev
+         match_keys:
+           provider: do
+         match_params:
+           must_exists: True
+           resource_type: ssh_public_key
 infrastructure:
    jenkins:
        stack_name: config0-publish:::jenkins_on_do
@@ -26,11 +27,12 @@ infrastructure:
           with_ipv6: false
           with_private_networking: false
           with_resize_disk: false
-       labels:
-         - general
-         - infrastructure
-       selectors:
-         - ssh_key_info
-       credentials:
-         - reference: do-token
-           orchestration: true
+       metadata:
+          labels:
+            - general
+            - infrastructure
+          selectors:
+            - ssh_key_info
+          credentials:
+            - reference: do-token
+              orchestration: true
