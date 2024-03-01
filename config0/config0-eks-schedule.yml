@@ -67,6 +67,3 @@ infrastructure:
       matchSelectors:
         - network_vars
         - eks_info
-      credentials:
-        - reference: eval-config0-iam
-          orchestration: true
