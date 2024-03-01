@@ -44,6 +44,3 @@ infrastructure:
         - infrastructure
       matchSelectors:
         - network_vars
-      credentials:
-        - reference: eval-config0-iam
-          orchestration: true
