@@ -13,7 +13,7 @@ global:
         infrastructure:
           cloud: aws
           product: eks
-     selectors:
+     matchSelectors:
         network_vars:
           labels:
             environment: dev
@@ -43,7 +43,7 @@ infrastructure:
           labels:
              - general
              - infrastructure
-          selectors:
+          matchSelectors:
              - network_vars
           inputvars:
              - reference: eks-workshop-public-key
