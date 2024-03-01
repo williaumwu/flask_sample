@@ -7,21 +7,22 @@ global:
        database: mongodb
        product: ec2
        database_type: nosql
-labels:
-   general: 
-     environment: dev
-     purpose: eval-config0
-   infrastructure:
-     cloud: aws
-     product: mongodb
-selectors:
-   network_vars:
+   metadata:   
      labels:
-       environment: dev
-       purpose: eval-config0
-       area: network
-       region: eu-west-1
-       cloud: aws
+        general: 
+          environment: dev
+          purpose: eval-config0
+        infrastructure:
+          cloud: aws
+          product: mongodb
+     selectors:
+        network_vars:
+          labels:
+            environment: dev
+            purpose: eval-config0
+            area: network
+            region: eu-west-1
+            cloud: aws
 infrastructure:
    mongodb_replica:
      stack_name: config0-publish:::mongodb_replica_on_ec2
@@ -48,10 +49,11 @@ infrastructure:
         mongodb_username: admin123
         mongodb_password: admin123
         publish_to_saas: true
-     to_base64:
-       - cloud_tags_hash
-     selectors:
-       - network_vars
-     credentials:
-       - reference: eval-config0-iam
-         orchestration: true
+     spec:
+       serialization:
+         to_base64:
+           arguments:
+             - cloud_tags_hash
+     metadata:   
+       selectors:
+         - network_vars
