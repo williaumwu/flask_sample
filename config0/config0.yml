@@ -15,7 +15,7 @@ global:
         infrastructure:
           cloud: aws
           product: mongodb
-     selectors:
+     matchSelectors:
         network_vars:
           labels:
             environment: dev
@@ -55,5 +55,5 @@ infrastructure:
            arguments:
              - cloud_tags_hash
      metadata:   
-       selectors:
+       matchSelectors:
          - network_vars
