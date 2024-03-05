@@ -8,7 +8,7 @@ global:
         purpose: eval-config0
       infrastructure:
         cloud: aws
-        product: natgw
+        product: nat-instance
         area: networking
     matchSelectors:
       network_vars:
@@ -22,8 +22,11 @@ infrastructure:
   natgw:
     stack_name: config0-publish:::aws_nat_vpc
     arguments:
+      service_name: eval-config0
+      vpc_id: selector:::network_vars::vpc_id
       public_subnet_ids: selector:::network_vars::public_subnet_ids
-      nat_gateway_name: eval-config0-natgw
+      instance_types: t3.nano,t3a.nano
+      cidr_ingress_accept: 0.0.0.0/0
       private_route_table_id: selector:::network_vars::private_route_table_id
       cloud_tags_hash:
         environment: dev
