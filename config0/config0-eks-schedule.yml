@@ -35,13 +35,13 @@ infrastructure:
       vpc_name: selector:::network_vars::vpc_name
       vpc_id: selector:::network_vars::vpc_id
       # vpc with NAT, private_subet_ids is more secure
-      subnet_ids: selector:::network_vars::public_subnet_ids:csv
+      subnet_ids: selector:::network_vars::private_subnet_ids:csv
       sg_id: selector:::network_vars::bastion_sg_id
       eks_cluster: eval-config0-eks
       eks_cluster_version: 1.25
       publish_to_saas: true
       # vpc with NAT, private_subet_ids is more secure
-      eks_subnet_ids: selector:::network_vars::public_subnet_ids:csv
+      eks_subnet_ids: selector:::network_vars::private_subnet_ids:csv
       eks_node_role_arn: selector:::eks_info::node_role_arn
       eks_node_capacity_type: ON_DEMAND
       eks_node_ami_type: AL2_x86_64
