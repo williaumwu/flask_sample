@@ -20,7 +20,7 @@ global:
           cloud: aws
 infrastructure:
   natgw:
-    stack_name: config0-publish:::aws_nat_vpc
+    stack_name: config0-publish:::aws_nat_inst_vpc
     arguments:
       service_name: eval-config0
       vpc_id: selector:::network_vars::vpc_id
@@ -28,6 +28,7 @@ infrastructure:
       instance_types: t3.nano,t3a.nano
       cidr_ingress_accept: 0.0.0.0/0
       private_route_table_id: selector:::network_vars::private_route_table_id
+      use_spot_instance: true
       cloud_tags_hash:
         environment: dev
         purpose: eval-config0
