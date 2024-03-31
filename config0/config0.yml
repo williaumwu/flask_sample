@@ -1,13 +1,14 @@
 global:
+   matchSelectors:
+     aws_base:
+       match_keys:
+         provider: aws
+       match_labels:
+         environment: dev
+         purpose: eval-config0
+         area: network
    metadata:   
      matchSelectors:
-        aws_base:
-          match_keys:
-            provider: aws
-          match_labels:
-            environment: dev
-            purpose: eval-config0
-            area: network
         vpc_info:
           match_base: aws_base
           match_params:
