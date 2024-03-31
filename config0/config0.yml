@@ -13,7 +13,6 @@ global:
           match_params:
             must_exists: True
             resource_type: vpc
-            name: testtest456
         public_route_table:
           match_base: aws_base
           match_keys:
