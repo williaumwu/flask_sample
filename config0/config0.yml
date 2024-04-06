@@ -12,43 +12,11 @@ global:
        general: 
          environment: dev
          purpose: ci
-    selectors:
-       network_vars:
-         labels:
-           environment: dev
-           purpose: eval-config0
-           area: network
-           region: eu-west-1
-           cloud: aws
-custom:
-   codebuild:
-     stack_name: config0-publish:::add_codebuild_ci
+infrastructure:
+   ecr:
+     stack_name: config0-publish:::aws_ecr_repo
      arguments:
-       codebuild_name: maven-sample-private
-       git_repo: maven_sample-private
-       git_url: git@github.com:williaumwu/maven_sample-private.git
-       branch: ci
-       ecr_repo_name: maven_sample
-       docker_username: williaumwu
-       docker_registry: ecr
-       slack_channel: opentofu
-       security_group_id: selector:::network_vars::bastion_sg_id
-       subnet_ids: selector:::network_vars::private_subnet_ids
-       vpc_id: selector:::network_vars::vpc_id
-     spec:
-       serialization:
-         to_base64:
-           arguments:
-             - cloud_tags_hash
+       ecr_repo: ecr123
      metadata:
-       inputvars:
-         - reference: docker-token
-           orchestration: true
-         - reference: slack-webhook-hash
-           orchestration: true
-         - reference: github-token
-           orchestration: true
        labels:
           - general
-       selectors:
-          - network_vars
