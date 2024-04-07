@@ -14,9 +14,14 @@ global:
          purpose: ci
 infrastructure:
    ecr:
-     stack_name: config0-publish:::aws_ecr_repo
-     arguments:
-       ecr_repo: ecr123
-     metadata:
-       labels:
-          - general
+      stack_name: config0-publish:::aws_ecr_repo
+      arguments:
+        ecr_repo: ecr123
+    spec:
+      serialization:
+        to_base64:
+          arguments:
+            - cloud_tags_hash
+      metadata:
+        labels:
+           - general
