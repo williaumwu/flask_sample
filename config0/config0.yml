@@ -25,3 +25,4 @@ infrastructure:
       metadata:
         labels:
            - general
+
