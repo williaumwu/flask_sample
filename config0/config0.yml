@@ -6,7 +6,7 @@ global:
           purpose: testing
 infrastructure:
    drift:
-     stack_name: config0-publish:::validate_resources
+     stack_name: config0-publish:::check_drift_resources
      metadata:
         labels:
           - general
