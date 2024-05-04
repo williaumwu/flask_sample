@@ -1,4 +1,5 @@
 global:
+   platform: config0-publish:::platform-do
    arguments: 
      do_region: lon1
    metadata:   
@@ -10,7 +11,16 @@ global:
         doks: 
           platform: kubernetes
           component: manged_k8
-   platform: config0-publish:::platform-do
+    matchSelectors:
+       ssh_key_info:
+         match_labels:
+           cloud: do
+           environment: dev
+         match_keys:
+           provider: do
+         match_params:
+           must_exists: True
+           resource_type: ssh_public_key
 infrastructure:
    doks:
      platform:
