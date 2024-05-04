@@ -12,19 +12,32 @@ global:
           platform: kubernetes
           component: manged_k8
 infrastructure:
-   doks:
+   jenkins:
      platform:
-        stack_ref: doks 
+       stack_ref: jenkins_on_do 
      arguments:
-        doks_cluster_name: eval-config0-doks
-        doks_cluster_version: 1.29.1-do.0
-        doks_cluster_pool_size: s-1vcpu-2gb-amd
-        doks_cluster_autoscale_max: 4
-        doks_cluster_autoscale_min: 1
+        name: eval-jenkins
+        region: NYC1
+        size: s-1vcpu-2gb
+        with_monitoring: true
+        with_backups: false
+        with_ipv6: false
+        with_private_networking: false
+        with_resize_disk: false
      metadata:
         labels:
           - general
-          - doks
+        matchSelectors:
+          - ssh_key_info
         credentials:
           - reference: do-token
             orchestration: true
+   drift:
+     dependencies:
+       - infrastructure::doks
+       - infrastructure::jenkins
+     platform:
+       stack_ref: check_drift_resources
+     metadata:
+        labels:
+          - general
