@@ -28,3 +28,24 @@ infrastructure:
         credentials:
           - reference: do-token
             orchestration: true
+   jenkins:
+     platform:
+       stack_ref: jenkins_on_do 
+     arguments:
+        name: eval-jenkins
+        region: NYC1
+        size: s-1vcpu-2gb
+        with_monitoring: true
+        with_backups: false
+        with_ipv6: false
+        with_private_networking: false
+        with_resize_disk: false
+     metadata:
+        labels:
+          - general
+          - infrastructure
+        matchSelectors:
+          - ssh_key_info
+        credentials:
+          - reference: do-token
+            orchestration: true
