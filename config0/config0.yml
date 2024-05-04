@@ -13,8 +13,6 @@ global:
           component: manged_k8
 infrastructure:
    doks:
-     platform:
-        stack_ref: doks 
      arguments:
         doks_cluster_name: eval-config0-doks
         doks_cluster_version: 1.29.1-do.0
