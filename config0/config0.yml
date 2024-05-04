@@ -10,12 +10,11 @@ global:
         doks: 
           platform: kubernetes
           component: manged_k8
-   platform:
-     reference: config0-publish:::platform-do
+   platform: config0-publish:::platform-do
 infrastructure:
    doks:
      platform:
-        substack_ref: doks 
+        stack_ref: doks 
      arguments:
         doks_cluster_name: eval-config0-doks
         doks_cluster_version: 1.29.1-do.0
