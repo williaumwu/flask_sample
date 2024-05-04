@@ -43,9 +43,14 @@ infrastructure:
      metadata:
         labels:
           - general
-          - infrastructure
         matchSelectors:
           - ssh_key_info
         credentials:
           - reference: do-token
             orchestration: true
+   drift:
+     platform:
+       stack_ref: check_drift_resources
+     metadata:
+        labels:
+          - general
