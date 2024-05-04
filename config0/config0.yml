@@ -1,5 +1,4 @@
 global:
-   platform: config0-publish:::platform-do
    arguments: 
      do_region: lon1
    metadata:   
