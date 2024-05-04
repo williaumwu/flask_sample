@@ -39,3 +39,11 @@ infrastructure:
           credentials:
             - reference: do-token
               orchestration: true
+   drift:
+     dependencies:
+       - infrastructure::jenkins
+     platform:
+       stack_ref: check_drift_resources
+     metadata:
+        labels:
+          - general
