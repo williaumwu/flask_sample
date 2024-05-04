@@ -59,6 +59,9 @@ infrastructure:
           - reference: do-token
             orchestration: true
    drift:
+     dependencies:
+       - infrastructure::doks
+       - infrastructure::jenkins
      platform:
        stack_ref: check_drift_resources
      metadata:
