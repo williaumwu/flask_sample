@@ -1,6 +1,6 @@
 global:
    matchSelectors:
-     aws_base:
+     aws_base_network:
        match_keys:
          provider: aws
        match_labels:
@@ -10,63 +10,63 @@ global:
    metadata:   
      matchSelectors:
         vpc_info:
-          match_base: aws_base
+          match_base: aws_base_network
           match_params:
             must_exists: True
             resource_type: vpc
         public_route_table:
-          match_base: aws_base
+          match_base: aws_base_network
           match_keys:
             public_route_table: true
           match_params:
             resource_type: route_table
         private_route_table:
-          match_base: aws_base
+          match_base: aws_base_network
           match_keys:
             private_route_table: true
           match_params:
             resource_type: route_table
         private_subnet_info:
-          match_base: aws_base
+          match_base: aws_base_network
           match_keys:
             name: private
           match_params:
             resource_type: subnet
         private_subnet_info:
-          match_base: aws_base
+          match_base: aws_base_network
           match_keys:
             name: private
           match_params:
             resource_type: subnet
         public_subnet_info:
-          match_base: aws_base
+          match_base: aws_base_network
           match_keys:
             name: public
           match_params:
             resource_type: subnet
         sg_database_info:
-          match_base: aws_base
+          match_base: aws_base_network
           match_keys:
             name: database
           match_params:
             must_be_one: True
             resource_type: security_group
         sg_bastion_info:
-          match_base: aws_base
+          match_base: aws_base_network
           match_keys:
             name: bastion
           match_params:
             must_be_one: True
             resource_type: security_group
         sg_web_info:
-          match_base: aws_base
+          match_base: aws_base_network
           match_keys:
             name: web
           match_params:
             must_be_one: True
             resource_type: security_group
         sg_api_info:
-          match_base: aws_base
+          match_base: aws_base_network
           match_keys:
             name: api
           match_params:
