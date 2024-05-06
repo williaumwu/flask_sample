@@ -1,4 +1,5 @@
 global:
+   platform: config0-publish:::platform-do
    arguments: 
      aws_default_region: eu-west-1
      cloud_tags_hash:
@@ -25,7 +26,8 @@ global:
             cloud: aws
 infrastructure:
    mongodb_replica:
-     stack_name: config0-publish:::mongodb_replica_on_ec2
+     platform:
+        stack_ref: mongodb_replica_on_ec2
      arguments:
         vpc_name: selector:::network_vars::vpc_name
         vpc_id: selector:::network_vars::vpc_id
