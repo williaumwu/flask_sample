@@ -1,4 +1,5 @@
 global:
+  platform: config0-publish:::platform-do
   arguments: 
     aws_default_region: eu-west-1
   metadata:   
@@ -12,7 +13,8 @@ global:
          area: network
 infrastructure:
   vpc:
-    stack_name: config0-publish:::aws_vpc_simple
+    platform:
+        stack_ref: aws_vpc_simple 
     arguments:
       vpc_name: eval-config0-vpc-simple
       eks_cluster: eval-config0-eks
