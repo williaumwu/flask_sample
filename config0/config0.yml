@@ -1,33 +1,19 @@
 global:
-  platform: config0-publish:::platform-do
-  arguments: 
-    aws_default_region: eu-west-1
+  platform: config0-publish:::platform-eval-config0
   metadata:   
     labels:
-       general: 
-         environment: dev
-         purpose: eval-config0
-       infrastructure:
-         cloud: aws
-         product: vpc
-         area: network
+      infrastructure:
+        product: vpc
+        area: network
 infrastructure:
   vpc:
     platform:
-        stack_ref: aws_vpc_simple 
+      stack_ref: aws_vpc_simple 
     arguments:
+      aws_default_region: eu-west-1
       vpc_name: eval-config0-vpc-simple
       eks_cluster: eval-config0-eks
       publish_to_saas: true
-      cloud_tags_hash:
-        environment: dev
-        purpose: eval-config0
-    spec:
-      serialization:
-        to_base64:
-          arguments:
-            - cloud_tags_hash
     metadata:
       labels:
-        - general
         - infrastructure
