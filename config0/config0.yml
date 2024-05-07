@@ -1,38 +1,23 @@
 global:
-   arguments: 
-     aws_default_region: eu-west-1
-     cloud_tags_hash:
-       environment: dev
-       purpose: eval-config0
-       message_queue: kafka
-       product: ec2
+   platform: config0-publish:::platform-eval-config0
    metadata:   
      labels:
-        general: 
-          environment: eval
-          purpose: test
         infrastructure:
-          cloud: aws
+          provider: aws
           product: kafka
-     matchSelectors:
-        network_vars:
-          labels:
-            environment: dev
-            purpose: eval-config0
-            area: network
-            region: eu-west-1
-            cloud: aws
 infrastructure:
    kafka:
-     stack_name: config0-publish:::kafka_on_ec2
+     platform:
+        stack_ref: kafka_on_ec2
      arguments:
+       aws_default_region: eu-west-1
        spot: True
-       vpc_name: selector:::network_vars::vpc_name
-       vpc_id: selector:::network_vars::vpc_id
-       subnet_ids: selector:::network_vars::public_subnet_ids
-       sg_id: selector:::network_vars::db_sg_id
-       bastion_sg_id: selector:::network_vars::bastion_sg_id
-       bastion_subnet_ids: selector:::network_vars::public_subnet_ids
+       vpc_name: selector:::network_vars::vpc_name  # selector definition injected by platform configs
+       vpc_id: selector:::network_vars::vpc_id  # selector definition injected by platform configs
+       subnet_ids: selector:::network_vars::public_subnet_ids  # selector definition injected by platform configs
+       sg_id: selector:::network_vars::db_sg_id  # selector definition injected by platform configs
+       bastion_sg_id: selector:::network_vars::bastion_sg_id  # selector definition injected by platform configs
+       bastion_subnet_ids: selector:::network_vars::public_subnet_ids  # selector definition injected by platform configs
        bastion_destroy: true
        kafka_cluster: kafka-cluster-dev
        ami_filter: Name=name,Values=ubuntu/images/hvm-ssd/ubuntu-bionic-18.04-amd64-server-*
@@ -47,11 +32,6 @@ infrastructure:
        num_of_ksql: 1
        disksize: 25
        publish_to_saas: true
-     spec:
-       serialization:
-         to_base64:
-           arguments:
-             - cloud_tags_hash
-     metadata:   
-       matchSelectors:
-         - network_vars
+     metadata:
+       labels:
+         - infrastructure
