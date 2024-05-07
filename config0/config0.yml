@@ -1,41 +1,19 @@
 global:
-  arguments: 
-    aws_default_region: eu-west-1
+  platform: config0-publish:::platform-eval-config0
   metadata:   
     labels:
-      general: 
-        environment: dev
-        purpose: eval-config0
       infrastructure:
-        cloud: aws
+        provider: aws
         product: natgw
         area: networking
-    matchSelectors:
-      network_vars:
-        labels:
-          environment: dev
-          purpose: eval-config0
-          area: network
-          region: eu-west-1
-          cloud: aws
 infrastructure:
   natgw:
     stack_name: config0-publish:::aws_nat_vpc
     arguments:
-      public_subnet_ids: selector:::network_vars::public_subnet_ids
+      aws_default_region: eu-west-1
       nat_gateway_name: eval-config0-natgw
+      public_subnet_ids: selector:::network_vars::public_subnet_ids
       private_route_table_id: selector:::network_vars::private_route_table_id
-      cloud_tags_hash:
-        environment: dev
-        purpose: eval-config0
-    spec:
-      serialization:
-        to_base64:
-          arguments:
-            - cloud_tags_hash
     metadata:
       labels:
-        - general
         - infrastructure
-      matchSelectors:
-        - network_vars
