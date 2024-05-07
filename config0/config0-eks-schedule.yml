@@ -1,48 +1,27 @@
 global:
+  platform: config0-publish:::platform-eval-config0
   arguments: 
     aws_default_region: eu-west-1
   metadata:   
     labels:
-       general: 
-         environment: dev
-         purpose: eval-config0
        infrastructure:
-         cloud: aws
+         provider: aws
          product: eks
-    matchSelectors:
-       network_vars:
-         labels:
-           environment: dev
-           purpose: eval-config0
-           area: network
-           region: eu-west-1
-           cloud: aws
-       eks_info:
-         keys:
-           provider: aws
-           region: eu-west-1
-           aws_default_region: eu-west-1
-         params:
-           resource_type: eks
-         labels:
-           environment: dev
-           purpose: eval-config0
-           cloud: aws
 infrastructure:
   eks:
-    stack_name: config0-publish:::aws_eks
+    platform:
+      stack_ref: aws_eks 
     arguments:
-      vpc_name: selector:::network_vars::vpc_name
-      vpc_id: selector:::network_vars::vpc_id
       # vpc with NAT, private_subet_ids is more secure
-      subnet_ids: selector:::network_vars::public_subnet_ids:csv
-      sg_id: selector:::network_vars::bastion_sg_id
       eks_cluster: eval-config0-eks
       eks_cluster_version: 1.29
       publish_to_saas: true
-      # vpc with NAT, private_subet_ids is more secure
-      eks_subnet_ids: selector:::network_vars::private_subnet_ids:csv
-      eks_node_role_arn: selector:::eks_info::node_role_arn
+      vpc_name: selector:::network_vars::vpc_name  # selector definition injected by platform configs
+      vpc_id: selector:::network_vars::vpc_id  # selector definition injected by platform configs
+      subnet_ids: selector:::network_vars::public_subnet_ids:csv  # selector definition injected by platform configs
+      sg_id: selector:::network_vars::bastion_sg_id  # selector definition injected by platform configs
+      eks_subnet_ids: selector:::network_vars::private_subnet_ids:csv  # selector definition injected by platform configs
+      eks_node_role_arn: selector:::eks_info::node_role_arn  # selector definition injected by platform configs
       eks_node_capacity_type: ON_DEMAND
       eks_node_ami_type: AL2_x86_64
       eks_node_max_capacity: 1
@@ -52,18 +31,6 @@ infrastructure:
       eks_node_instance_types: 
         - t3.medium
         - t3.large
-      cloud_tags_hash:
-        environment: dev
-        purpose: eval-config0
-    spec:
-      serialization:
-        to_base64:
-          arguments:
-            - cloud_tags_hash
     metadata:
       labels:
-        - general
         - infrastructure
-      matchSelectors:
-        - network_vars
-        - eks_info
