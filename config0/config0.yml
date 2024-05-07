@@ -1,28 +1,24 @@
 global:
-   arguments: 
-     do_region: lon1
-   metadata:   
-     labels:
-        general: 
-          environment: dev
-          purpose: testing
-          provider: doks
-        doks: 
-          platform: kubernetes
-          component: manged_k8
+  platform: config0-publish:::platform-eval-config0
+  metadata:   
+    labels:
+       doks: 
+         platform: kubernetes
+         component: manged_k8
 infrastructure:
-   doks:
-     stack_name: config0-publish:::doks
-     arguments:
-        doks_cluster_name: eval-config0-doks
-        doks_cluster_version: 1.29.1-do.0
-        doks_cluster_pool_size: s-1vcpu-2gb-amd
-        doks_cluster_autoscale_max: 4
-        doks_cluster_autoscale_min: 1
-     metadata:
-        labels:
-          - general
-          - doks
-        credentials:
-          - reference: do-token
-            orchestration: true
+  doks:
+    platform:
+      stack_ref: doks
+    arguments:
+       do_region: lon1
+       doks_cluster_name: eval-config0-doks
+       doks_cluster_version: 1.29.1-do.0
+       doks_cluster_pool_size: s-1vcpu-2gb-amd
+       doks_cluster_autoscale_max: 4
+       doks_cluster_autoscale_min: 1
+    metadata:
+       labels:
+         - doks
+       credentials:
+         - reference: do-token
+           orchestration: true
