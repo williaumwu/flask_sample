@@ -1,39 +1,31 @@
 global:
+  platform: config0-publish:::platform-eval-config0
   metadata:   
-    labels:
-       general: 
-         environment: dev
-         purpose: test
-       infrastructure:
-         cloud: do
-    matchSelectors:
+    selectors:
        ssh_key_info:
-         match_labels:
-           cloud: do
+         matchLabels:
            environment: dev
-         match_keys:
+         matchKeys:
            provider: do
-         match_params:
+         matchParams:
            must_exists: True
            resource_type: ssh_public_key
 infrastructure:
    jenkins:
-       stack_name: config0-publish:::jenkins_on_do
-       arguments:
-          name: eval-jenkins
-          region: NYC1
-          size: s-1vcpu-2gb
-          with_monitoring: true
-          with_backups: false
-          with_ipv6: false
-          with_private_networking: false
-          with_resize_disk: false
-       metadata:
-          labels:
-            - general
-            - infrastructure
-          matchSelectors:
-            - ssh_key_info
-          credentials:
-            - reference: do-token
-              orchestration: true
+     platform:
+       stack_ref: jenkins_on_do
+     arguments:
+        name: eval-jenkins
+        region: NYC1
+        size: s-1vcpu-2gb
+        with_monitoring: true
+        with_backups: false
+        with_ipv6: false
+        with_private_networking: false
+        with_resize_disk: false
+     metadata:
+        matchSelectors:
+          - ssh_key_info
+        credentials:
+          - reference: do-token
+            orchestration: true
