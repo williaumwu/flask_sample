@@ -1,28 +1,9 @@
 global:
-  arguments: 
-    aws_default_region: eu-west-1
-    ci_environment: config0-eval
-    suffix_id: d645633
-    cloud_tags_hash:
-        environment: dev
-        purpose: ci
-        billing_code: 87deo
-  metadata:   
-    labels:
-       general: 
-         environment: dev
-         purpose: ci
-    selectors:
-       network_vars:
-         labels:
-           environment: dev
-           purpose: eval-config0
-           area: network
-           region: eu-west-1
-           cloud: aws
+  platform: config0-publish:::platform-eval-config0
 custom:
    codebuild:
-     stack_name: config0-publish:::add_codebuild_ci
+     platform:
+       stack_ref: add_codebuild_ci
      arguments:
        codebuild_name: maven-sample-private
        git_repo: maven_sample-private
@@ -35,11 +16,9 @@ custom:
        security_group_id: selector:::network_vars::bastion_sg_id
        subnet_ids: selector:::network_vars::private_subnet_ids
        vpc_id: selector:::network_vars::vpc_id
-     spec:
-       serialization:
-         to_base64:
-           arguments:
-             - cloud_tags_hash
+       aws_default_region: eu-west-1
+       ci_environment: config0-eval
+       suffix_id: d645633
      metadata:
        inputvars:
          - reference: docker-token
@@ -48,7 +27,3 @@ custom:
            orchestration: true
          - reference: github-token
            orchestration: true
-       labels:
-          - general
-       selectors:
-          - network_vars
