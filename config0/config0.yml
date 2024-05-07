@@ -1,12 +1,70 @@
 global:
-   platform: config0-publish:::platform-do
+   platform: config0-publish:::platform-eval-config0
    metadata:   
-     matchSelectors:
+     selectors:
         vpc_info:
-          match_base: aws_base_network
-          match_params:
+          matchBase: aws_base_network
+          matchParams:
             must_exists: True
             resource_type: vpc
+        public_route_table:
+          matchBase: aws_base_network
+          matchKeys:
+            public_route_table: true
+          matchParams:
+            resource_type: route_table
+        private_route_table:
+          matchBase: aws_base_network
+          matchKeys:
+            private_route_table: true
+          matchParams:
+            resource_type: route_table
+        private_subnet_info:
+          matchBase: aws_base_network
+          matchKeys:
+            name: private
+          matchParams:
+            resource_type: subnet
+        private_subnet_info:
+          matchBase: aws_base_network
+          matchKeys:
+            name: private
+          matchParams:
+            resource_type: subnet
+        public_subnet_info:
+          matchBase: aws_base_network
+          matchKeys:
+            name: public
+          matchParams:
+            resource_type: subnet
+        sg_database_info:
+          matchBase: aws_base_network
+          matchKeys:
+            name: database
+          matchParams:
+            must_be_one: True
+            resource_type: security_group
+        sg_bastion_info:
+          matchBase: aws_base_network
+          matchKeys:
+            name: bastion
+          matchParams:
+            must_be_one: True
+            resource_type: security_group
+        sg_web_info:
+          matchBase: aws_base_network
+          matchKeys:
+            name: web
+          matchParams:
+            must_be_one: True
+            resource_type: security_group
+        sg_api_info:
+          matchBase: aws_base_network
+          matchKeys:
+            name: api
+          matchParams:
+            must_be_one: True
+            resource_type: security_group
 custom:
    vars_set:
      platform:
@@ -17,14 +75,29 @@ custom:
        arguments_hash:
          vpc_name: selector:::vpc_info::name
          vpc_id: selector:::vpc_info::vpc_id
+         public_subnet_ids: selector:::public_subnet_info::subnet_id:csv
+         private_subnet_ids: selector:::private_subnet_info::subnet_id:csv
+         public_route_table_id: selector:::public_route_table::route_table_id
+         private_route_table_id: selector:::private_route_table::route_table_id
+         db_sg_id: selector:::sg_database_info::sg_id
+         bastion_sg_id: selector:::sg_bastion_info::sg_id
+         web_sg_id: selector:::sg_web_info::sg_id
+         api_sg_id: selector:::sg_api_info::sg_id
          ami_filter: Name=name,Values=ubuntu/images/hvm-ssd/ubuntu-bionic-18.04-amd64-server-*
          ami_owner: 099720109477 
      spec:
        serialization:
          to_base64:
            arguments:
-             - labels_hash
              - arguments_hash
      metadata:
-       matchSelectors:
+       selectors:
          - vpc_info
+         - public_route_table
+         - private_route_table
+         - public_subnet_info
+         - private_subnet_info
+         - sg_bastion_info
+         - sg_database_info
+         - sg_web_info
+         - sg_api_info
