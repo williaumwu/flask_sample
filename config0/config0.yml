@@ -1,12 +1,6 @@
 global:
-   metadata:   
-     labels:
-        general: 
-          environment: dev
-          purpose: testing
+  platform: config0-publish:::platform-eval-config0
 infrastructure:
-   drift:
-     stack_name: config0-publish:::check_drift_resources
-     metadata:
-        labels:
-          - general
+   drift_detection:
+     platform:
+       stack_ref: check_drift_resources
