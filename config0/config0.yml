@@ -11,7 +11,6 @@ global:
             purpose: eval-config0
             area: network
             region: eu-west-1
-            provider: aws
 infrastructure:
    mongodb_replica:
      stack_name: config0-publish:::aws_ec2_server
