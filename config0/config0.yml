@@ -16,6 +16,7 @@ infrastructure:
    mongodb_replica:
      stack_name: config0-publish:::aws_ec2_server
      arguments:
+        ssh_key_name: mongodb-cluster-dev-ssh-key
         aws_default_region: eu-west-1
         hostnam: test101
         sg_id: selector:::network_vars::bastion_sg_id
