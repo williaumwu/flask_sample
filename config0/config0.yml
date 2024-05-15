@@ -1,65 +1,29 @@
 global:
-  platform: config0-publish:::platform-do
-  metadata:   
-    labels:
-       general: 
-         environment: dev
-         purpose: test
-       infrastructure:
-         cloud: do
-    matchSelectors:
-       ssh_key_info:
-         match_labels:
-           cloud: do
-           environment: dev
-         match_keys:
-           provider: do
-         match_params:
-           must_exists: True
-           resource_type: ssh_public_key
+   metadata:   
+     labels:
+        infrastructure:
+          provider: aws
+          product: ec2
+     matchSelectors:
+        network_vars:
+          labels:
+            environment: dev
+            purpose: eval-config0
+            area: network
+            region: eu-west-1
+            provider: aws
 infrastructure:
-   doks:
-       platform:
-         stack_ref: doks 
-       arguments:
-          doks_cluster_name: eval-config0-doks
-          doks_cluster_version: 1.29.1-do.0
-          doks_cluster_pool_size: s-1vcpu-2gb-amd
-          doks_cluster_autoscale_max: 4
-          doks_cluster_autoscale_min: 1
-       metadata:
-          labels:
-            - general
-          credentials:
-            - reference: do-token
-              orchestration: true
-   jenkins:
-       platform:
-         stack_ref: jenkins_on_do 
-       arguments:
-          name: eval-jenkins
-          region: NYC1
-          size: s-1vcpu-2gb
-          with_monitoring: true
-          with_backups: false
-          with_ipv6: false
-          with_private_networking: false
-          with_resize_disk: false
-       metadata:
-          labels:
-            - general
-            - infrastructure
-          matchSelectors:
-            - ssh_key_info
-          credentials:
-            - reference: do-token
-              orchestration: true
-   drift:
-     dependencies:
-       - infrastructure::doks
-       - infrastructure::jenkins
-     platform:
-       stack_ref: check_drift_resources
+   mongodb_replica:
+     stack_name: config0-publish:::aws_ec2_server
+     arguments:
+        aws_default_region: eu-west-1
+        hostnam: test101
+        sg_id: selector:::network_vars::bastion_sg_id
+        subnet_ids: selector:::network_vars::public_subnet_ids
+        ami_filter: Name=name,Values=ubuntu/images/hvm-ssd/ubuntu-jammy-22.04-amd64-server-*
+        ami_owner: 099720109477 
+        instance_type: t3.micro
+        disksize: 25
      metadata:
-        labels:
-          - general
+       labels:
+         - infrastructure
