@@ -10,6 +10,7 @@ infrastructure:
      platform:
         stack_ref: kafka_on_ec2
      arguments:
+       spot: True
        aws_default_region: eu-west-1
        vpc_name: selector:::network_vars::vpc_name  # selector definition injected by platform configs
        vpc_id: selector:::network_vars::vpc_id  # selector definition injected by platform configs
