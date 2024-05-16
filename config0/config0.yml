@@ -12,7 +12,7 @@ global:
             area: network
             region: eu-west-1
 infrastructure:
-   mongodb_replica:
+   aws_ec2:
      stack_name: config0-publish:::aws_ec2_server
      arguments:
         ssh_key_name: mongodb-cluster-dev-ssh-key
