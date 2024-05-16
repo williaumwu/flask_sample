@@ -27,3 +27,5 @@ infrastructure:
      metadata:
        labels:
          - infrastructure
+       selectors:
+         - network_vars
