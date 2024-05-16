@@ -24,7 +24,6 @@ infrastructure:
         bastion_ami_owner: 099720109477 
         bastion_destroy: true 
         instance_type: t3.micro
-        spot: true
         num_of_replicas: 3
         disksize: 25
         volume_size: 25
