@@ -13,7 +13,7 @@ global:
             region: eu-west-1
 infrastructure:
    aws_ec2:
-     stack_name: config0-publish:::aws_ec2_server
+     stack_name: williaumwu:::aws_ec2_server
      arguments:
         ssh_key_name: default
         aws_default_region: eu-west-1
