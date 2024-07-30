@@ -40,6 +40,14 @@ custom:
        db_instance_class: db.t3.micro
        eks_cluster_sg_id: selector:::network_vars::bastion_sg_id  # selector definition injected by platform configs
        eks_node_role_arn: selector:::eks_info::node_role_arn  # selector definition injected by platform configs
+       cloud_tags_hash:
+         environment: dev
+         purpose: config0
+     spec:
+       serialization:
+         to_base64:
+           arguments:
+             - cloud_tags_hash
      metadata:
        labels:
          - general
