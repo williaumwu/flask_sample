@@ -31,6 +31,7 @@ custom:
      stack_name: williaumwu:::dev
      arguments: 
        env_name: rds_eks
+       vpc_id: selector:::network_vars::vpc_id
        public_subnet_ids: selector:::network_vars::public_subnet_ids:csv  # selector definition injected by platform configs
        private_subnet_ids: selector:::network_vars::private_subnet_ids:csv  # selector definition injected by platform configs
        db_sg_id: selector:::network_vars::db_sg_id  # selector definition injected by platform configs
