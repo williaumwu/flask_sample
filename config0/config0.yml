@@ -27,10 +27,10 @@ global:
             environment: dev
             purpose: config0
 custom:
-   rds_eks:
+   mongodb-eks:
      stack_name: williaumwu:::dev
      arguments: 
-       env_name: dev105
+       env_name: nosql-eks
        aws_default_region: eu-west-1
        vpc_id: selector:::network_vars::vpc_id
        vpc_name: selector:::network_vars::vpc_name  # selector definition injected by platform configs
