@@ -28,15 +28,15 @@ global:
             purpose: config0
 custom:
    rds_eks:
-     stack_name: williaumwu:::dev-rds
+     stack_name: williaumwu:::rds_eks
      arguments: 
-       env_name: dev-rds-101
+       env_name: rds-eks
        vpc_id: selector:::network_vars::vpc_id
        public_subnet_ids: selector:::network_vars::public_subnet_ids:csv  # selector definition injected by platform configs
        private_subnet_ids: selector:::network_vars::private_subnet_ids:csv  # selector definition injected by platform configs
        db_sg_id: selector:::network_vars::db_sg_id  # selector definition injected by platform configs
-       engine: MySQL
-       engine_version: 5.7.44
+       db_engine: MySQL
+       db_engine_version: 5.7.44
        db_allocated_storage: 14
        db_instance_class: db.t3.micro
        eks_cluster_sg_id: selector:::network_vars::bastion_sg_id  # selector definition injected by platform configs
