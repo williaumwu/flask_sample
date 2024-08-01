@@ -28,7 +28,7 @@ global:
             purpose: config0
 custom:
    mongodb-eks:
-     stack_name: williaumwu:::dev
+     stack_name: williaumwu:::mongodb_eks
      arguments: 
        env_name: nosql-eks
        aws_default_region: eu-west-1
