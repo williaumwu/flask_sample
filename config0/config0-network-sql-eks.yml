@@ -34,12 +34,6 @@ global:
             name: private
           match_params:
             resource_type: subnet
-        private_subnet_info:
-          match_base: aws_base
-          match_keys:
-            name: private
-          match_params:
-            resource_type: subnet
         public_subnet_info:
           match_base: aws_base
           match_keys:
