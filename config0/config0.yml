@@ -1,1 +1,155 @@
-config0-rds-eks-demo.yml
+global:
+   matchSelectors:
+     aws_base:
+       match_keys:
+         provider: aws
+       match_labels:
+         environment: dev
+         purpose: config0
+   metadata:   
+     labels:
+       general: 
+         environment: dev
+         purpose: config0
+     matchSelectors:
+        vpc_info:
+          match_base: aws_base
+          match_params:
+            resource_type: vpc
+        public_route_table:
+          match_base: aws_base
+          match_keys:
+            public_route_table: true
+          match_params:
+            resource_type: route_table
+        private_route_table:
+          match_base: aws_base
+          match_keys:
+            private_route_table: true
+          match_params:
+            resource_type: route_table
+        private_subnet_info:
+          match_base: aws_base
+          match_keys:
+            name: private
+          match_params:
+            resource_type: subnet
+        private_subnet_info:
+          match_base: aws_base
+          match_keys:
+            name: private
+          match_params:
+            resource_type: subnet
+        public_subnet_info:
+          match_base: aws_base
+          match_keys:
+            name: public
+          match_params:
+            resource_type: subnet
+        sg_database_info:
+          match_base: aws_base
+          match_keys:
+            name: database
+          match_params:
+            resource_type: security_group
+        sg_bastion_info:
+          match_base: aws_base
+          match_keys:
+            name: bastion
+          match_params:
+            resource_type: security_group
+        sg_web_info:
+          match_base: aws_base
+          match_keys:
+            name: web
+          match_params:
+            resource_type: security_group
+        sg_api_info:
+          match_base: aws_base
+          match_keys:
+            name: api
+          match_params:
+            resource_type: security_group
+        network_vars:
+          labels:
+            environment: dev
+            purpose: config0
+        eks_info:
+          keys:
+            provider: aws
+            region: eu-west-1
+            aws_default_region: eu-west-1
+          params:
+            resource_type: eks
+          labels:
+            environment: dev
+            purpose: config0
+custom:
+   env_3tier:
+     stack_name: williaumwu:::env_nosql
+     arguments: 
+       env_name: nosql
+       aws_default_region: eu-west-1
+       vpc_id: selector:::vpc_info::vpc_id
+       vpc_name: selector:::vpc_info::vpc_name  # selector definition injected by platform configs
+       public_subnet_ids: selector:::public_subnet_info::subnet_id:csv
+       private_route_table_id: selector:::private_route_table::route_table_id
+       private_subnet_ids: selector:::private_subnet_info::subnet_id:csv
+       db_sg_id: selector:::sg_database_info::sg_id
+       eks_cluster_sg_id: selector:::network_vars::bastion_sg_id  # selector definition injected by platform configs
+       eks_node_role_arn: selector:::eks_info::node_role_arn  # selector definition injected by platform configs
+       mongodb_ami_filter: ubuntu/images/hvm-ssd/ubuntu-bionic-18.04-amd64-server-*
+       mongodb_ami_owner: 099720109477 
+       mongodb_num_of_replicas: 3
+       mongodb_instance_type: t3.micro
+       mongodb_disksize: 25
+       mongodb_volume_size: 25
+       mongodb_username: admin123
+       mongodb_password: admin123
+       bastion_ami_filter: ubuntu/images/hvm-ssd/ubuntu-jammy-22.04-amd64-server-*
+       bastion_ami_owner: 099720109477 
+       bastion_destroy: true 
+       bastion_sg_id: selector:::network_vars::bastion_sg_id  # selector definition injected by platform configs
+       bastion_subnet_ids: selector:::network_vars::public_subnet_ids  # selector definition injected by platform configs
+       netvars_set_labels_hash:
+         region: eu-west-1
+         environment: dev
+         purpose: config0
+         area: network
+         cloud: aws
+       netvars_set_arguments_hash:
+         vpc_name: selector:::vpc_info::name
+         vpc_id: selector:::vpc_info::vpc_id
+         public_subnet_ids: selector:::public_subnet_info::subnet_id:csv
+         private_subnet_ids: selector:::private_subnet_info::subnet_id:csv
+         public_route_table_id: selector:::public_route_table::route_table_id
+         private_route_table_id: selector:::private_route_table::route_table_id
+         db_sg_id: selector:::sg_database_info::sg_id
+         bastion_sg_id: selector:::sg_bastion_info::sg_id
+         web_sg_id: selector:::sg_web_info::sg_id
+         api_sg_id: selector:::sg_api_info::sg_id
+       cloud_tags_hash:
+         environment: dev
+         purpose: config0
+     spec:
+       serialization:
+         to_base64:
+           arguments:
+             - cloud_tags_hash
+             - netvars_set_labels_hash
+             - netvars_set_arguments_hash
+     metadata:
+       labels:
+         - general
+       matchSelectors:
+         - vpc_info
+         - public_route_table
+         - private_route_table
+         - public_subnet_info
+         - private_subnet_info
+         - sg_bastion_info
+         - sg_database_info
+         - sg_web_info
+         - sg_api_info
+         - network_vars
+         - eks_info
