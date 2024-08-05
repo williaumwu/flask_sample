@@ -91,12 +91,12 @@ custom:
        env_name: nosql
        aws_default_region: eu-west-1
        vpc_id: selector:::vpc_info::vpc_id
-       vpc_name: selector:::vpc_info::vpc_name  # selector definition injected by platform configs
+       vpc_name: selector:::vpc_info::vpc_name 
        public_subnet_ids: selector:::public_subnet_info::subnet_id:csv
        private_route_table_id: selector:::private_route_table::route_table_id
        private_subnet_ids: selector:::private_subnet_info::subnet_id:csv
        db_sg_id: selector:::sg_database_info::sg_id
-       eks_cluster_sg_id: selector:::network_vars::bastion_sg_id  # selector definition injected by platform configs
+       eks_cluster_sg_id: selector:::sg_bastion_info::sg_id
        eks_node_role_arn: selector:::eks_info::node_role_arn  # selector definition injected by platform configs
        mongodb_ami_filter: ubuntu/images/hvm-ssd/ubuntu-bionic-18.04-amd64-server-*
        mongodb_ami_owner: 099720109477 
@@ -109,8 +109,8 @@ custom:
        bastion_ami_filter: ubuntu/images/hvm-ssd/ubuntu-jammy-22.04-amd64-server-*
        bastion_ami_owner: 099720109477 
        bastion_destroy: true 
-       bastion_sg_id: selector:::network_vars::bastion_sg_id  # selector definition injected by platform configs
-       bastion_subnet_ids: selector:::network_vars::public_subnet_ids  # selector definition injected by platform configs
+       bastion_sg_id: selector:::sg_bastion_info::sg_id
+       bastion_subnet_ids: selector:::public_subnet_info::subnet_id:csv
        netvars_set_labels_hash:
          region: eu-west-1
          environment: dev
