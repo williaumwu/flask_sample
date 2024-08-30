@@ -1,10 +1,5 @@
 global:
   platform: config0-publish:::platform-eval-config0
-  metadata:   
-    labels:
-      infrastructure:
-        product: vpc
-        area: network
 infrastructure:
   vpc:
     platform:
@@ -13,6 +8,3 @@ infrastructure:
       vpc_name: eval-config0-vpc-simple
       eks_cluster: eval-config0-eks
       publish_to_saas: true
-    metadata:
-      labels:
-        - infrastructure
