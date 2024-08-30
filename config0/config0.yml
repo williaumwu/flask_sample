@@ -1,11 +1,5 @@
 global:
   platform: config0-publish:::platform-eval-config0
-  metadata:   
-    labels:
-      infrastructure:
-        provider: aws
-        product: nat-instance
-        area: networking
 infrastructure:
   natgw:
     platform:
@@ -19,6 +13,3 @@ infrastructure:
       vpc_id: selector:::network_vars::vpc_id
       public_subnet_ids: selector:::network_vars::public_subnet_ids
       private_route_table_id: selector:::network_vars::private_route_table_id
-    metadata:
-      labels:
-        - infrastructure
