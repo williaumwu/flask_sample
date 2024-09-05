@@ -8,3 +8,7 @@ infrastructure:
       vpc_name: eval-config0-vpc-simple
       eks_cluster: eval-config0-eks
       publish_to_saas: true
+    metadata:
+      inputvars:
+        - reference: infracost
+          orchestration: true
