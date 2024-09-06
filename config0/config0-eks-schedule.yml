@@ -2,20 +2,24 @@ global:
   platform: config0-publish:::platform-eval-config0
   arguments: 
     aws_default_region: eu-west-1
+  metadata:   
+    labels:
+       infrastructure:
+         provider: aws
+         product: eks
 infrastructure:
   eks:
     platform:
       stack_ref: aws_eks 
     arguments:
-      # vpc with NAT, private_subet_ids is more secure
-      eks_cluster: eval-config0-eks
-      eks_cluster_version: 1.29
-      publish_to_saas: true
       vpc_name: selector:::network_vars::vpc_name  # selector definition injected by platform configs
       vpc_id: selector:::network_vars::vpc_id  # selector definition injected by platform configs
-      subnet_ids: selector:::network_vars::public_subnet_ids:csv  # selector definition injected by platform configs
-      sg_id: selector:::network_vars::bastion_sg_id  # selector definition injected by platform configs
-      eks_subnet_ids: selector:::network_vars::private_subnet_ids:csv  # selector definition injected by platform configs
+      publish_to_saas: true
+      eks_cluster: eval-config0-eks
+      eks_cluster_version: 1.29
+      eks_cluster_subnet_ids: selector:::network_vars::public_subnet_ids:csv  # selector definition injected by platform configs
+      eks_cluster_sg_id: selector:::network_vars::bastion_sg_id  # selector definition injected by platform configs
+      eks_node_group_subnet_ids: selector:::network_vars::private_subnet_ids:csv  # selector definition injected by platform configs
       eks_node_role_arn: selector:::eks_info::node_role_arn  # selector definition injected by platform configs
       eks_node_capacity_type: ON_DEMAND
       eks_node_ami_type: AL2_x86_64
@@ -27,6 +31,5 @@ infrastructure:
         - t3.medium
         - t3.large
     metadata:
-      inputvars:
-        - reference: infracost
-          orchestration: true
+      labels:
+        - infrastructure
