@@ -2,11 +2,6 @@ global:
   platform: config0-publish:::platform-eval-config0
   arguments: 
     aws_default_region: eu-west-1
-  metadata:   
-    labels:
-       infrastructure:
-         provider: aws
-         product: eks
 infrastructure:
   eks:
     platform:
@@ -30,6 +25,3 @@ infrastructure:
       eks_node_instance_types: 
         - t3.medium
         - t3.large
-    metadata:
-      labels:
-        - infrastructure
