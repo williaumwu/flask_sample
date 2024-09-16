@@ -13,3 +13,7 @@ infrastructure:
       vpc_id: selector:::network_vars::vpc_id
       public_subnet_ids: selector:::network_vars::public_subnet_ids
       private_route_table_id: selector:::network_vars::private_route_table_id
+    metadata:
+      inputvars:
+        - reference: iac_ci_repo_info
+          orchestration: true
