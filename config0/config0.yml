@@ -1,19 +1,8 @@
 global:
   platform: config0-publish:::platform-eval-config0
-  metadata:   
-    labels:
-      infrastructure: 
-        area: ci
 infrastructure:
    setup_codebuild:
      platform:
-       stack_ref: setup_codebuild_ci
+       stack_ref: setup_iac_ci
      arguments:
        aws_default_region: eu-west-1
-       remote_stateful_bucket: s3://app-env.customer-provider.tfstatefile
-       ci_environment: config0-eval
-       suffix_id: d645633
-       bucket_expire_days: 1
-     metadata:
-       labels:
-         - infrastructure
