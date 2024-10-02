@@ -1,7 +1,7 @@
 global:
   platform: config0-publish:::platform-eval-config0
 infrastructure:
-   setup_codebuild:
+   register_repo_to_iac_ci:
      platform:
        stack_ref: register_repo_iac_ci
      metadata:
