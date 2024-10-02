@@ -4,5 +4,3 @@ infrastructure:
    setup_iac_ci:
      platform:
        stack_ref: setup_iac_ci
-     arguments:
-       aws_default_region: eu-west-1
