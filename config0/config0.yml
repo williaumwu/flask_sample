@@ -1,7 +1,7 @@
 global:
   platform: config0-publish:::platform-eval-config0
 infrastructure:
-   setup_codebuild:
+   setup_iac_ci:
      platform:
        stack_ref: setup_iac_ci
      arguments:
