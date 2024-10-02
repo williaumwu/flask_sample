@@ -3,6 +3,14 @@ global:
 infrastructure:
    setup_codebuild:
      platform:
-       stack_ref: setup_iac_ci
+       stack_ref: register_repo_iac_ci
      arguments:
-       aws_default_region: eu-west-1
+       aws_default_region: us-east-1
+     metadata:
+       inputvars:
+         - reference: slack-webhook-hash
+           orchestration: true
+         - reference: github-token
+           orchestration: true
+         - reference: iac-ci-repo-info
+           orchestration: true
