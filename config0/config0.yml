@@ -1,8 +1,10 @@
 global:
   platform: config0-publish:::platform-eval-config0
 infrastructure:
-   setup_iac_ci:
+   add_iac_ci:
      platform:
-       stack_ref: setup_iac_ci
+       stack_ref: add_iac_ci
      arguments:
-       aws_default_region: eu-west-1
+       repo_name: iac_ci
+       subdir: dev
+       branch: vpc
