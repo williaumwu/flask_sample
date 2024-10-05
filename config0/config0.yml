@@ -6,5 +6,6 @@ infrastructure:
       stack_ref: aws_vpc_simple 
     arguments:
       vpc_name: eval-config0-vpc-simple
+      vpc_id: selector:::network_vars::vpc_id  # selector definition injected by platform configs
       eks_cluster: eval-config0-eks
       publish_to_saas: true
