@@ -8,6 +8,6 @@ infrastructure:
        repo_name: iac_ci
        subdir: dev
        branch: vpc
-       check_str: tf check
-       apply_str: tf apply
-       destroy_str: tf destroy
+       check_keyword: tf
+       apply_keyword: tf
+       destroy_keyword: tf
