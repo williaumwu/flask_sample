@@ -7,7 +7,7 @@ infrastructure:
      arguments:
        repo_name: iac_ci
        subdir: dev
-       branch: vpc
+       branch: dev
        check_keyword: tf
        apply_keyword: tf
        destroy_keyword: tf
