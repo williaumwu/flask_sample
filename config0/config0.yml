@@ -6,8 +6,8 @@ infrastructure:
        stack_ref: add_iac_ci
      arguments:
        repo_name: iac_ci
-       subdir: dev
-       branch: vpc
+       subdir: eks
+       branch: eks
        check_keyword: tf
        apply_keyword: tf
        destroy_keyword: tf
