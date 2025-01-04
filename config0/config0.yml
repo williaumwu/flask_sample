@@ -1,14 +1,15 @@
 global:
   platform: config0-publish:::platform-eval-config0
 infrastructure:
-   register_repo_to_iac_ci:
-     platform:
-       stack_ref: register_repo_iac_ci
-     metadata:
-       inputvars:
-         - reference: slack-webhook-hash
-           orchestration: true
-         - reference: github-token
-           orchestration: true
-         - reference: iac-ci-repo-info
-           orchestration: true
+  env-streaming:
+    platform:
+      stack_ref: env_streaming 
+    arguments: 
+      env_name: env-streaming
+      kafka_disksize: 25
+      kafka_num_of_zookeeper: 1
+      kafka_num_of_schema_registry: 1
+      kafka_num_of_broker: 1
+      kafka_num_of_rest: 1
+      kafka_num_of_ksql: 1
+      bastion_destroy: true 
