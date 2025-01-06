@@ -6,8 +6,8 @@ infrastructure:
        stack_ref: add_iac_ci
      arguments:
        repo_name: iac_ci
-       subdir: ec2
-       branch: ec2
+       subdir: asg
+       branch: asg
        check_keyword: tf
        apply_keyword: tf
        destroy_keyword: tf
