@@ -4,3 +4,16 @@ infrastructure:
    setup_iac_ci:
      platform:
        stack_ref: setup_iac_ci
+   register_repo_to_iac_ci:
+     dependencies:
+         - infrastructure::setup_iac_ci
+     platform:
+       stack_ref: register_repo_iac_ci
+     metadata:
+       inputvars:
+         - reference: slack-webhook-hash
+           orchestration: true
+         - reference: github-token
+           orchestration: true
+         - reference: iac-ci-repo-info
+           orchestration: true
