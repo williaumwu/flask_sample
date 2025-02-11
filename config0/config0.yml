@@ -26,6 +26,8 @@ infrastructure:
      metadata:
         matchSelectors:
           - ssh_key_info
-        credentials:
-          - reference: do-token
+        inputvars:
+          - reference: digital-ocean
+            orchestration: true
+          - reference: iac-ci-repo-info
             orchestration: true
