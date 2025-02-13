@@ -20,6 +20,20 @@ global:
           match_base: aws_base
           match_params:
             resource_type: security_group
+        network_vars:
+          labels:
+            environment: dev
+            purpose: config0
+        eks_info:
+          keys:
+            provider: aws
+            region: eu-west-1
+            aws_default_region: eu-west-1
+          params:
+            resource_type: eks
+          labels:
+            environment: dev
+            purpose: config0
 custom:
    env_3tier:
      stack_name: williaumwu:::env_nosql
@@ -82,3 +96,4 @@ custom:
          - sg_info
          - network_vars
          - eks_info
+
