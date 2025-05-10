@@ -48,8 +48,6 @@ custom:
        db_sg_id: selector:::sg_info::db_sg_id
        eks_cluster_sg_id: selector:::sg_info::bastion_sg_id
        eks_node_role_arn: selector:::eks_info::node_role_arn  # selector definition injected by platform configs
-       mongodb_ami_filter: ubuntu/images/hvm-ssd/ubuntu-bionic-18.04-amd64-server-*
-       mongodb_ami_owner: 099720109477 
        mongodb_num_of_replicas: 3
        mongodb_instance_type: t3.micro
        mongodb_disksize: 25
