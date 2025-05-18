@@ -9,6 +9,8 @@ infrastructure:
          - infrastructure::setup_iac_ci
      platform:
        stack_ref: register_repo_iac_ci
+     arguments:
+       aws_default_region: us-east-1
      metadata:
        inputvars:
          - reference: slack-webhook-hash
