@@ -5,6 +5,7 @@ custom:
      platform:
        stack_ref: add_codebuild_ci
      arguments:
+       aws_default_region: us-east-1
        codebuild_name: flask-sample-private
        git_repo: flask_sample-private
        git_url: git@github.com:williaumwu/flask_sample-private.git
