@@ -9,7 +9,6 @@ infrastructure:
      platform:
        stack_ref: setup_codebuild_ci
      arguments:
-       aws_default_region: eu-west-1
        remote_stateful_bucket: s3://app-env.customer-provider.tfstatefile
        ci_environment: config0-eval
        suffix_id: d645633
