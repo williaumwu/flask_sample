@@ -5,7 +5,6 @@ custom:
      platform:
        stack_ref: add_codebuild_ci
      arguments:
-       aws_default_region: us-east-1
        codebuild_name: maven-sample-private
        git_repo: maven_sample-private
        git_url: git@github.com:williaumwu/maven_sample-private.git
