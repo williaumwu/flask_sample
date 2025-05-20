@@ -5,7 +5,6 @@ infrastructure:
     platform:
       stack_ref: aws_vpc_simple 
     arguments:
-      aws_default_region: eu-west-1
       vpc_name: eval-config0-vpc-simple
       vpc_id: selector:::network_vars::vpc_id
       eks_cluster: eval-config0-eks
