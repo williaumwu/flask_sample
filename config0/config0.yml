@@ -1,12 +1,11 @@
 global:
   platform: config0-publish:::platform-eval-config0
-  arguments: 
-    aws_default_region: us-east-1
 infrastructure:
   eks:
     platform:
       stack_ref: aws_eks2
     arguments:
+      aws_default_region: us-east-1
       vpc_name: config0-iac
       eks_cluster: config0-eks
       general_external_dns_role_name: external-dns-yofool
