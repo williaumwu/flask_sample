@@ -1,14 +1,13 @@
-global:
-  platform: config0-publish:::platform-eval-config0
-infrastructure:
-   add_iac_ci:
-     platform:
-       stack_ref: add_iac_ci
-     arguments:
-       ssm_name: /config0-iac/saas/users/resources/autogen/zpedgx/458d6ab4b47da8e1134f122fdf1c7ca0
-       repo_name: iac_ci
-       subdir: eks
-       branch: eks
-       check_keyword: tf
-       apply_keyword: tf
-       destroy_keyword: tf
+stacks:
+  add_iac_ci:
+    stack: config0-hub:::add_iac_ci
+    arguments:
+      ssm_name: /config0-iac/saas/users/resources/autogen/zpedgx/458d6ab4b47da8e1134f122fdf1c7ca0
+      repo_name: iac_ci
+      subdir: eks
+      branch: eks
+      check_keyword: tf
+      apply_keyword: tf
+      destroy_keyword: tf
+    connections:
+      - reference: dev1
