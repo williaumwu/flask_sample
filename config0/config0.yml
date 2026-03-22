@@ -1,13 +1,12 @@
-global:
-  platform: config0-publish:::platform-eval-config0
-infrastructure:
-   add_iac_ci:
-     platform:
-       stack_ref: add_iac_ci
-     arguments:
-       repo_name: iac_ci
-       subdir: vpc
-       branch: vpc
-       check_keyword: tf
-       apply_keyword: tf
-       destroy_keyword: tf
+stacks:
+  add_iac_ci:
+    stack: config0-hub:::add_iac_ci
+    arguments:
+      repo_name: iac_ci
+      subdir: vpc
+      branch: vpc
+      check_keyword: tf
+      apply_keyword: tf
+      destroy_keyword: tf
+    connections:
+      - reference: dev1
