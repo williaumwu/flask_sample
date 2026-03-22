@@ -1,59 +1,57 @@
 global:
-   arguments: 
-     aws_default_region: eu-west-1
-     cloud_tags_hash:
-       environment: dev
-       purpose: eval-config0
-       database: mongodb
-       product: ec2
-       database_type: nosql
-   metadata:   
-     labels:
-        general: 
-          environment: dev
-          purpose: eval-config0
-        infrastructure:
-          cloud: aws
-          product: mongodb
-     matchSelectors:
-        network_vars:
-          labels:
-            environment: dev
-            purpose: eval-config0
-            area: network
-            region: eu-west-1
-            cloud: aws
-infrastructure:
-   mongodb_replica:
-     stack_name: config0-publish:::mongodb_replica_on_ec2
-     arguments:
-        vpc_name: selector:::network_vars::vpc_name
-        vpc_id: selector:::network_vars::vpc_id
-        subnet_ids: selector:::network_vars::public_subnet_ids
-        sg_id: selector:::network_vars::db_sg_id
-        bastion_sg_id: selector:::network_vars::bastion_sg_id
-        bastion_subnet_ids: selector:::network_vars::public_subnet_ids
-        mongodb_cluster: mongodb-cluster-dev
-        ami_filter: Name=name,Values=ubuntu/images/hvm-ssd/ubuntu-bionic-18.04-amd64-server-*
-        ami_owner: 099720109477 
-        bastion_ami_filter: Name=name,Values=ubuntu/images/hvm-ssd/ubuntu-jammy-22.04-amd64-server-*
-        bastion_ami_owner: 099720109477 
-        bastion_destroy: true 
-        instance_type: t3.micro
-        spot: true
-        num_of_replicas: 3
-        disksize: 25
-        volume_size: 25
-        volume_mount: /var/lib/mongodb
-        volume_fstype: xfs
-        mongodb_username: admin123
-        mongodb_password: admin123
-        publish_to_saas: true
-     spec:
-       serialization:
-         to_base64:
-           arguments:
-             - cloud_tags_hash
-     metadata:   
-       matchSelectors:
-         - network_vars
+  arguments:
+    aws_default_region: eu-west-1
+    cloud_tags_hash:
+      environment: dev
+      purpose: eval-config0
+      database: mongodb
+      product: ec2
+      database_type: nosql
+
+labels:
+  general:
+    environment: dev
+    purpose: eval-config0
+  infrastructure:
+    cloud: aws
+    product: mongodb
+
+selectors:
+  network_vars:
+    match:
+      labels:
+        environment: dev
+        purpose: eval-config0
+        area: network
+        region: eu-west-1
+        cloud: aws
+
+stacks:
+  mongodb_replica:
+    stack: config0-publish:::mongodb_replica_on_ec2
+    arguments:
+      vpc_name: selector:::network_vars::vpc_name
+      vpc_id: selector:::network_vars::vpc_id
+      subnet_ids: selector:::network_vars::public_subnet_ids
+      sg_id: selector:::network_vars::db_sg_id
+      bastion_sg_id: selector:::network_vars::bastion_sg_id
+      bastion_subnet_ids: selector:::network_vars::public_subnet_ids
+      mongodb_cluster: mongodb-cluster-dev
+      ami_filter: "Name=name,Values=ubuntu/images/hvm-ssd/ubuntu-bionic-18.04-amd64-server-*"
+      ami_owner: "099720109477"
+      bastion_ami_filter: "Name=name,Values=ubuntu/images/hvm-ssd/ubuntu-jammy-22.04-amd64-server-*"
+      bastion_ami_owner: "099720109477"
+      bastion_destroy: true
+      instance_type: t3.micro
+      spot: true
+      num_of_replicas: 3
+      disksize: 25
+      volume_size: 25
+      volume_mount: /var/lib/mongodb
+      volume_fstype: xfs
+      mongodb_username: admin123
+      mongodb_password: admin123
+    selectors:
+      - network_vars
+    connections:
+      - reference: dev1
