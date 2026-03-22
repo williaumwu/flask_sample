@@ -1,57 +1,124 @@
 global:
   arguments:
     aws_default_region: eu-west-1
-    cloud_tags_hash:
-      environment: dev
-      purpose: eval-config0
-      database: mongodb
-      product: ec2
-      database_type: nosql
-
 labels:
   general:
     environment: dev
-    purpose: eval-config0
+    purpose: test
   infrastructure:
     cloud: aws
     product: mongodb
-
-selectors:
-  network_vars:
-    match:
-      labels:
-        environment: dev
-        purpose: eval-config0
-        area: network
-        region: eu-west-1
-        cloud: aws
-
+defaults:
+  match:
+    labels:
+      environment: dev
+      app_tier: networking
+    keys:
+      provider: aws
+      region: eu-west-1
+vpc_info:
+  match:
+    labels:
+      environment: dev
+      app_tier: networking
+    keys:
+      provider: aws
+      region: eu-west-1
+    filter:
+      resource_type: vpc
+    expect:
+      must_exist: true
+private_subnet_info:
+  match:
+    labels:
+      environment: dev
+      app_tier: networking
+    keys:
+      provider: aws
+      region: eu-west-1
+      name: private
+    filter:
+      resource_type: subnet
+public_subnet_info:
+  match:
+    labels:
+      environment: dev
+      app_tier: networking
+    keys:
+      provider: aws
+      region: eu-west-1
+      name: public
+    filter:
+      resource_type: subnet
+sg_database_info:
+  match:
+    labels:
+      environment: dev
+      app_tier: networking
+    keys:
+      provider: aws
+      region: eu-west-1
+      name: database
+    filter:
+      resource_type: security_group
+    expect:
+      must_be_one: true
+sg_bastion_info:
+  match:
+    labels:
+      environment: dev
+      app_tier: networking
+    keys:
+      provider: aws
+      region: eu-west-1
+      name: bastion
+    filter:
+      resource_type: security_group
+    expect:
+      must_be_one: true
 stacks:
-  mongodb_replica:
-    stack: config0-publish:::mongodb_replica_on_ec2
+  ssh_upload:
+    stack: config0-hub:::aws::ec2_ssh_upload
     arguments:
-      vpc_name: selector:::network_vars::vpc_name
-      vpc_id: selector:::network_vars::vpc_id
-      subnet_ids: selector:::network_vars::public_subnet_ids
-      sg_id: selector:::network_vars::db_sg_id
-      bastion_sg_id: selector:::network_vars::bastion_sg_id
-      bastion_subnet_ids: selector:::network_vars::public_subnet_ids
-      mongodb_cluster: mongodb-cluster-dev
-      ami_filter: "Name=name,Values=ubuntu/images/hvm-ssd/ubuntu-bionic-18.04-amd64-server-*"
-      ami_owner: "099720109477"
-      bastion_ami_filter: "Name=name,Values=ubuntu/images/hvm-ssd/ubuntu-jammy-22.04-amd64-server-*"
-      bastion_ami_owner: "099720109477"
-      bastion_destroy: true
-      instance_type: t3.micro
+      name: mongodb-cluster-ssh-dev
+      clobber: true
+    connections:
+    - reference: aws_2
+      orchestration: true
+  replica:
+    stack: config0-hub:::mongodb::mongodb_replica_on_ec2
+    dependencies:
+    - stacks::ssh_upload
+    arguments:
       spot: true
+      size: t3.micro
       num_of_replicas: 3
+      hostname_random: true
+      vpc_name: selector:::vpc_info::name
+      vpc_id: selector:::vpc_info::vpc_id
+      subnet_ids: selector:::private_subnet_info::subnet_id:csv
+      sg_id: selector:::sg_database_info::sg_id
+      bastion_sg_id: selector:::sg_bastion_info::sg_id
+      bastion_subnet_ids: selector:::public_subnet_info::subnet_id:csv
+      bastion_config_destroy: true
+      ami_filter: Name=name,Values=ubuntu/images/hvm-ssd/ubuntu-bionic-18.04-amd64-server-*
+      ami_owner: 099720109477
+      bastion_ami_filter: Name=name,Values=ubuntu/images/hvm-ssd/ubuntu-bionic-18.04-amd64-server-*
+      bastion_ami_owner: 099720109477
+      ssh_key_name: mongodb-cluster-ssh-dev
+      mongodb_cluster: mongodb-cluster-dev
+      mongodb_username: sops:::mongodb_username
+      mongodb_password: sops:::mongodb_password
       disksize: 25
+      ip_key: public_ip
       volume_size: 25
       volume_mount: /var/lib/mongodb
       volume_fstype: xfs
-      mongodb_username: admin123
-      mongodb_password: admin123
     selectors:
-      - network_vars
+    - vpc_info
+    - public_subnet_info
+    - private_subnet_info
+    - sg_bastion_info
+    - sg_database_info
     connections:
-      - reference: dev1
+    - reference: dev1
