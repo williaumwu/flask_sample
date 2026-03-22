@@ -1,57 +1,55 @@
 global:
-   arguments: 
-     aws_default_region: eu-west-1
-     cloud_tags_hash:
-       environment: dev
-       purpose: eval-config0
-       message_queue: kafka
-       product: ec2
-   metadata:   
-     labels:
-        general: 
-          environment: eval
-          purpose: test
-        infrastructure:
-          cloud: aws
-          product: kafka
-     matchSelectors:
-        network_vars:
-          labels:
-            environment: dev
-            purpose: eval-config0
-            area: network
-            region: eu-west-1
-            cloud: aws
-infrastructure:
-   kafka:
-     stack_name: config0-publish:::kafka_on_ec2
-     arguments:
-       spot: True
-       vpc_name: selector:::network_vars::vpc_name
-       vpc_id: selector:::network_vars::vpc_id
-       subnet_ids: selector:::network_vars::public_subnet_ids
-       sg_id: selector:::network_vars::db_sg_id
-       bastion_sg_id: selector:::network_vars::bastion_sg_id
-       bastion_subnet_ids: selector:::network_vars::public_subnet_ids
-       bastion_destroy: true
-       kafka_cluster: kafka-cluster-dev
-       ami_filter: Name=name,Values=ubuntu/images/hvm-ssd/ubuntu-bionic-18.04-amd64-server-*
-       ami_owner: 099720109477 
-       bastion_ami_filter: Name=name,Values=ubuntu/images/hvm-ssd/ubuntu-jammy-22.04-amd64-server-*
-       bastion_ami_owner: 099720109477 
-       instance_type: t3.micro
-       num_of_zookeeper: 1
-       num_of_schema_registry: 1
-       num_of_broker: 1
-       num_of_rest: 1
-       num_of_ksql: 1
-       disksize: 25
-       publish_to_saas: true
-     spec:
-       serialization:
-         to_base64:
-           arguments:
-             - cloud_tags_hash
-     metadata:   
-       matchSelectors:
-         - network_vars
+  arguments:
+    aws_default_region: eu-west-1
+    cloud_tags_hash:
+      environment: dev
+      purpose: eval-config0
+      message_queue: kafka
+      product: ec2
+
+labels:
+  general:
+    environment: eval
+    purpose: test
+  infrastructure:
+    cloud: aws
+    product: kafka
+
+selectors:
+  network_vars:
+    match:
+      labels:
+        environment: dev
+        purpose: eval-config0
+        area: network
+        region: eu-west-1
+        cloud: aws
+
+stacks:
+  kafka:
+    stack: config0-publish:::kafka_on_ec2
+    arguments:
+      spot: true
+      vpc_name: selector:::network_vars::vpc_name
+      vpc_id: selector:::network_vars::vpc_id
+      subnet_ids: selector:::network_vars::public_subnet_ids
+      sg_id: selector:::network_vars::db_sg_id
+      bastion_sg_id: selector:::network_vars::bastion_sg_id
+      bastion_subnet_ids: selector:::network_vars::public_subnet_ids
+      bastion_destroy: true
+      kafka_cluster: kafka-cluster-dev
+      ami_filter: "Name=name,Values=ubuntu/images/hvm-ssd/ubuntu-bionic-18.04-amd64-server-*"
+      ami_owner: "099720109477"
+      bastion_ami_filter: "Name=name,Values=ubuntu/images/hvm-ssd/ubuntu-jammy-22.04-amd64-server-*"
+      bastion_ami_owner: "099720109477"
+      instance_type: t3.micro
+      num_of_zookeeper: 1
+      num_of_schema_registry: 1
+      num_of_broker: 1
+      num_of_rest: 1
+      num_of_ksql: 1
+      disksize: 25
+    selectors:
+      - network_vars
+    connections:
+      - reference: dev1
