@@ -20,5 +20,3 @@ stacks:
       cloud_tags_hash:
         environment: dev
         purpose: eval-config0
-    connections:
-      - reference: dev1
