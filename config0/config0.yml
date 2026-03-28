@@ -23,7 +23,7 @@ selectors:
 
 stacks:
   rds:
-    stack: config0-publish:::aws_rds
+    stack: config0-hub:::aws_rds
     arguments:
       vpc_name: selector:::network_vars::vpc_name
       sg_id: selector:::network_vars::db_sg_id
