@@ -1,50 +1,49 @@
 global:
-   arguments: 
-     aws_default_region: eu-west-1
-     cloud_tags_hash:
-       environment: dev
-       purpose: eval-config0
-       product: eks
-   metadata:   
-     labels:
-        general: 
-          environment: dev
-          purpose: eval-config0
-        infrastructure:
-          cloud: aws
-          product: eks
-     matchSelectors:
-        network_vars:
-          labels:
-            environment: dev
-            purpose: eval-config0
-            area: network
-            region: eu-west-1
-            cloud: aws
-infrastructure:
-   eks-workshop:
-       stack_name: config-publish:::eks_workshop
-       arguments:
-          vpc_name: selector:::network_vars::vpc_name
-          vpc_id: selector:::network_vars::vpc_id
-          sg_id: selector:::network_vars::bastion_sg_id
-          subnet_ids: selector:::network_vars::public_subnet_ids
-          bastion_sg_id: selector:::network_vars::bastion_sg_id
-          workshop_name: eks-workshop
-          eks_node_capacity_type: ON_DEMAND
-          eks_node_ami_type: AL2_x86_64
-          eks_node_min_capacity: 1
-          eks_node_max_capacity: 1
-          eks_node_desired_capacity: 1
-          eks_node_instance_types: 
-            - t3.micro
-            - t3.small
-       metadata:   
-          labels:
-             - general
-             - infrastructure
-          matchSelectors:
-             - network_vars
-          inputvars:
-             - reference: eks-workshop-public-key
-               orchestration: true
+  arguments:
+    aws_default_region: eu-west-1
+    cloud_tags_hash:
+      environment: dev
+      purpose: eval-config0
+      product: eks
+
+labels:
+  general:
+    environment: dev
+    purpose: eval-config0
+  infrastructure:
+    cloud: aws
+    product: eks
+
+selectors:
+  network_vars:
+    match:
+      labels:
+        environment: dev
+        purpose: eval-config0
+        area: network
+        region: eu-west-1
+        cloud: aws
+
+stacks:
+  eks-workshop:
+    stack: config-publish:::eks_workshop
+    arguments:
+      vpc_name: selector:::network_vars::vpc_name
+      vpc_id: selector:::network_vars::vpc_id
+      sg_id: selector:::network_vars::bastion_sg_id
+      subnet_ids: selector:::network_vars::public_subnet_ids
+      bastion_sg_id: selector:::network_vars::bastion_sg_id
+      workshop_name: eks-workshop
+      eks_node_capacity_type: ON_DEMAND
+      eks_node_ami_type: AL2_x86_64
+      eks_node_min_capacity: 1
+      eks_node_max_capacity: 1
+      eks_node_desired_capacity: 1
+      eks_node_instance_types:
+        - t3.micro
+        - t3.small
+    selectors:
+      - network_vars
+    inputvars:
+      - reference: eks-workshop-public-key
+        orchestration: true
