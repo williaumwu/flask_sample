@@ -1,100 +1,100 @@
 global:
-  arguments: 
+  arguments:
     aws_default_region: eu-west-1
-  metadata:   
-    labels:
-       general: 
-         environment: dev
-         purpose: test
-         eks_cluster: eks-workshop
-       infrastructure:
-         cloud: aws
-       ec2:
-         product: ec2
-       ssh:
-         product: ssh_public_key
-    matchSelectors:
-       vpc_info:
-         match_labels:
-           environment: dev
-           app_tier: networking
-         match_keys:
-           provider: aws
-           region: eu-west-1
-         match_params:
-           must_exists: True
-           resource_type: vpc
-       public_subnet_info:
-         match_labels:
-           environment: dev
-           app_tier: networking
-         match_keys:
-           provider: aws
-           region: eu-west-1
-           name: public
-         match_params:
-           resource_type: subnet
-       sg_bastion_info:
-         match_labels:
-           environment: dev
-           app_tier: networking
-         match_keys:
-           provider: aws
-           region: eu-west-1
-           name: bastion
-         match_params:
-           must_be_one: True
-           resource_type: security_group
-       instance_profile_info:
-         match_labels:
-           environment: dev
-           purpose: test
-         match_keys:
-           provider: aws
-         match_params:
-           must_be_one: True
-           resource_type: iam_instance_profile
-infrastructure:
-   ssh_public_key:
-       stack_name: elasticdev:::ec2_ssh_upload_public
-       arguments:
-          key_name: eks-workshop-public-key
-       metadata:
-          labels:
-            - general
-            - infrastructure
-          credentials:
-            - reference: eval-config0-iam
-              orchestration: true
-          inputvars:
-            - reference: eks-workshop-public-key
-              orchestration: true
-   ec2_admin:
-       dependencies: 
-           - infrastructure::ssh_public_key
-       stack_name: elasticdev:::ec2_ubuntu_admin
-       arguments:
-          hostname: eks-ec2-admin-workshop
-          eks_cluster: eks-workshop
-          eks_workshop: true
-          install_kubectl: true
-          spot: true
-          vpc_name: selector:::vpc_info::name
-          subnet_ids: selector:::public_subnet_info::subnet_id:csv
-          sg_id: selector:::sg_bastion_info::sg_id
-          vpc_id: selector:::vpc_info::vpc_id
-          iam_instance_profile: selector:::instance_profile_info::name
-          ip_key: public_ip
-          size: t3.micro
-          disksize: 25
-          ssh_key_name: eks-workshop-public-key
-       metadata:
-          labels:
-            - general
-            - infrastructure
-            - ec2
-          matchSelectors:
-            - vpc_info
-            - public_subnet_info
-            - sg_bastion_info
-            - instance_profile_info
+
+labels:
+  general:
+    environment: dev
+    purpose: test
+    eks_cluster: eks-workshop
+  infrastructure:
+    cloud: aws
+  ec2:
+    product: ec2
+  ssh:
+    product: ssh_public_key
+
+selectors:
+  vpc_info:
+    match:
+      labels:
+        environment: dev
+        app_tier: networking
+      keys:
+        provider: aws
+        region: eu-west-1
+      filter:
+        resource_type: vpc
+      expect:
+        must_exist: true
+  public_subnet_info:
+    match:
+      labels:
+        environment: dev
+        app_tier: networking
+      keys:
+        provider: aws
+        region: eu-west-1
+        name: public
+      filter:
+        resource_type: subnet
+  sg_bastion_info:
+    match:
+      labels:
+        environment: dev
+        app_tier: networking
+      keys:
+        provider: aws
+        region: eu-west-1
+        name: bastion
+      filter:
+        resource_type: security_group
+      expect:
+        must_be_one: true
+  instance_profile_info:
+    match:
+      labels:
+        environment: dev
+        purpose: test
+      keys:
+        provider: aws
+      filter:
+        resource_type: iam_instance_profile
+      expect:
+        must_be_one: true
+
+stacks:
+  ssh_public_key:
+    stack: elasticdev:::ec2_ssh_upload_public
+    arguments:
+      key_name: eks-workshop-public-key
+    connections:
+      - reference: eval-config0-iam
+        orchestration: true
+    inputvars:
+      - reference: eks-workshop-public-key
+        orchestration: true
+  ec2_admin:
+    stack: elasticdev:::ec2_ubuntu_admin
+    dependencies:
+      - ssh_public_key
+    arguments:
+      hostname: eks-ec2-admin-workshop
+      eks_cluster: eks-workshop
+      eks_workshop: true
+      install_kubectl: true
+      spot: true
+      vpc_name: selector:::vpc_info::name
+      subnet_ids: selector:::public_subnet_info::subnet_id:csv
+      sg_id: selector:::sg_bastion_info::sg_id
+      vpc_id: selector:::vpc_info::vpc_id
+      iam_instance_profile: selector:::instance_profile_info::name
+      ip_key: public_ip
+      size: t3.micro
+      disksize: 25
+      ssh_key_name: eks-workshop-public-key
+    selectors:
+      - vpc_info
+      - public_subnet_info
+      - sg_bastion_info
+      - instance_profile_info
