@@ -1,6 +1,7 @@
 global:
   arguments:
     aws_default_region: eu-west-1
+
 labels:
   general:
     environment: dev
@@ -8,74 +9,69 @@ labels:
   infrastructure:
     cloud: aws
     product: mongodb
-defaults:
-  match:
-    labels:
-      environment: dev
-      app_tier: networking
-    keys:
-      provider: aws
-      region: eu-west-1
-vpc_info:
-  match:
-    labels:
-      environment: dev
-      app_tier: networking
-    keys:
-      provider: aws
-      region: eu-west-1
-    filter:
-      resource_type: vpc
-    expect:
-      must_exist: true
-private_subnet_info:
-  match:
-    labels:
-      environment: dev
-      app_tier: networking
-    keys:
-      provider: aws
-      region: eu-west-1
-      name: private
-    filter:
-      resource_type: subnet
-public_subnet_info:
-  match:
-    labels:
-      environment: dev
-      app_tier: networking
-    keys:
-      provider: aws
-      region: eu-west-1
-      name: public
-    filter:
-      resource_type: subnet
-sg_database_info:
-  match:
-    labels:
-      environment: dev
-      app_tier: networking
-    keys:
-      provider: aws
-      region: eu-west-1
-      name: database
-    filter:
-      resource_type: security_group
-    expect:
-      must_be_one: true
-sg_bastion_info:
-  match:
-    labels:
-      environment: dev
-      app_tier: networking
-    keys:
-      provider: aws
-      region: eu-west-1
-      name: bastion
-    filter:
-      resource_type: security_group
-    expect:
-      must_be_one: true
+
+selectors:
+  vpc_info:
+    match:
+      labels:
+        environment: dev
+        app_tier: networking
+      keys:
+        provider: aws
+        region: eu-west-1
+      filter:
+        resource_type: vpc
+      expect:
+        must_exist: true
+  private_subnet_info:
+    match:
+      labels:
+        environment: dev
+        app_tier: networking
+      keys:
+        provider: aws
+        region: eu-west-1
+        name: private
+      filter:
+        resource_type: subnet
+  public_subnet_info:
+    match:
+      labels:
+        environment: dev
+        app_tier: networking
+      keys:
+        provider: aws
+        region: eu-west-1
+        name: public
+      filter:
+        resource_type: subnet
+  sg_database_info:
+    match:
+      labels:
+        environment: dev
+        app_tier: networking
+      keys:
+        provider: aws
+        region: eu-west-1
+        name: database
+      filter:
+        resource_type: security_group
+      expect:
+        must_be_one: true
+  sg_bastion_info:
+    match:
+      labels:
+        environment: dev
+        app_tier: networking
+      keys:
+        provider: aws
+        region: eu-west-1
+        name: bastion
+      filter:
+        resource_type: security_group
+      expect:
+        must_be_one: true
+
 stacks:
   ssh_upload:
     stack: config0-hub:::aws::ec2_ssh_upload
@@ -83,12 +79,12 @@ stacks:
       name: mongodb-cluster-ssh-dev
       clobber: true
     connections:
-    - reference: aws_2
-      orchestration: true
+      - reference: aws_2
+        orchestration: true
   replica:
     stack: config0-hub:::mongodb::mongodb_replica_on_ec2
     dependencies:
-    - stacks::ssh_upload
+      - ssh_upload
     arguments:
       spot: true
       size: t3.micro
@@ -115,10 +111,10 @@ stacks:
       volume_mount: /var/lib/mongodb
       volume_fstype: xfs
     selectors:
-    - vpc_info
-    - public_subnet_info
-    - private_subnet_info
-    - sg_bastion_info
-    - sg_database_info
+      - vpc_info
+      - public_subnet_info
+      - private_subnet_info
+      - sg_bastion_info
+      - sg_database_info
     connections:
-    - reference: dev1
+      - reference: dev1
