@@ -1,19 +1,14 @@
-global:
-  platform: config0-publish:::platform-eval-config0
-  metadata:   
-    labels:
-      infrastructure:
-        provider: aws
-        product: natgw
-        area: networking
-infrastructure:
+labels:
+  infrastructure:
+    provider: aws
+    product: natgw
+    area: networking
+
+stacks:
   natgw:
-    stack_name: config0-publish:::aws_nat_vpc
+    stack: config0-publish:::aws_nat_vpc
     arguments:
       aws_default_region: eu-west-1
       nat_gateway_name: eval-config0-natgw
       public_subnet_ids: selector:::network_vars::public_subnet_ids
       private_route_table_id: selector:::network_vars::private_route_table_id
-    metadata:
-      labels:
-        - infrastructure
