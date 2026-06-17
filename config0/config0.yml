@@ -1,27 +1,25 @@
 global:
-  arguments: 
+  arguments:
     aws_default_region: eu-west-1
     ci_environment: config0-eval
     suffix_id: d645633
     cloud_tags_hash:
-        environment: dev
-        purpose: ci
-        billing_code: 87deo
-  metadata:   
-    labels:
-       general: 
-         environment: dev
-         purpose: ci
-infrastructure:
-   ecr:
-      stack_name: config0-publish:::aws_ecr_repo
-      arguments:
-        ecr_repo: ecr123
-      spec:
-        serialization:
-          to_base64:
-            arguments:
-              - cloud_tags_hash
-      metadata:
-        labels:
-           - general
+      environment: dev
+      purpose: ci
+      billing_code: 87deo
+
+labels:
+  general:
+    environment: dev
+    purpose: ci
+
+stacks:
+  ecr:
+    stack: config0-publish:::aws_ecr_repo
+    arguments:
+      ecr_repo: ecr123
+    spec:
+      serialization:
+        to_base64:
+          arguments:
+            - cloud_tags_hash
