@@ -1,11 +1,10 @@
+platform: config0-hub:::devops-solutions::platform-eval-config0
 global:
-  platform: config0-publish:::platform-eval-config0
-  arguments: 
+  arguments:
     aws_default_region: eu-west-1
-infrastructure:
+stacks:
   eks:
-    platform:
-      stack_ref: aws_eks 
+    stack_alias: aws_eks
     arguments:
       vpc_name: selector:::network_vars::vpc_name  # selector definition injected by platform configs
       vpc_id: selector:::network_vars::vpc_id  # selector definition injected by platform configs
@@ -22,6 +21,6 @@ infrastructure:
       eks_node_min_capacity: 1
       eks_node_desired_capacity: 1
       eks_node_disksize: 25
-      eks_node_instance_types: 
+      eks_node_instance_types:
         - t3.medium
         - t3.large
