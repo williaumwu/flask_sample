@@ -1,9 +1,7 @@
-global:
-  platform: config0-publish:::platform-eval-config0
-infrastructure:
+platform: config0-hub:::devops-solutions::platform-eval-config0
+stacks:
   vpc:
-    platform:
-      stack_ref: aws_vpc_simple 
+    stack_alias: aws_vpc_simple
     arguments:
       vpc_name: eval-config0-vpc-simple
       vpc_id: selector:::network_vars::vpc_id
