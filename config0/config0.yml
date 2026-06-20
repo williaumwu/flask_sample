@@ -1,15 +1,14 @@
+platform: config0-hub:::devops-solutions::platform-eval-config0
 global:
-  platform: config0-publish:::platform-eval-config0
-  metadata:   
+  metadata:
     labels:
       infrastructure:
         provider: aws
         product: rds
         area: database
-infrastructure:
+stacks:
   rds:
-    platform:
-      stack_ref: aws_rds 
+    stack_alias: aws_rds
     arguments:
       aws_default_region: eu-west-1
       engine: MySQL
