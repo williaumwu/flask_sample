@@ -1,9 +1,7 @@
-global:
-  platform: config0-publish:::platform-eval-config0
-infrastructure:
+platform: config0-hub:::devops-solutions::platform-eval-config0
+stacks:
   natgw:
-    platform:
-      stack_ref: aws_nat_inst_vpc
+    stack_alias: aws_nat_inst_vpc
     arguments:
       aws_default_region: eu-west-1
       service_name: eval-config0
