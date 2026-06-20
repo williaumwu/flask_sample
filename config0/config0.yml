@@ -1,35 +1,34 @@
+platform: config0-hub:::devops-solutions::platform-eval-config0
 global:
-   platform: config0-publish:::platform-eval-config0
-   metadata:   
-     labels:
-        infrastructure:
-          provider: aws
-          product: mongodb
-infrastructure:
-   mongodb_replica:
-     platform:
-        stack_ref: mongodb_replica_on_ec2
-     arguments:
-        aws_default_region: eu-west-1
-        vpc_name: selector:::network_vars::vpc_name  # selector definition injected by platform configs
-        vpc_id: selector:::network_vars::vpc_id  # selector definition injected by platform configs
-        subnet_ids: selector:::network_vars::public_subnet_ids  # selector definition injected by platform configs
-        sg_id: selector:::network_vars::db_sg_id  # selector definition injected by platform configs
-        bastion_sg_id: selector:::network_vars::bastion_sg_id  # selector definition injected by platform configs
-        bastion_subnet_ids: selector:::network_vars::public_subnet_ids  # selector definition injected by platform configs
-        mongodb_cluster: mongodb-cluster-dev
-        bastion_ami_filter: ubuntu/images/hvm-ssd/ubuntu-jammy-22.04-amd64-server-*
-        bastion_ami_owner: 099720109477 
-        bastion_destroy: true 
-        instance_type: t3.micro
-        num_of_replicas: 3
-        disksize: 25
-        volume_size: 25
-        volume_mount: /var/lib/mongodb
-        volume_fstype: xfs
-        mongodb_username: admin123
-        mongodb_password: admin123
-        publish_to_saas: true
-     metadata:
-       labels:
-         - infrastructure
+  metadata:
+    labels:
+      infrastructure:
+        provider: aws
+        product: mongodb
+stacks:
+  mongodb_replica:
+    stack_alias: mongodb_replica_on_ec2
+    arguments:
+      aws_default_region: eu-west-1
+      vpc_name: selector:::network_vars::vpc_name  # selector definition injected by platform configs
+      vpc_id: selector:::network_vars::vpc_id  # selector definition injected by platform configs
+      subnet_ids: selector:::network_vars::public_subnet_ids  # selector definition injected by platform configs
+      sg_id: selector:::network_vars::db_sg_id  # selector definition injected by platform configs
+      bastion_sg_id: selector:::network_vars::bastion_sg_id  # selector definition injected by platform configs
+      bastion_subnet_ids: selector:::network_vars::public_subnet_ids  # selector definition injected by platform configs
+      mongodb_cluster: mongodb-cluster-dev
+      bastion_ami_filter: ubuntu/images/hvm-ssd/ubuntu-jammy-22.04-amd64-server-*
+      bastion_ami_owner: 099720109477
+      bastion_destroy: true
+      instance_type: t3.micro
+      num_of_replicas: 3
+      disksize: 25
+      volume_size: 25
+      volume_mount: /var/lib/mongodb
+      volume_fstype: xfs
+      mongodb_username: admin123
+      mongodb_password: admin123
+      publish_to_saas: true
+    metadata:
+      labels:
+        - infrastructure
