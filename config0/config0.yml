@@ -1,9 +1,7 @@
-global:
-  platform: config0-publish:::platform-eval-config0
-infrastructure:
+platform: config0-hub:::devops-solutions::platform-eval-config0
+stacks:
   eks:
-    platform:
-      stack_ref: aws_eks2
+    stack_alias: aws_eks2
     arguments:
       aws_default_region: us-east-1
       vpc_name: config0-iac
